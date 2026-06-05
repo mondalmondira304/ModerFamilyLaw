@@ -14,8 +14,7 @@ import spinnerPng from '@salesforce/resourceUrl/mflIcon';
 
 const FIELDS = [INVOICE_RETAINER_URL, CHECK_TRUST_BALANCE, TRUST_BALANCE, FEE_AGREEMENT_AMOUNT];
 
-//const POLL_INTERVAL_MS = 3000;
-const POLL_INTERVAL_MS = 5000;
+const POLL_INTERVAL_MS = 3000;
 const MAX_POLL_ATTEMPTS = 5; 
 export default class PaymentLink extends LightningElement {
     @api recordId;
