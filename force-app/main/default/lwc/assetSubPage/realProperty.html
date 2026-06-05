@@ -1,0 +1,233 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<template if:false={addRealPropertyPage}>
+			<div class="slds-col heading slds-size_1-of-1">Assets-Real Property</div>
+		</template>
+		<template if:true={addRealPropertyPage}>
+			<div class="slds-col heading slds-size_1-of-1">{addRealPropertyLabel} Real Estate</div>
+		</template>
+		<template if:true={addRealPropertyOwnerShipPage}>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading">Ownership and Title</div>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading">{address}</div>
+		</template>
+		<template if:true={addRealPropertyHOAPage}>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading"> HOA and Maintenance</div>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center slds-p-bottom_xx-large subheading">{address}</div>
+		</template>
+		<template if:true={addRealPropertyMortagePage}>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading"> Mortgage Information</div>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center slds-p-bottom_xx-large subheading">{address}</div>
+		</template>
+		<template if:true={addRealPropertyValuationPage}>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading"> Property Valuation</div>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center slds-p-bottom_xx-large subheading">{address}</div>
+		</template>
+
+		<template if:false={addRealState}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+					<button class="custom-button" onclick={handleRealStateVehicles}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+
+				<div
+					class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<!-- Responsive stacked table on <= medium screens -->
+					<table
+						class="slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked-horizontal">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th scope="col">
+									<div class="slds-truncate" title="Address">Address</div>
+								</th>
+								<th scope="col">
+									<div class="slds-truncate" title="City">City</div>
+								</th>
+								<th scope="col" class="slds-hide_x-small slds-show_medium">
+									<div class="slds-truncate" title="Titled">Titled</div>
+								</th>
+								<th scope="col">
+									<div class="slds-truncate" title="Our Value">Our Value</div>
+								</th>
+								<th scope="col" class="slds-text-align_right">
+									<div class="slds-truncate" title="Actions">Actions</div>
+								</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<template if:true={isRealProperty}>  
+							<template for:each={recordsData} for:item="row" for:index="index">
+								<tr key={row.fields.Id.value} class="slds-hint-parent">
+									<!-- First cell is the row header in stacked view -->
+									<th scope="row" data-label="Address">
+										<div class="slds-truncate" title={row.fields.Name}>
+											<span class="rowName" onclick={handleRealStateCellClick} data-id={row.fields.Id.value} data-field="Housing__c" data-index={index}>{row.fields.Name.value}
+												<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon>
+											</span>
+										</div>
+									</th>
+
+									<td data-label="City">
+										<div class="slds-truncate" title={row.fields.Property_City__c}>{row.fields.Property_City__c.value}</div>
+									</td>
+
+									<td data-label="Titled" class="slds-hide_x-small slds-show_medium">
+										<div class="slds-truncate" title={row.fields.Property_Titled__c}>{row.fields.Property_Titled__c.value}</div>
+									</td>
+
+									<td data-label="Our Value">
+										<div class="slds-truncate" title={row.fields.Client_Estimate_of_Value__c}>{row.fields.Client_Estimate_of_Value__c.displayValue}</div>
+									</td>
+
+									<td data-label="Actions" class="slds-cell-shrink slds-text-align_right">
+										<button class="slds-button slds-button_icon slds-button_icon-border-filled" title="Delete" data-id={row.fields.Id.value} data-field="Housing__c" data-index={index} onclick={handleDeleteChild}>
+											<lightning-icon icon-name="utility:delete" size="x-small"></lightning-icon>
+											<span class="slds-assistive-text">Delete</span>
+										</button>
+									</td>
+								</tr>
+							</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+
+
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Housing__c" onsuccess={handleSuccess} >
+
+			<template lwc:if={addRealPropertyPage}>
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Name" data-field="Name" autocomplete="off" label="Real Property {address}" variant="label-stacked" class="required-field custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							<lightning-input-field field-name="Property_City__c" data-field="Property_City__c" autocomplete="off" label="City" variant="label-stacked" class="required-field custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							<lightning-input-field field-name="Zip_Code__c" data-field="Zip_Code__c" autocomplete="off" label="Zip" variant="label-stacked" class="required-field custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							<lightning-input-field field-name="Property_State__c" data-field="Property_State__c" autocomplete="off" label="State" variant="label-stacked" class="required-field custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+						</div>						
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Type_of_Property__c" data-field="Type_of_Property__c" autocomplete="off" label="Type of Property" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Date_of_Purchase__c" data-field="Date_of_Purchase__c" autocomplete="off" label="Date of Purchase" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Original_Purchase_Price__c" data-field="Original_Purchase_Price__c" autocomplete="off" label="Original Purchase Price" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Property_Address__c" data-field="Property_Address__c" autocomplete="off" label="Who Resides Here?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<template lwc:elseif={addRealPropertyOwnerShipPage}>
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Marital_or_Separate__c" data-field="Marital_or_Separate__c" autocomplete="off" label="Marital or Separate Property" variant="label-stacked" class="required-field custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							<lightning-input-field field-name="Related_To_Text__c" data-field="Related_To_Text__c" autocomplete="off" label="Owned by" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Responsible_Party__c" data-field="Responsible_Party__c" autocomplete="off" label="Responsible Party" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Property_Titled__c" data-field="Property_Titled__c" autocomplete="off" label="Property Titled" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+
+					</div>
+				</div>
+
+			</template>
+
+			<template lwc:elseif={addRealPropertyHOAPage}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="HOA_Dues__c" data-field="HOA_Dues__c" autocomplete="off" label="HOA Monthly Dues" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Maintenance_and_Repair__c" data-field="Maintenance_and_Repair__c" autocomplete="off" label="Monthly Repair and Maintenance" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+				</div>
+			</template>
+
+			<template lwc:elseif={addRealPropertyMortagePage}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Last_4_of_Mortgage_Account_Number__c" data-field="Last_4_of_Mortgage_Account_Number__c" autocomplete="off" label="Last 4 Digits of Account Number" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+						<div class="slds-grid">
+							<div class="slds-col slds-wrap slds-grid slds-size_1-of-2">
+								<lightning-input-field field-name="Date_of_Purchase__c" data-field="Date_of_Purchase__c" type="date" autocomplete="off" label="Date of Purchase" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-wrap slds-grid slds-size_1-of-2">
+								<lightning-input-field field-name="Loan_Balance__c" data-field="Loan_Balance__c" autocomplete="off" label="Loan Balance" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Mortgage_Principal__c" data-field="Mortgage_Principal__c" autocomplete="off" label="Mortgage Principal" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Mortgage_Interest__c" data-field="Mortgage_Interest__c" autocomplete="off" label="Mortgage Interest" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Property_Tax__c" data-field="Property_Tax__c" autocomplete="off" label="Monthly Property Tax" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Mortgage_Lender__c" data-field="Mortgage_Lender__c" autocomplete="off" label="Mortgage Lender" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+						
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Second_Mortgage__c" data-field="Second_Mortgage__c" autocomplete="off" label="Second Mortgage?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Second_Mortgage_Monthly_Payment__c" data-field="Second_Mortgage_Monthly_Payment__c" autocomplete="off" label="Second Mortgage Monthly Payment" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Mortgage_Insurance__c" data-field="Mortgage_Insurance__c" autocomplete="off" label="Mortgage Insurance" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Monthly_Payment__c" data-field="Monthly_Payment__c" autocomplete="off" label="Total Monthly Payment" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							<lightning-input-field field-name="Home_Owners_Insurance__c" data-field="Home_Owners_Insurance__c" autocomplete="off" label="Homeowner’s Insurance Premium" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+					</div>
+
+				</div>
+
+			</template>
+
+			<template lwc:elseif={addRealPropertyValuationPage}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Zillow_Valuation__c" data-field="Zillow_Valuation__c" autocomplete="off" label="Zillow Estimate" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Client_Estimate_of_Value__c" data-field="Client_Estimate_of_Value__c" autocomplete="off" label="Your Estimate of the Value" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+				</div>
+			</template>
+			<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>
+			<!--lightning-input-field field-name="Related_To__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parentRecId} ></lightning-input-field-->	 
+		</lightning-record-edit-form>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<template if:false={manageRealStateNextButtons}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center">
+			<template if:true={manageRealStatePreviousButtons}>
+				<button class="next-button previousBtnPadding slds-m-top_xx-large" onclick={handleRealStatePrevious}>
+					<span class="arrow previousBtnArrow">←</span>
+					PREVIOUS
+				</button>
+			</template>
+			<template if:true={manageRealStateNextButtons1}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleRealStateNext}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+			<template if:true={manageRealStateSaveButtons}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+</template>

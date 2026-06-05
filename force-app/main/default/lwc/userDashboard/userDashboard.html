@@ -1,0 +1,291 @@
+<template>
+    <div class="dashboard-shell">
+
+        <!-- Welcome Header -->
+        <header class="welcome-header">
+            <div class="logo-wrap">
+                <img src={logoUrl} alt="Modern Family Law" class="logo-img" />
+            </div>
+            <div class="welcome-text">
+                <button class="logout-link" type="button" onclick={handleLogout}>Logout</button>
+                <h1 class="welcome-title">{welcomeGreeting}</h1>
+                <p class="welcome-subtitle">Here&rsquo;s a summary of your active matters and next steps.</p>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+
+        <!-- Left: Matter Card -->
+        <div class="left-grid">
+
+            <template lwc:if={isLoading}>
+                <div class="matter-card skeleton-card">
+                    <div class="skeleton-line skeleton-line-lg"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line skeleton-line-short"></div>
+                </div>
+            </template>
+
+            <template lwc:elseif={loadError}>
+                <div class="matter-card error-card">
+                    <div class="section-label">Couldn’t load your matters</div>
+                    <div class="next-step-desc">{loadError}</div>
+                    <button class="btn btn-neutral" onclick={handleRetry}>Try again</button>
+                </div>
+            </template>
+
+            <template lwc:elseif={hasMatters}>
+            <div class="matter-card">
+
+                <!-- Card Header -->
+                <div class="card-header">
+                    <div class="card-title-group">
+                        <div class="card-icon">
+                            <lightning-icon icon-name="utility:open_folder" size="x-small"></lightning-icon>
+                        </div>
+                        <div>
+                            <div class="card-title">{matterTitle}</div>
+                        </div>
+                        <span class={badgeClass}>{matterBadge}</span>
+                    </div>
+                    <div class="nav-controls">
+                        <button class="btn-icon" onclick={handlePrevMatter} disabled={isPrevDisabled}
+                            title="Previous matter" aria-label="Previous matter">
+                            <lightning-icon icon-name="utility:chevronleft" size="xx-small"></lightning-icon>
+                        </button>
+                        <button class="btn-icon" onclick={handleNextMatter} disabled={isNextDisabled}
+                            title="Next matter" aria-label="Next matter">
+                            <lightning-icon icon-name="utility:chevronright" size="xx-small"></lightning-icon>
+                        </button>
+                        <button class="link-btn" onclick={handleViewAllMatters}>View all matters &rsaquo;</button>
+                    </div>
+                </div>
+
+                <!-- Next Step -->
+                <div class="next-step">
+                    <div class="next-step-icon">
+                        <lightning-icon icon-name="utility:task" size="small"></lightning-icon>
+                    </div>
+                    <div class="next-step-body">
+                        <div>
+                            <div class="next-step-label">Next step</div>
+                            <div class="next-step-title">{nextStepTitle}</div>
+                            <div class="next-step-desc">{nextStepDesc}</div>
+                        </div>
+                        <template lwc:if={showContinueButton}>
+                            <button class="btn btn-brand" onclick={handleContinue}>Continue &rsaquo;</button>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Two Column: Case Details + Legal Team -->
+                <div class="two-col">
+
+                    <!-- Case Details -->
+                    <div class="detail-card">
+                        <div class="section-label">Case details</div>
+                        <ul class="field-list">
+                            <li class="field-row">
+                                <span class="field-label">Status</span>
+                                <span class="field-value">{caseStatus}</span>
+                            </li>
+                            <li class="field-row">
+                                <span class="field-label">Case type</span>
+                                <span class="field-value">{caseType}</span>
+                            </li>
+                            <li class="field-row">
+                                <span class="field-label">Last updated</span>
+                                <span class="field-value">{lastUpdated}</span>
+                            </li>
+                            <li class="field-row">
+                                <span class="field-label">Next court date</span>
+                                <span class="field-value blue">{nextCourtDate}</span>
+                            </li>
+                            <li class="field-row">
+                                <span class="field-label">Due date</span>
+                                <span class="field-value red">{dueDate}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Legal Team -->
+                    <div class="detail-card">
+                        <div class="section-label">Legal team</div>
+                        <div class="team-list">
+                            <div class="team-member">
+                                <div class="avatar avatar-blue">{attorney.initials}</div>
+                                <div>
+                                    <div class="member-name">{attorney.name}</div>
+                                    <div class="member-role">Primary Attorney</div>
+                                </div>
+                            </div>
+                            <div class="team-member">
+                                <div class="avatar avatar-teal">{paralegal.initials}</div>
+                                <div>
+                                    <div class="member-name">{paralegal.name}</div>
+                                    <div class="member-role">Primary Paralegal</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-neutral btn-full" onclick={handleMessageTeam}>
+                                <lightning-icon icon-name="utility:chat" size="xx-small"></lightning-icon>
+                                Message team
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Billing Summary -->
+                <div class="billing-card">
+                    <div class="section-label">Billing summary</div>
+                    <div class="billing-stats">
+                        <div>
+                            <span class="billing-stat-label">Total balance</span>
+                            <span class="billing-stat-value">{totalBalance}</span>
+                        </div>
+                        <div class="billing-divider"></div>
+                        <div>
+                            <span class="billing-stat-label">Next due date</span>
+                            <span class="billing-stat-value red">{billingDueDate}</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick={handlePayNow}>
+                        <lightning-icon icon-name="utility:lock" size="xx-small"></lightning-icon>
+                        Pay now
+                    </button>
+                </div>
+
+            </div>
+            </template>
+
+            <!-- Recent Updates -->
+            <!-- TODO: real source TBD — Skylar/Don to confirm activity feed shape -->
+            <div class="updates-card">
+                <div class="updates-header">
+                    <div class="updates-title-group">
+                        <div class="updates-icon">
+                            <lightning-icon icon-name="utility:notification" size="x-small"></lightning-icon>
+                        </div>
+                        <div>
+                            <div class="updates-title">Recent Updates</div>
+                            <div class="updates-desc">Stay up to date on important activity.</div>
+                        </div>
+                    </div>
+                    <button class="link-btn" onclick={handleViewAllUpdates}>View all updates &rsaquo;</button>
+                </div>
+                <template lwc:if={hasRecentUpdates}>
+                    <div class="updates-grid">
+                        <template for:each={recentUpdates} for:item="update">
+                            <div class="update-item" key={update.id}>
+                                <div class={update.iconClass}>
+                                    <lightning-icon icon-name={update.icon} size="xx-small"></lightning-icon>
+                                </div>
+                                <div class="update-text">{update.text}</div>
+                                <div class="update-date">{update.dateLabel}</div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="updates-empty">
+                        <lightning-icon icon-name="utility:notification" size="small"
+                            class="updates-empty-icon"></lightning-icon>
+                        <div class="updates-empty-title">No recent activity yet</div>
+                        <div class="updates-empty-desc">
+                            Updates about your matters — messages, documents, and payments — will appear here.
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="sidebar right-sidebar">
+            <div class="sidebar-card">
+                <div class="ai-assistant-card">
+                    <div class="ai-assistant-title">Chat with your virtual Assistant</div>
+                    <div class="ai-assistant-desc">Get instant answers to general questions</div>
+
+                    <div class="chat-box" id="chatBox">
+                        <div class="messages-container" lwc:dom="manual" id="messagesContainer"></div>
+                    </div>
+                    <div class="input-container">
+                        <input class="user-input" type="text" placeholder="Type your message..." value={userMessage}
+                            oninput={handleInput} onkeydown={handleKeyDown} />
+                        <button class="send-button" onclick={handleSendMessage}>
+                            Send
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-item" onclick={handleContactFinance}>
+                    <div class="action-item-content">
+                        <div class="action-icon action-icon-green">
+                            <lightning-icon icon-name="utility:currency" size="x-small"></lightning-icon>
+                        </div>
+                        <div>
+                            <div class="action-title">Contact Finance</div>
+                            <div class="action-desc">Questions about billing or payments? We can help.</div>
+                        </div>
+                    </div>
+                    <span class="action-chevron">&rsaquo;</span>
+                </div>
+
+                <hr class="faq-divider" />
+                <div class="faq-label">Frequently Asked Questions</div>
+
+                <template for:each={faqDisplay} for:item="faq">
+                    <div class={faq.itemClass} key={faq.id}>
+                        <button class="faq-question-row" type="button"
+                            data-id={faq.id} onclick={handleFaqToggle}
+                            aria-expanded={faq.isOpen}>
+                            <span class="faq-question">{faq.question}</span>
+                            <lightning-icon icon-name={faq.iconName} size="xx-small"
+                                class="faq-chevron"></lightning-icon>
+                        </button>
+                        <template lwc:if={faq.isOpen}>
+                            <div class="faq-answer">{faq.answer}</div>
+                        </template>
+                    </div>
+                </template>
+
+                <button class="view-all-faqs" onclick={handleViewAllFaqs}>View all FAQs &rsaquo;</button>
+            </div>
+        </div>
+
+        </div> <!-- /.main-grid -->
+
+        <!-- Footer -->
+        <footer class="legal-footer">
+            <div class="legal-row">
+                <a href="#" onclick={handleFooterLink} data-key="conditions">Conditions of Use</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="privacy">Privacy Notice</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="health">Consumer Health Data Privacy Policy</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="disclaimer">Disclaimer</a>
+            </div>
+            <div class="legal-row">
+                <a href="#" onclick={handleFooterLink} data-key="cookie">Cookie Notice</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="accessibility">Accessibility Statement</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="advertising">Attorney Advertising</a>
+                <span class="legal-sep">|</span>
+                <a href="#" onclick={handleFooterLink} data-key="eeo">EEO Statement</a>
+            </div>
+        </footer>
+
+        <!-- Mobile-only floating chat trigger -->
+        <button class="mobile-chat-fab" type="button" onclick={openMobileChat}
+                title="Chat with assistant" aria-label="Chat with assistant">
+            <span>?</span>
+        </button>
+
+    </div>
+</template>

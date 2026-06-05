@@ -1,0 +1,71 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+    <div class="slds-col heading slds-size_1-of-1">Identity/Demographics</div>
+
+    <lightning-record-edit-form record-id={selectedRecordId}  onsuccess={handleSuccess} object-api-name="Account" density="comfy">
+
+      <div class="slds-grid slds-wrap slds-gutters">
+
+        <!-- Column A (full-width on mobile, half on desktop) -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+
+        <div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+          <div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_xx-small class1">
+              <lightning-input-field field-name="Birthdate__c" data-field="Birthdate__c" name="DateofBirth" label="Date of Birth" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+          </div>
+          <div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_xx-small class1">
+              <lightning-input-field field-name="Race__c" data-field="Race__c" name="race" label="Race" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+          </div>
+          <div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_x-small">
+              <lightning-input-field  field-name="Drivers_License__c" data-field="Drivers_License__c" name="driversLicense" maxlength="15" label="Drivers License #"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+          </div>
+          <div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_x-small">
+              <lightning-input-field type="number" field-name="Drivers_License_State__c" data-field="Drivers_License_State__c" label="Drivers License State" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+          </div>
+          <div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_x-small">
+              <lightning-input-field  pattern="^\D*(\d\D*){9}$" field-name="Social_Security_Number__c" data-field="Social_Security_Number__c" label="Social Security Number"   variant="label-stacked" class="custom-input icon-color"  onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+            </div>
+          </div>
+
+	  </div>
+        <!-- Column B -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+
+        <div class="upload-container slds-p-top_medium">
+          <div class="upload-header">
+            <span>UPLOAD DOCUMENTS</span>
+            <lightning-helptext content="Please upload the required documents." class="icon-color"></lightning-helptext>
+          </div>
+          <p class="upload-instructions">Please upload the following files:</p>
+          <ul class="file-list">
+            <li><strong>Drivers License</strong></li>
+          </ul>
+					<div class="upload-box">
+						<p class="file-types">JPG, PNG</p>
+						<lightning-file-upload name="fileUploader" accept={acceptedFormats} record-id={selectedRecordId} onuploadfinished={handleUploadFinished}></lightning-file-upload>
+					</div>
+        <template if:true={uploadedIdentityFile}>
+            <p class="uploaded-file">Uploaded: {uploadedIdentityFile.name}</p>
+        </template>
+        <template if:true={listOfUploadedIdentityFiles}>
+          <template for:each={listOfUploadedIdentityFiles} for:item="file" for:index="index">
+            <lightning-pill
+              label={file.name}
+              name={index} 
+              key={file.id}
+              data-id={file.id}
+              data-field="uploadFile"
+              onremove={handleFileDelete}>
+            </lightning-pill>
+          </template>
+        </template>        
+      </div>
+
+	  </div>
+	</div>
+
+    </lightning-record-edit-form>
+
+
+  </div>
+</template>

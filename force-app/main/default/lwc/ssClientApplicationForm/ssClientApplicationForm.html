@@ -1,0 +1,104 @@
+<template>
+    <div class="slds-p-around_large">
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <h3 class="slds-m-bottom_medium slds-card__header-title">Applicant Vitals</h3>            
+        </div>
+        <div class="mobile-form">
+
+            <lightning-record-edit-form density="comfy" object-api-name="Account" record-id={recordId} onsuccess={handleSuccess} onerror={handleError} class="custom-form">
+                <div class="custom-form-container">
+                    <lightning-input-field disabled field-name="FirstName" class="custom-input readonly"></lightning-input-field>
+                    <lightning-input-field disabled field-name="MiddleName" class="custom-input"></lightning-input-field>
+                    <lightning-input-field disabled field-name="LastName" class="custom-input"></lightning-input-field>
+                </div>
+                <lightning-input-field field-name="Gender__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="PersonMobilePhone" class="custom-input" onchange={handlePhoneChange}></lightning-input-field>
+                <template if:true={errors.PersonMobilePhone.show}>
+                    <div class="slds-p-none slds-text-color_error">  {errors.PersonMobilePhone.error} </div>
+                </template>                  
+                <lightning-input-field field-name="PersonEmail" class="custom-input" required="true" disabled></lightning-input-field>     
+                <lightning-input-field field-name="PersonBirthdate" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Birth_City__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Birth_State__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Birth_Country__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Current_Employer__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Job_Title__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Annual_household_income__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                <lightning-input-field field-name="Social_Security_Number__c" class="custom-input" onchange={handleSSNChange}></lightning-input-field>
+                <template if:true={errors.Social_Security_Number__c.show}>
+                    <div class="slds-p-none slds-text-color_error">  {errors.Social_Security_Number__c.error} </div>
+                </template>                
+                <div class="slds-m-top_medium slds-text-align_center">
+                    <template if:true={isLoading}>
+                        <!-- <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner> -->
+                        <c-image-spinner is-loading={isLoading} alternative-text="Loading records…" size="large" backdrop> <!-- optional: dim the background --></c-image-spinner>
+                    </template>
+                </div>                
+                <div class="slds-col slds-grid slds-size_1-of-1 slds-p-vertical_medium slds-grid_align-center">
+                    <template lwc:if={showNext}>
+                        <button class="next-button nextBtnPadding" onclick={handleSave}>NEXT
+                            <span class="arrow nextBtnArrow">→</span>
+                        </button>
+                    </template>
+                </div>
+
+            </lightning-record-edit-form>
+            <!--template if:true={errorMessage}>
+                <p class="slds-text-color_error slds-m-top_small">{errorMessage}</p>
+            </template-->
+        </div>
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium desktop-form">
+            <lightning-record-edit-form density="comfy" object-api-name="Account" record-id={recordId}
+                onsuccess={handleSuccess} onerror={handleError} class="custom-form">
+                <div class="slds-grid slds-gutters">
+
+                    <div class="slds-col slds-wrap slds-grid slds-size_1-of-2 flex-end">
+                        <div class="custom-form-container">
+                            <lightning-input-field disabled field-name="FirstName" class="custom-input readonly"></lightning-input-field>
+                            <lightning-input-field disabled field-name="MiddleName" class="custom-input"></lightning-input-field>
+                            <lightning-input-field disabled field-name="LastName" class="custom-input"></lightning-input-field>
+                        </div>
+                        <lightning-input-field field-name="Gender__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="PersonMobilePhone" class="custom-input" onchange={handlePhoneChange}></lightning-input-field>
+                        <template if:true={errors.PersonMobilePhone.show}>
+                            <div class="slds-p-none slds-text-color_error">  {errors.PersonMobilePhone.error} </div>
+                        </template>                        
+                        <lightning-input-field field-name="PersonEmail" class="custom-input required-field" required="true" disabled></lightning-input-field>
+                        <lightning-input-field field-name="PersonBirthdate" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                    </div>
+                    
+                    <div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center flex-end">
+                        <lightning-input-field field-name="Birth_City__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Birth_State__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Birth_Country__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Current_Employer__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Job_Title__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Annual_household_income__c" class="custom-input required-field" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="Social_Security_Number__c" class="custom-input" onchange={handleSSNChange}></lightning-input-field>
+                        <template if:true={errors.Social_Security_Number__c.show}>
+                            <div class="slds-p-none slds-text-color_error">  {errors.Social_Security_Number__c.error} </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-m-top_medium slds-text-align_center">
+                        <template if:true={isLoading}>
+                            <!-- <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner> -->
+                            <c-image-spinner is-loading={isLoading} alternative-text="Loading records…" size="large" backdrop> <!-- optional: dim the background --></c-image-spinner>
+                        </template>
+                    </div>
+                    
+                </div>
+                <div class="slds-col slds-grid slds-size_1-of-1 slds-p-vertical_medium slds-grid_align-center">                    
+                    <button class="next-button nextBtnPadding" onclick={handleSave}>
+                        NEXT <span class="arrow nextBtnArrow">→</span>
+                    </button>
+                </div>
+            </lightning-record-edit-form>
+            <!--template if:true={errorMessage}>
+                <p class="slds-text-color_error slds-m-top_small">{errorMessage}</p>
+            </template-->
+        </div>
+
+    </div>
+
+</template>

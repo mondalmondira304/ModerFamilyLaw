@@ -1,0 +1,160 @@
+/*/
+@font-face {
+    font-family: "RalewayBold";
+    src: url('/resource/RalewayBold') format('TrueType');
+}
+
+@font-face {
+    font-family: "RalewayMedium";
+    src: url('/resource/RalewayMedium') format('TrueType');
+}*/
+
+
+.heading {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 28px;
+    Color: #4e4d4e;
+}
+
+.subheading {
+	font-size: 14px;
+    Color: #4e4d4e;
+    /* font-weight: bold; */
+}
+
+.custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #3dbedb;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2sease-in-out;
+    Color: #3dbedb;
+}
+ 
+.custom-button:hover {
+    background: #25c0eb;
+    color: white;
+}
+
+.icon-style {
+    margin-left: 5px;
+    --slds-c-icon-color-foreground-default: #25c0eb;
+}
+
+.custom-button:hover .icon-style {
+    --slds-c-icon-color-foreground-default: white;
+}
+
+.name-link {
+    color: #25c0eb;
+    text-decoration: none;
+}
+
+.name-link:hover {
+    text-decoration: underline;
+}
+
+.buttonCSS {
+    background-color: #4dc5e1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+	margin-right: 20px;
+}
+
+.next-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #3dbedb;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.next-button .arrow {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.previousBtnPadding {
+    padding: 5px 35px 5px 5px;
+    margin-right: 20px;
+}
+
+.previousBtnArrow {
+    margin-right: 30px;
+}
+
+.nextBtnPadding {
+    padding: 5px 5px 5px 35px;
+}
+
+.nextBtnArrow {
+    margin-left: 30px;
+}
+
+.labelCSS {
+    font-size: 12px;
+    margin-bottom:0.125rem;
+    color:#4e4d4e
+}
+
+.helpTextMargin {
+    margin-left: 10px;
+    position: relative;
+    bottom: 2px;
+    --lwc-colorTextIconDefault: #4dc5e1!important;
+}
+
+.info-icon {
+  cursor: pointer;
+  position: relative;
+  bottom: 4px;
+  --lwc-colorTextIconDefault: #4dc5e1 !important;
+}
+
+.alignAddButton {
+    display: flex;
+    justify-content: end;
+}
+
+.custom-input {
+    --slds-c-input-color-background: #f2f2f2;
+    --slds-c-input-radius-border: 8px;
+}
+
+.icon-color {
+    --lwc-colorTextIconDefault: #4dc5e1!important;
+}
+
+.labelCSS {
+    font-size: 12px;
+    margin-bottom:0.125rem;
+    color:#4e4d4e
+}

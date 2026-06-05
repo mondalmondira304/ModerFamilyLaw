@@ -1,0 +1,93 @@
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.text-primary {
+  color: #3dbedb
+}
+
+.heading-large {
+  font-size: 2.5rem;
+  color: #5D69B2;
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+
+.waiting-btn-bg {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.waiting-container {
+  display: block;
+  width: 100px !important;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+}
+
+/* Waiting Spinner */
+.spinner-img {
+  display: block;
+  width: 80px;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+} 
+.waiting-container .spinner-img {
+  display: block;
+  width: 100px !important;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+}
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  /* font-weight: bold; */
+  color: white;
+  background-color: #3dbedb;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.next-button:disabled {
+  background-color: rgba(61, 190, 219, 0.565);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.next-button:active {
+	transform: translateY(2px);
+	box-shadow: 0 5px 3px #dcdcdc;
+}
+
+.next-button .arrow {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 7px 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.btn-spinner {
+  width: 50px;
+}
+
+.nextBtnPadding {
+  /* padding: 5px 5px 5px 35px; */
+  padding: 5px 5px 5px 55px;
+}
+
+.nextBtnArrow {
+  margin-left: 40px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

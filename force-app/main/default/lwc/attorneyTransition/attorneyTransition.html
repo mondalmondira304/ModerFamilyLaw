@@ -1,0 +1,59 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Attorney Transition Firm Choice</div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Processing" size="large"></lightning-spinner>
+        </template>
+        <template if:true={showSurvey}>
+			<!--lightning-record-edit-form record-id={recordIdIn} object-api-name="Matters__c"-->
+				<div class="slds-grid slds-wrap slds-gutters">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+                            <h2 class="slds-align_absolute-center slds-card__header-title slds-p-top_large slds-p-bottom_large">Your Available Options</h2>              
+                            <h3 class="slds-align_absolute-center slds-card__header-title slds-p-bottom-large">
+                                *Stay with MFL:  I wish to continue to be represented by Modern Family Law and understand I will be contacted by 
+                                Modern Family Law to discuss its continuing representation of me and the selection of an alternate attorney in the Firm.</h3>            
+                            <template lwc:if={retainingClientsIn}>             
+                                <h3 class="slds-align_absolute-center slds-card__header-title slds-p-bottom-large">
+                                    *Stay with current attorney:  I wish to continue to be represented by my current Attorney and authorize the transfer 
+                                    of all paper and electronic files to their new firm and any balance of my unearned retainer held in trust to me.</h3>
+                            </template>
+                            <h3 class="slds-align_absolute-center slds-card__header-title slds-p-bottom-large">
+                                *Seek new counsel:  I wish to be represented by a new law firm and authorize the transfer of 
+                                all paper and electronic files to the aforementioned firm.</h3>                                    
+							<div class="slds-col slds-m-top_large slds-m-bottom_medium slds-size_1-of-1">                      
+                                    <lightning-radio-group name="radioGroup"
+                                                        label="Select Your Choice"
+                                                        options={options}
+                                                        class="decisionValue"
+                                                        value={decisionValue}
+                                                        onchange={handleDecisionValueChange}
+                                                        type="radio"></lightning-radio-group>                                        
+							</div>
+							<div class="slds-col slds-m-bottom_medium slds-size_1-of-1">
+                                <lightning-input type="text" label="Type Your Full Name" class="nameValue" value={nameValue} onchange={handleNameValueChange} required></lightning-input>                                    
+							</div>
+							<div class="slds-col slds-m-bottom_medium slds-size_1-of-1">
+                                <lightning-input type="date" name="input7" label="Today's Date" disabled value={todaysDate} ></lightning-input>                                    
+							</div>
+						</div>				
+				</div>
+			<!--/lightning-record-edit-form-->
+            <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center  slds-p-vertical_medium">
+                <button class="next-button nextBtnPadding" onclick={handleSubmit}>SUBMIT CHOICE
+                    <span class="arrow nextBtnArrow">→</span>
+                </button>
+	        </div>
+        </template>
+        <template if:true={showSuccessMessage}>
+            <div class="slds-p-right_large slds-p-left_large slds-p-bottom_large">            
+                <h2 class="slds-align_absolute-center slds-card__header-title slds-p-top_large slds-p-bottom_large">Thank you for your response!</h2>            
+                <h3 class="slds-align_absolute-center slds-card__header-title slds-p-bottom_xx-large">Our legal team will contact you shortly to discuss the next steps.</h3>
+                <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center  slds-p-vertical_medium">
+                <button class="next-button nextBtnPadding" onclick={handleRefresh}>CLOSE
+                    <span class="arrow nextBtnArrow">→</span>
+                </button>
+                </div>
+            </div>
+        </template>        
+	</div>
+</template>

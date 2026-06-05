@@ -1,0 +1,110 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Matter Financial Summary</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <template lwc:if={hasError}>
+                <div class="slds-text-color_error">{errorMessage}</div>
+            </template>
+
+            <template lwc:if={isLoading}>
+                <div class="slds-is-relative">
+                    <lightning-spinner alternative-text="Loading financial data..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <template lwc:if={recordId}>
+                <template lwc:if={isLoading}></template>
+                <template lwc:elseif={hasError}></template>
+                <template lwc:else>
+                    <!-- Info note (Option 1) -->
+<div class="slds-notify slds-notify_alert slds-theme_info slds-theme_alert-texture slds-m-bottom_small custom-info-banner" role="alert">
+                        <span class="slds-assistive-text">Info</span>
+                        <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <h2 class="slds-text-body_regular" >For real-time data, please refer to the corresponding records in TimeSolv.</h2>
+                    </div>
+
+                    <!-- Last synced timestamp -->
+                    <div class="slds-grid slds-align_absolute-center slds-text-color_weak slds-text-body_small slds-m-bottom_small">
+                        <lightning-icon icon-name="utility:clock" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <span>Last synced: {formattedLastSync}</span>
+                    </div>
+
+                    <div class="slds-p-vertical_medium slds-p-horizontal_small">
+                        <div class="slds-grid slds-wrap slds-gutters_small">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid slds-grid_align-center">
+                                <div class="slds-size_4-of-5">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2"><span class="slds-text-title_bold">WIP:</span></div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_right"><span class="value-align">{formattedWip}</span></div>
+                                    </div>
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2"><span class="slds-text-title_bold">FA Retainer:</span></div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_right"><span class="value-align">{formattedRetainerAmount}</span></div>
+                                    </div>
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2"><span class="slds-text-title_bold">Trust Balance:</span></div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_right"><span class="value-align">{formattedTrustBalance}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid slds-grid_align-center">
+                                <div class="slds-size_4-of-5">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2"><span class="slds-text-title_bold">Worked:</span></div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_right"><span class="value-align">{formattedWorked}</span></div>
+                                    </div>
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2"><span class="slds-text-title_bold">Billed:</span></div>
+                                        <div class="slds-col slds-size_1-of-2 slds-text-align_right"><span class="value-align">{formattedBilled}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-box slds-theme_shade slds-m-top_medium">
+                        <div class="slds-grid slds-wrap slds-gutters_small">
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="slds-box slds-grid slds-grid_align-spread slds-p-around_small">
+                                    <span class="slds-text-title_caps">Pay to Maintain Retainer</span>
+                                    <span class="slds-text-heading_medium">{payToMaintainRetainerFormatted}</span>
+                                </div>
+                            </div>
+                            
+                            <template lwc:if={showTotalPotentialDue}>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                    <div class="slds-box slds-grid slds-grid_align-spread slds-p-around_small">
+                                        <div>
+                                            <div class="slds-text-title_caps" style="line-height: 1.2;">TOTAL POTENTIAL</div>
+                                            <div class="slds-text-title_caps" style="line-height: 1.2;">DUE</div>
+                                        </div>
+                                        <span class="slds-text-heading_medium">{formattedTotalBalanceDue}</span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <template lwc:else>
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-longform">
+                        <h3 class="slds-text-heading_medium">No Matter Selected</h3>
+                        <p class="slds-text-body_regular">Please select a matter to view financial information.</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

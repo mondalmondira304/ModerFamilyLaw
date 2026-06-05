@@ -1,0 +1,26 @@
+<template>
+    <div class="container">
+        <!-- Loading/waiting state -->
+        <template if:false={success}>
+            <div class="slds-p-around_medium slds-text-align_center">
+                <lightning-spinner alternative-text="Waiting" size="large" variant="brand"></lightning-spinner>
+                <p class="slds-text-heading_small slds-p-top_medium">{waitingMessage}</p>
+                <div class="slds-p-around_medium">
+                    <lightning-progress-bar value={progressPercentage} size="large"></lightning-progress-bar>
+                </div>
+                <!--<p class="slds-text-body_small">Attempt {currentAttemptDisplay} of {maxAttempts}</p>-->
+            </div>
+        </template>
+        
+        <!-- Simple success message on white background -->
+        <template if:true={success}>
+            <div class="simple-success-container">
+                <div class="success-icon">
+                    <lightning-icon icon-name="utility:success" size="large"></lightning-icon>
+                </div>
+                <h1 class="success-title">Success!</h1>
+                <p class="success-message">{successMessage}</p>
+            </div>
+        </template>
+    </div>
+</template>

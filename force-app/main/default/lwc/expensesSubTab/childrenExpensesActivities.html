@@ -1,0 +1,42 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Children’s Expenses and Activities</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Clothing_Shoes_Client__c" data-field="Clothing_Shoes_Client__c" label = "Clothing and Shoes" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Children_s_Tuition_Client__c" data-field="Children_s_Tuition_Client__c"  label = "Children’s Tuition" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Misc_Children_Expenses_Client__c" data-field="Misc_Children_Expenses_Client__c"  label = "Misc. Children" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Extraordinary_Child_Expenses_Client__c" data-field="Extraordinary_Child_Expenses_Client__c"  label = "Extraordinary Child Expenses" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Child_Care_Client__c" data-field="Child_Care_Client__c" label = "Child Care" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Child_Expenses_other_family__c" data-field="Child_Expenses_other_family__c" label = "Children Expenses Other Family" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Child_Expenses_other_family_of_months__c" data-field="Child_Expenses_other_family_of_months__c" label = "Child Expenses Other Family # of Months" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+    </div>
+</template>

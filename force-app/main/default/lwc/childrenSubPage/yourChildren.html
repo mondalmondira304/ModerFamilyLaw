@@ -1,0 +1,179 @@
+<template>
+	<template if:true={showServiceSpinner}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Children From Relationship With</div>
+		<div
+			class="toggle-container slds-col slds-size_1-of-1 slds-p-top_small slds-p-bottom_large slds-grid slds-grid_align-center">
+			<div class="toggle-switch">
+				<button class={getButtonClassOpposing} data-option="Opposing Party" onclick={handleToggle}>Opposing
+					Party</button>
+				<button class={getButtonClassOther} data-option="Other" onclick={handleToggle}>Other</button>
+			</div>
+		</div>
+		<template lwc:if={opposingParty}>
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-vertical_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddChildBtn}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Full Name</th>
+								<th>Age</th>
+								<th>Gender</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<template if:true={parent1Data}>
+								<template for:each={parent1Data} for:item="row">
+									<tr key={row.Id}>
+										<td>
+											<span class="rowName" onclick={handleCellClick} data-id={row.Id}
+												data-field={row.Name}>{row.Name}<lightning-icon icon-name="utility:edit"
+													size="xx-small" class="edit-icon"></lightning-icon></span>
+										</td>
+										<td>{row.Child_Age__c}</td>
+										<td>{row.Gender__c}</td>
+										<td><span data-id={row.Id} data-field="Children__c"
+												onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete"
+													size="x-small" class="edit-icon"></lightning-icon></span></td>
+									</tr>
+								</template>
+							</template>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+
+		<template lwc:else>
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center"
+				style="padding-bottom:200px">
+				<div class="slds-col slds-size_12-of-12 slds-p-vertical_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddChildBtn}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+
+				<div class="slds-col slds-size_1-of-1 slds-p-vertical_medium">
+					<table
+						class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout slds-max-medium-table_stacked">
+						<thead>
+							<tr>
+								<th scope="col">Full Name</th>
+								<th scope="col">Age</th>
+								<th scope="col">Gender</th>
+								<th scope="col" class="slds-text-align_right">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template if:true={parent2Data}>
+								<template for:each={parent2Data} for:item="row">
+									<tr key={row.Id}>
+										<td data-label="Full Name">
+											<span class="rowName" role="button" tabindex="0" onclick={handleCellClick}
+												data-id={row.Id} data-field="Name">
+												{row.Name}
+												<lightning-icon icon-name="utility:edit" size="xx-small"
+													class="edit-icon"></lightning-icon>
+											</span>
+										</td>
+										<td data-label="Age">{row.Child_Age__c}</td>
+										<td data-label="Gender">{row.Gender__c}</td>
+										<td data-label="Actions" class="slds-text-align_right">
+											<span data-id={row.Id} onclick={handleDeleteChild} data-field="Children__c" title="Delete child">
+												<lightning-icon icon-name="utility:delete" size="x-small"
+													class="edit-icon"></lightning-icon>
+											</span>
+										</td>
+									</tr>
+								</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+
+
+			</div>
+		</template>
+
+		<div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center">
+
+		</div>
+
+		<template lwc:if={opposingParty}>
+			<lightning-record-edit-form record-id={matter.Id} object-api-name="Matters__c" density="comfy"  onsuccess={handleSuccess}>
+
+				<div class="slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div
+						class="slds-col slds-size_1-of-1 slds-p-right_small slds-p-vertical_xx-small subheading slds-text-align_center">
+						Children’s Health Insurance</div>
+
+					<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1">
+
+						<!-- Column A -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+								<label class="labelCSS">Health Insurance Provider</label>
+								<lightning-input-field field-name="Health_Ins_Provider_Children__c" data-field="Health_Ins_Provider_Children__c" label="Health Insurance Provider" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+								<label class="labelCSS">Flex/Cafeteria Plan</label>
+								<lightning-input-field field-name="Flex_Cafeteria_Plan_Children__c" data-field="Flex_Cafeteria_Plan_Children__c"  label="Flex/Cafeteria Plan" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+								<lightning-input-field field-name="Uncovered_Costs__c" data-field="Uncovered_Costs__c" label="Uncovered Costs" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+						<!-- Column B -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+								<label class="labelCSS">Health Policy Number</label>
+								<lightning-input-field field-name="Health_Policy_Number_Children__c" data-field="Health_Policy_Number_Children__c" label="Health Policy Number" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+								<label class="labelCSS">Children’s Premium</label>
+								<lightning-input-field field-name="Children_s_Portion_of_HI_Premium__c" data-field="Children_s_Portion_of_HI_Premium__c" label="Children’s Premium" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+								<lightning-input-field field-name="Life_Insurance_Paid_by_Employer_OP__c" data-field="Life_Insurance_Paid_by_Employer_OP__c" label="Is the health insurance policy provided by an employer?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</lightning-record-edit-form>
+		</template>
+
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<template if:false={manageNextButtons}>
+				<button class="next-button nextBtnPadding" onclick={saveMatter}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal}
+						class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={vitalLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

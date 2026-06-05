@@ -1,0 +1,51 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Maintenance and Child Support</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Maintenance_Paid_this_family_Client__c" data-field="Maintenance_Paid_this_family_Client__c"  label = "Maintenance Paid by You (This Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Maintenance_Paid_other_family_Client__c" data-field="Maintenance_Paid_other_family_Client__c"  label = "Maintenance Paid by You (Other Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Spousal_Support_from_Other_Client__c" data-field="Spousal_Support_from_Other_Client__c"  label = "Spousal Support" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Spousal_support_average_monthly__c" data-field="Spousal_support_average_monthly__c" label = "Spousal Support Monthly Average" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Partner_support_C__c" data-field="Partner_support_C__c" label = "Partner Support" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Partner_support_avg_monthly_C__c" data-field="Partner_support_avg_monthly_C__c" label = "Partner Support Monthly Average" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Child_Support_this_family_Client__c" data-field="Child_Support_this_family_Client__c"  label = "Child Support (This Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Number_of_Children__c" data-field="Number_of_Children__c"  label = "Number of Children (This Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Child_Support_other_family_Client__c" data-field="Child_Support_other_family_Client__c" label = "Court Ordered Child Support (Other Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Stock_Contribution_Deducted_from_Pay_C__c" data-field="Stock_Contribution_Deducted_from_Pay_C__c" label = "Non-Court Ordered Child Support (Other Family)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+	</div>
+</template>

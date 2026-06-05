@@ -1,0 +1,29 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Trust Income</div>
+		<lightning-record-edit-form record-id={otherIncomeRecordId} object-api-name="Other_Income__c"  onsuccess={handleSuccess}>
+			<div class="slds-col slds-p-top_medium slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Trust Income Last Month Trust</label>
+						<lightning-input-field field-name="Trust_Income_Last_Month__c" data-field="Trust_Income_Last_Month__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Average Monthly Trust Income</label>
+						<lightning-input-field field-name="Trust_Income_Avg_Monthly__c" data-field="Trust_Income_Avg_Monthly__c"  variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Income Last Year</label>
+						<lightning-input-field field-name="Trust_Income_Last_Year__c" data-field="Trust_Income_Last_Year__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+						<lightning-input-field field-name="Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+		<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+    </div>
+</template>

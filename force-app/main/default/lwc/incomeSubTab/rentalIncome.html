@@ -1,0 +1,49 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Rental Income</div>
+
+		<lightning-record-edit-form record-id={otherIncomeRecordId} object-api-name="Other_Income__c" onsuccess={handleSuccess}>
+
+			<div class="slds-grid slds-wrap slds-gutters">
+
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1 slds-m-bottom_small">
+							<label class="labelCSS">Rental Property Street Address</label>
+							<lightning-input-field field-name="Street_Address__c" data-field="Street_Address__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1 slds-m-bottom_small">
+							<label class="labelCSS">Renter’s Name</label>
+							<lightning-input-field field-name="Renters_Name__c" data-field="Renters_Name__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1 slds-m-bottom_small">
+							<label class="labelCSS">Rental Property Income Last Month</label>
+							<lightning-input-field field-name="Rental_Prop_Last_Month__c" data-field="Rental_Prop_Last_Month__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1 slds-m-bottom_small">
+							<label class="labelCSS">Average Rental Income</label>
+							<lightning-input-field field-name="Rental_Prop_Avg_Monthly__c" data-field="Rental_Prop_Avg_Monthly__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1 slds-m-bottom_small">
+							<label class="labelCSS">Rental Property Income Last Year</label>
+							<lightning-input-field field-name="Rental_Prop_Last_Year__c" data-field="Rental_Prop_Last_Year__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>					
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+
+		 <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+ </div>
+</template>

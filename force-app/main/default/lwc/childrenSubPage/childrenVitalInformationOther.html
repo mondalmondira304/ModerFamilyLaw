@@ -1,0 +1,57 @@
+<template>
+	<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">{addLabelOther} Child From Other Relationship</div>
+
+		<lightning-record-edit-form object-api-name="Children__c" record-id={selectedChildRecordId}  onsuccess={handleSuccess}>
+
+			<div class="slds-grid slds-wrap slds-gutters">
+
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Name" data-field="Name" label="Child's First Name" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Gender__c" data-field="Gender__c" label="Gender" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Date_of_Birth__c" data-field="Date_of_Birth__c" label="Date Of Birth" class="custom-input icon-color" variant="label-stacked" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Child_Resides_With__c" data-field="Child_Resides_With__c" label="Child Resides with" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Street__c" data-field="Street__c" label="Current Street Address" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="City__c" data-field="City__c" label="City" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="State__c" data-field="State__c" label="State" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+
+			</div> 
+		<lightning-input-field field-name="Matter_ID__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+		<lightning-input-field field-name="Parent_1__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parent_1} ></lightning-input-field>	
+		<lightning-input-field field-name="Parent_2__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parent_2} ></lightning-input-field>	
+		<lightning-input-field field-name="Time_in_Jurisdiction__c" disabled="true" variant="label-hidden" class="slds-hidden" value="0" ></lightning-input-field>			
+		<template if:true={isInsert}>		<!--Set default value for new records-->
+			<lightning-input-field field-name="Child_Resides_With__c" disabled="true" variant="label-hidden" class="slds-hidden" value="Both" ></lightning-input-field>	
+		</template>	
+		</lightning-record-edit-form>
+		</div>
+
+	<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center class11">
+		<button class="cancel-button" onclick={handleResetProgressChild}>
+			CANCEL
+		</button>
+		<button class="next-button nextBtnPadding" onclick={saveChildRecord}>Add Child Data
+			<span class="arrow nextBtnArrow">→</span>
+		</button>
+    </div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={vitalLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

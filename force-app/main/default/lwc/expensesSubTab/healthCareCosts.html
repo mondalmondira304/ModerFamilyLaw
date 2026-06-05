@@ -1,0 +1,39 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Monthly Healthcare Costs</div>
+		<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading">Healthcare Costs (Co-Pays, Premiums – NOT already deducted from your payroll)</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Doctor and Vision Care</label>
+							<lightning-input-field field-name="Doctor_Vision_Care_Client__c" data-field="Doctor_Vision_Care_Client__c"  label = "Doctor and Vision Care" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Medicine_Rx_Drugs_Client__c" data-field="Medicine_Rx_Drugs_Client__c"  label = "Medicine & Prescription Drugs" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Healthcare_Premium_NOT_Employer_Paid_C__c" data-field="Healthcare_Premium_NOT_Employer_Paid_C__c"  label = "Healthcare Premium NOT Paid by Employer" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Therapy/Counseling</label>
+							<lightning-input-field field-name="Therapy_Counseling_Client__c" data-field="Therapy_Counseling_Client__c"  label = "Therapy/Counseling" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Dentist_Orthodontist_Client__c" data-field="Dentist_Orthodontist_Client__c" label = "Dentist and Orthodontist" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</lightning-record-edit-form>
+	</div>
+</template>

@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-grid slds-grid_vertical slds-grid_align-center slds-p-around_large" style="height:100%;">
+
+        <div class="slds-align_absolute-center slds-m-vertical_large">
+            <!-- <lightning-spinner alternative-text="Waiting for Credit Decision..." size="large"></lightning-spinner> -->
+            <c-image-spinner is-loading={isLoading} alternative-text="Loading records…" size="large" backdrop> <!-- optional: dim the background --></c-image-spinner>
+            <p class="slds-m-top_medium slds-text-heading_medium">Processing your application. Please wait...</p>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,13 @@
+<apex:page standardcontroller="Contact">
+    <apex:form >
+        <script type="text/javascript">
+            function validate() {
+                // validate code here
+                savePost();
+            }
+        </script>
+        <apex:actionfunction name="savePost" action="{!save}" rerender="" status="str" />
+        <apex:commandbutton value="Save New Account Value" onclick="this.disabled='disabled'; validate();" />
+        <apex:actionstatus startText="Loading..." stopText="" id="str" />
+    </apex:form>
+</apex:page>

@@ -1,0 +1,105 @@
+<template>
+	<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<template lwc:if={addMedicalProvider}>
+			<div class="slds-col heading slds-size_1-of-1">Medical Providers</div>
+			<div class="slds-p-bottom_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 subheading">{childName}</div>
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-vertical_medium">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Medical Providers</th>
+								<th>Clinic</th>
+								<th>Type of Provider</th>
+								<th>
+									<button class="custom-button" onclick={handleMedicalProvider}>
+										<span class="button-text">Add</span>
+										<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+									</button>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={medicalProviderData} for:item="row">
+								<tr key={row.id}>
+									<td>
+										<div style="color: #25c0eb; cursor:pointer" onclick={handleMedicalClick} data-id={row.Id}>{row.Name}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></div>
+									</td>
+									<td>{row.Medical_Clinic_s_Name__c}</td>
+									<td>{row.Type_of_Provider__c}</td>
+									<td><span data-id={row.Id} data-field="Medical_Providers__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+		<template lwc:else>
+			<lightning-record-edit-form record-id={medicalActivity} object-api-name="Medical_Providers__c"  onsuccess={handleSuccess}>
+				<div class="slds-col heading slds-size_1-of-1">{addMedical} Medical Providers</div>
+				<div class="slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 subheading">{childName}</div>
+				<div class="slds-p-horizonal_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center slds-p-top_large">
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Name" data-field="Name" label="Medical Providers Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Medical_Clinic_s_Name__c" data-field="Medical_Clinic_s_Name__c" label="Health Care Clinic’s Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Last_Seen_by_this_Provider__c" data-field="Last_Seen_by_this_Provider__c"  label="Last Seen by this Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field read-only="true" field-name="Child_Name__c" data-field="Child_Name__c" label="Child Name" variant="label-stacked" class="custom-input icon-color" value={recordId} disabled="true" ></lightning-input-field>													
+						</div>
+					</div>
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center slds-p-top_large">
+						<div class="slds-col slds-size_10-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Type_of_Provider__c" data-field="Type_of_Provider__c" label="Type of Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_10-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Description_of_Care__c" data-field="Description_of_Care__c" label="Description of Care" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_10-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Prescriptions__c" data-field="Prescriptions__c" label="Prescriptions by this Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<lightning-input-field field-name="Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+			</lightning-record-edit-form>
+		</template>
+	</div>
+	<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center">
+		<template if:true={addMedicalProvider}>
+			<button class="next-button previousBtnPadding" onclick={handleCancelChild}>
+			<span class="arrow previousBtnArrow">←</span>
+			BACK
+			</button>
+			<button class="next-button nextBtnPadding" onclick={handleDoneWithProvider}>DONE WITH PROVIDERS
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+		<template if:false={addMedicalProvider}>
+			<button class="cancel-button" onclick={handleCancelMedical}>
+			CANCEL
+			</button>
+			<button class="next-button nextBtnPadding" onclick={handleSaveMedical}>ADD PROVIDERS  
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+	</div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={vitalLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

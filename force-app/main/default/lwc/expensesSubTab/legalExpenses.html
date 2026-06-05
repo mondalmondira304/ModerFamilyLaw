@@ -1,0 +1,37 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Legal Expenses</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Attorney Fees Paid to Date</label>
+							<lightning-input-field field-name="Fees_Paid_to_date__c" data-field="Fees_Paid_to_date__c" label = "Attorney Fees Paid to Date" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Fees Owed</label>
+							<lightning-input-field field-name="Fees_Owed__c" data-field="Fees_Owed__c" label = "Fees Owed" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Payment Source</label>
+							<lightning-input-field field-name="Payment_Source__c" data-field="Payment_Source__c" label = "Payment Source" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">PA Hourly Rate</label>
+							<lightning-input-field field-name="PA_Hourly_Rate__c" data-field="PA_Hourly_Rate__c" label = "PA Hourly Rate" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+    </div>
+</template>

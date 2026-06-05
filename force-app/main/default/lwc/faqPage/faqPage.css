@@ -1,0 +1,77 @@
+/* faqPage.css */
+
+:host {
+    --bg: #f0f2f7;
+    --surface: #ffffff;
+    --border: #e4e7ef;
+    --text-primary: #141820;
+    --text-secondary: #5a6072;
+    --text-muted: #8c94a6;
+    --blue: #185fa5;
+    --radius-lg: 14px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    display: block;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.page-shell {
+    background: linear-gradient(160deg, #f5f4fb 0%, #eef1f9 55%, #e8edf6 100%);
+    min-height: 100%;
+    padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2rem;
+    box-sizing: border-box;
+}
+
+.page-header { margin-bottom: 1.5rem; }
+
+.back-link {
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 0 0.5rem;
+    font-family: inherit;
+}
+.back-link:hover { text-decoration: underline; }
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+}
+.page-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.faq-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    padding: 0.5rem 1.25rem;
+}
+
+.faq-answer {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding: 0 0 0.5rem;
+    margin: 0;
+}
+
+/* Tighten SLDS accordion to match our palette */
+.faq-card lightning-accordion-section {
+    --sds-c-accordion-heading-text-color: var(--text-primary);
+    --sds-c-accordion-heading-font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    .page-shell { padding: 1rem 0.75rem 1.5rem; }
+    .faq-card { padding: 0.5rem 0.75rem; }
+}

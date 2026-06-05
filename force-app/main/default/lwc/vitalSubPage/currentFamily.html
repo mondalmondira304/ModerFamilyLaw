@@ -1,0 +1,26 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+      	<div class="slds-col heading slds-size_1-of-1">Current Family</div>
+
+		<lightning-record-edit-form record-id={selectedRecordId} onsuccess={handleSuccess} object-api-name="Account" density="comfy">
+
+			<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Spouse_Text__c" data-field="Spouse_Text__c" label="Current Spouse" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Length_of_Relationship__c" data-field="Length_of_Relationship__c" label="Length of Current Relationship" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Adults_in_Household__c" data-field="Adults_in_Household__c" label="Adults in Household" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="of_Children_of_this_Relationship__c" data-field="of_Children_of_this_Relationship__c" label="Number of Children In This Relationship" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+
+	</div>
+</template>

@@ -1,0 +1,34 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+      <div class="slds-col heading slds-size_1-of-1">Marriage Information</div>
+
+		<div class="slds-col slds-size_1-of-1">
+
+	  <lightning-record-edit-form record-id={selectedMatterId} onsuccess={handleSuccess} object-api-name="Matters__c">
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Date_of_Marriage__c" data-field="Date_of_Marriage__c"  name="dateOfMarriage" label="Date of Marriage"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Marriage_City__c" data-field="Marriage_City__c" name="cityOfMarriage" label="City of Marriage"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Marriage_State__c" data-field="Marriage_State__c" name="stateYouWereMarriedIn" label="State You Were Married in?"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Marriage_Country__c" data-field="Marriage_Country__c" name="countryOfMarriage" label="Country of Marriage"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Date_of_Separation__c" data-field="Date_of_Separation__c" name="dateOfSeperation" label="Date of Seperation" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Name_Change__c" data-field="Name_Change__c" name="namechange" label="Name Change" variant="label-stacked" class="custom-input icon-color" onchange={handleNameChange} autocomplete="off"></lightning-input-field>
+							<template if:true={matter.Name_Change__c}>
+								<lightning-input-field  field-name="New_Restored_Name__c" data-field="New_Restored_Name__c" name="changedName" label="Changed Name (First Middle Last)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</template>
+						</div>
+					</div>
+					
+			</div>
+			</lightning-record-edit-form>
+		</div>
+			
+	</div>
+</template>

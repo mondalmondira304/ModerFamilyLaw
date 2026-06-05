@@ -1,0 +1,45 @@
+<template>
+	<div class="slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Monthly Entertainment Expenses</div>
+			<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+				
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Gifts</label>
+								<lightning-input-field field-name="Gifts_Client__c" data-field="Gifts_Client__c"  label = "Gifts" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Recreation and Entertainment</label>
+								<lightning-input-field field-name="Recreation_Entertainment_Client__c" data-field="Recreation_Entertainment_Client__c" label = "Recreation and Entertainment" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Hobbies</label>
+								<lightning-input-field field-name="Hobbies_Client__c" data-field="Hobbies_Client__c"  label = "Hobbies" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Vacation and Travel</label>
+								<lightning-input-field field-name="Vacation_Travel_Client__c" data-field="Vacation_Travel_Client__c"  label = "Vacation and Travel" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Movies and Video Rental</label>
+								<lightning-input-field field-name="Movies_Video_Rental_Client__c" data-field="Movies_Video_Rental_Client__c"  label = "Movies and Video Rental" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Sporting Events and Participation</label>
+								<lightning-input-field field-name="Sporting_Events_Participation_Client__c" data-field="Sporting_Events_Participation_Client__c"  label = "Sporting Events and Participation" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</lightning-record-edit-form>
+		</div>
+</template>

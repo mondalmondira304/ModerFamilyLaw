@@ -1,0 +1,102 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">{addFurnitureLabel} Furniture & Personal Property</div>
+		<template if:false={addFurnitureAccount}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddFurniture}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Item Name</th>
+								<th>Type</th>
+								<th>Our Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template if:true={isFurnitureProperty}>
+								<template for:each={recordsData} for:item="row">
+									<tr key={row.fields.Id.value}>
+										<td>
+											<span class="rowName" onclick={handleFurnitureCellClick} data-id={row.fields.Id.value} data-field="Furniture_Personal_Property__c">{row.fields.Name.value}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></span>
+										</td>
+										<td>{row.fields.Property_Type__c.value}</td>
+										<td>{row.fields.Estimated_Value_as_of_Today__c.displayValue}</td>
+										<td><span data-id={row.fields.Id.value} data-field="Furniture_Personal_Property__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+									</tr>
+								</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+		<template if:true={addFurnitureAccount}>
+			<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Furniture_Personal_Property__c" onsuccess={handleSuccess} >
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS"><abbr class="slds-required" part="required" lwc-enmikoh2qu="" title="required">*</abbr>Property Name</label>
+								<lightning-input-field field-name="Name" data-field="Name" autocomplete="off" label = "Policy Name" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Marital or Separate</label>
+								<lightning-input-field field-name="Marital_Separate__c" data-field="Marital_Separate__c" autocomplete="off" label = "Type of Policy" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Owned by?</label>
+								<lightning-input-field field-name="Owned_By_Text__c" data-field="Owned_By_Text__c" autocomplete="off" label = "Type of Policy" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>							
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">In Possession of</label>
+								<lightning-input-field field-name="Pos_Joint__c" data-field="Pos_Joint__c" autocomplete="off" label = "Joint Life Insurance?" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Property Type</label>
+								<lightning-input-field field-name="Property_Type__c" data-field="Property_Type__c" autocomplete="off" label = "Face Amount of Policy" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">If Other, Specify</label>
+								<lightning-input-field field-name="Other_Specify__c" data-field="Other_Specify__c" autocomplete="off" label = "Cash Value Today" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Estimated Value as of Today</label>
+								<lightning-input-field field-name="Estimated_Value_as_of_Today__c" data-field="Estimated_Value_as_of_Today__c" autocomplete="off" label = "Owned By?" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+							</div>
+							<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+						</div>
+					</div>
+
+				</div>
+
+			</lightning-record-edit-form>
+		</template>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:true={addFurnitureAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:false={addFurnitureAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+    </div>
+</template>

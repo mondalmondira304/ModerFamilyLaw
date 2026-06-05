@@ -1,0 +1,92 @@
+<apex:page standardController="Matters__c" extensions="revokePermissionsController">    
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <div>
+                1.10 Compliance 
+
+                Rule 1.10: Imputation of Conflicts of Interest: 
+
+                “While lawyers are associated in a firm, none of them shall knowingly represent a client when any one of them practicing alone would be prohibited from doing so.”   
+
+                Modern Family Law’s “1.10 Compliance” for Salesforce prohibits a conflicted MFL professionals from access to determined conflict matter, client account, and record information relating to the conflict.   
+
+                Instructions for 1.10 compliance administration. 
+                <br/>
+
+                1.     Open the Matter related to the client conflict.  
+                <br/>
+                2.     Click the pull-down menu at the end of the action bar select Revoke Permission VF. (This Page) 
+                <br/>
+                3.     Two list boxes: 
+                <br/>
+                a.     Access. The access box represents MFL Professionals that potentially have a Conflict. 
+                <br/>
+                b.     The Restricted Access box represents MFL Professionals restricted from the conflict Matter, Client or related data. 
+                <br/>
+                To restrict a user, click Select Users. select the name in the Access list. Click Revoke Permission. The selected user will move to the Restricted Access list
+                Conflicted MFL Professionals are now shown in the Restricted Access list.  Viewable at any time. 
+
+                This completes the restriction process. 
+
+                Granting Access. 
+
+           Select the MFL Professional in the Restricted Access list. 
+
+           Click the Grant Access button.   
+
+           The MFL Professional will move back to the Access list. 
+            </div>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection >            
+            <apex:form > 
+                <div style="width: 50%; float:left;">
+                    <apex:outputText style="font-size: 2em;letter-spacing: -2px;" value="Access"></apex:outputText><br/>
+                    <apex:selectList value="{!users}" multiselect="true" style="height:300px">
+                    <apex:selectOptions value="{!items}"/>
+                </apex:selectList>
+                </div>               
+                
+                <div style="width: 50%; float:right;">
+                    <apex:outputText style="font-size: 2em;letter-spacing: -2px;" value="Restricted Access"></apex:outputText><br/>
+                <apex:selectList value="{!revokedUsers}" multiselect="true" style="height:300px">
+                    <apex:selectOptions value="{!revokedItems}"/>
+                </apex:selectList>    
+                </div>
+                <br/>
+                <br/>
+                
+                <div style="width:100%;">
+                    <apex:commandButton value="Select Users" rerender="out" status="status"/>                
+                    <apex:commandButton value="Clear Selected Users" reRender="out" oncomplete="window.location.reload();"/>
+                </div>
+                               
+                <apex:outputPanel id="out">
+                    <apex:actionstatus id="status" startText="Selecting users to revoke">
+                        <apex:facet name="stop">
+                            <apex:outputPanel >
+                                <p style="font-size: 14pt">Users selected to revoke permission: </p> 
+                                    <apex:dataList value="{!users}" var="c">{!c}</apex:dataList>
+                            </apex:outputPanel>
+                        </apex:facet>
+                    </apex:actionstatus>
+                    <apex:commandButton value="Revoke Permissions" action="{!revokePermissions}" oncomplete="window.location.reload();"/>  
+        
+                    <apex:actionstatus id="statusAdd" startText="Selecting users to add">
+                        <apex:facet name="stop">
+                            <apex:outputPanel >
+                                <p style="font-size: 14pt">Users selected to grant permission: </p> 
+                                <apex:dataList value="{!revokedUsers}" var="revoked">{!revoked}</apex:dataList>
+                            </apex:outputPanel>
+                        </apex:facet>
+                    </apex:actionstatus>
+                    <apex:commandButton value="Grant Permissions" action="{!grantPermissions}" oncomplete="window.location.reload();"/> 
+                </apex:outputPanel> 
+                <br/>
+                <br/>
+                <br/>
+                
+                <apex:commandButton value="Back to Matter" action="{!backToRecord}"></apex:commandButton>
+            </apex:form>
+        </apex:pageBlockSection>             
+    </apex:pageBlock>    
+</apex:page>

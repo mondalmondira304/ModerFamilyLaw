@@ -1,0 +1,61 @@
+<template>
+    <lightning-modal-header label="Contact Finance"></lightning-modal-header>
+
+    <lightning-modal-body>
+        <p class="intro-text">
+            Send a message to the MFL Finance team. We typically respond within
+            one business day.
+        </p>
+
+        <div class="form">
+            <div class="readonly-row">
+                <span class="readonly-label">Name</span>
+                <span class="readonly-value">{clientName}</span>
+            </div>
+            <div class="readonly-row">
+                <span class="readonly-label">Reply-to email</span>
+                <span class="readonly-value">{clientEmail}</span>
+            </div>
+
+            <lightning-combobox
+                name="matter"
+                label="Matter"
+                value={matterId}
+                placeholder="Choose a matter (optional)"
+                options={matterOptions}
+                onchange={handleMatterChange}>
+            </lightning-combobox>
+
+            <lightning-input
+                type="text"
+                name="subject"
+                label="Subject"
+                required
+                max-length="100"
+                value={subject}
+                onchange={handleSubjectChange}>
+            </lightning-input>
+
+            <lightning-textarea
+                name="message"
+                label="Message"
+                required
+                max-length="2000"
+                value={message}
+                onchange={handleMessageChange}
+                placeholder="Tell us what you need help with…">
+            </lightning-textarea>
+
+            <template lwc:if={errorMessage}>
+                <div class="error-banner">{errorMessage}</div>
+            </template>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" onclick={handleCancel} disabled={isSubmitting}></lightning-button>
+        <lightning-button label="Send" variant="brand" onclick={handleSubmit}
+                          disabled={isSubmitting} class="slds-m-left_x-small">
+        </lightning-button>
+    </lightning-modal-footer>
+</template>

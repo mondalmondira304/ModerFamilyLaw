@@ -1,0 +1,176 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+
+		<template if:false={addCreditCard}>
+			<div class="slds-col heading slds-size_1-of-1">Debts</div>
+		</template>
+
+		<template if:true={addCreditCard}>
+			<div class="slds-col heading slds-size_1-of-1">Debts – Add Credit Card</div>
+		</template>
+
+		<template if:false={addCreditCard}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small alignAddButton">
+					<button class="custom-button" onclick={handleAddCreditCard}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+
+				<div class="slds-col slds-size_1-of-1 custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Name of Credit Card</th>
+								<th>Account (last 4)</th>
+								<th>Payment</th>
+								<th>Balance</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={recordsData} for:item="row" for:index="index">
+								<tr key={row.fields.Id.value}>
+									<td>
+										<span class="rowName" onclick={handleCreditCellClick} data-id={row.fields.Id.value}
+											data-field="Credit_Card__c">{row.fields.Name.value}<lightning-icon
+												icon-name="utility:edit" size="xx-small"
+												class="edit-icon"></lightning-icon></span>
+									</td>
+									<td>{row.fields.Credit_Card_Number_Last_4__c.value}</td>
+									<td>{row.fields.Monthly_Payment__c.displayValue}</td>
+									<td>{row.fields.Credit_Card_Balance__c.displayValue}</td>
+									<!--td><span data-id={row.fields.Id.value} data-index={index} data-field="Credit_Card__c" onclick={handleDeleteChild}-->
+									<td><span data-id={row.fields.Id.value} data-field="Credit_Card__c" onclick={handleDeleteChild}>										
+											<lightning-icon icon-name="utility:delete"	size="x-small" class="edit-icon"></lightning-icon>
+										</span>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</template>
+
+		<template if:true={addCreditCard}>
+			<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Credit_Card__c" onsuccess={handleSuccess}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Name" data-field="Name" autocomplete="off" 
+									label="Credit Card Name" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleCreation} required></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Credit_Card_Number_Last_4__c"
+									data-field="Credit_Card_Number_Last_4__c" autocomplete="off" 
+									label="Last 4 of the Account Number" variant="label-stacked"
+									class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Monthly_Payment__c" data-field="Monthly_Payment__c"
+									autocomplete="off" label="Monthly Payment" variant="label-stacked"
+									class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Credit_Card_Balance__c"
+									data-field="Credit_Card_Balance__c" autocomplete="off" 
+									label="Balance" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Marital_or_Separate__c"
+									data-field="Marital_or_Separate__c" autocomplete="off" 
+									label="Marital or Separate" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Responsible_Party__c" data-field="Responsible_Party__c"
+									autocomplete="off"  label="Responsible Party" variant="label-stacked" class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Related_To__c" data-field="Related_To__c" autocomplete="off"
+									label="If Other, Provide Name" variant="label-stacked"	class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Account_Owner_Text__c" data-field="Account_Owner_Text__c"
+									autocomplete="off" label="Name on Card" variant="label-stacked"	class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Primary_Purpose_of_Debt__c"
+									data-field="Primary_Purpose_of_Debt__c" autocomplete="off" label="Purpose of Debt"
+									variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<template if:true={selectedRecordIdIsSet}> <!-- If the record Id exists, then we can attach files to it -->    
+								<div class="upload-container slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+									<div class="upload-header">
+										<span>UPLOAD DOCUMENTS</span>
+										<lightning-helptext content="Please upload the required documents."
+											class="icon-color"></lightning-helptext>
+									</div>
+									<p class="upload-instructions">Please upload the following files:</p>
+									<ul class="file-list">
+										<li><strong>Six Months of Credit Card Statements</strong></li>
+									</ul>
+									<div class="upload-box">
+										<p class="file-types">JPG, PDF, CSV, DOCX, XLSX</p>
+										<lightning-file-upload
+											name="fileUploader"
+											accept={acceptedFormats}
+											record-id={selectedRecordId}
+											multiple
+											onuploadfinished={handleUploadFinished}
+										>
+										</lightning-file-upload>
+									</div>	
+									<template if:true={listOfUploadedFileNames}>
+										<template for:each={listOfUploadedFileNames} for:item="file" for:index="index">
+											<lightning-pill label={file.name} name={index} key={file.id} data-id={file.id}
+												data-field="uploadFile" onremove={handleFileDelete}>
+											</lightning-pill>
+										</template>
+									</template>
+								</div>
+							</template>
+						</div>
+						<lightning-input-field field-name="Matter_ID__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+					</div>
+				</div>
+			</lightning-record-edit-form>
+		</template>
+
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center  slds-p-vertical_medium">
+			<template if:false={addCreditCard}>
+				<button class="next-button nextBtnPadding" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center">
+			<!-- saveRecord -->
+			<template if:true={addCreditCard}>
+				<button class="cancel-button" onclick={handleCreditCancel}>
+					CANCEL
+				</button>
+				<button class="next-button nextBtnPadding" onclick={handleSave}>SUBMIT
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+</template>

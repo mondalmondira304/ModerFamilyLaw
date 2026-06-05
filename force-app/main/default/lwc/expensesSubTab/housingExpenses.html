@@ -1,0 +1,120 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Housing Expenses</div>
+		<div class="toggle-container slds-col slds-size_1-of-1 slds-p-top_small slds-p-bottom_large slds-grid slds-grid_align-center">
+			<div class="toggle-switch">
+				<button class={getButtonClassOpposing} data-option="Own" onclick={handleToggle}>Own</button>
+				<button class={getButtonClassOther} data-option="Rent" onclick={handleToggle}>Rent</button>
+			</div>
+			<lightning-helptext content="Test" class="info-icon"></lightning-helptext>
+ 		</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			<template if:true={ownHome}>
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Residence Street Address</label>
+								<lightning-input-field field-name="Rental_Address__c" data-field="Rental_Address__c" label = "Residence Street Address" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium">
+								<label class="labelCSS">Total 1st Mortgage Payment</label>
+								<lightning-input-field field-name="X1st_Mortgage__c" data-field="X1st_Mortgage__c" label = "Total 1st Mortgage Payment" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_medium">
+								<label class="labelCSS">Total 2nd Mortgage Payment</label>
+								<lightning-input-field field-name="X2nd_Mortgage__c" data-field="X2nd_Mortgage__c"  label = "Total 2nd Mortgage Payment" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Maintenance Fees</label>
+								<lightning-input-field field-name="HOA_Maintenance_fees__c" data-field="HOA_Maintenance_fees__c" label = "Maintenance Fees" variant="label-hidden" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Homeowners Insurance</label>
+								<lightning-input-field field-name="Home_Owners_Insurance__c" data-field="Home_Owners_Insurance__c" label = "Homeowners Insurance" variant="label-hidden" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Monthly Property Tax</label>
+							<lightning-input-field field-name="Property_Tax_Total__c" data-field="Property_Tax_Total__c" label = "Monthly Property Tax" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="upload-container slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<div class="upload-header">
+								<span>UPLOAD DOCUMENTS</span>
+								<lightning-helptext content="Please upload the documents." class="icon-color"></lightning-helptext>
+							</div>
+							<p class="upload-instructions">Please upload the following files:</p>
+							<ul class="file-list">
+							<li><strong>• Three Months of Mortgage Statements</strong></li>
+							</ul>
+									<div class="upload-box">
+										<p class="file-types">JPG, PDF, CSV, DOCX, XLSX</p>
+										<lightning-file-upload
+											name="fileUploader"
+											accept={acceptedFormats}
+											record-id={selectedRecordId}
+											multiple
+											onuploadfinished={handleUploadFinished}
+										>
+										</lightning-file-upload>
+									</div>								
+									<template if:true={listOfUploadedFileNames}>
+										<template for:each={listOfUploadedFileNames} for:item="file" for:index="index">
+											<lightning-pill label={file.name} name={index} key={file.id} data-id={file.id}
+												data-field="uploadFile" onremove={handleFileDelete}>
+											</lightning-pill>
+										</template>
+									</template>	
+						</div>
+					</div>
+				</div>
+
+			</template>
+
+			<template if:false={ownHome}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium subheading">Housing Expenses (Rent your Home)</div>
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Address__c" data-field="Rental_Address__c" label = "Residence Street Address" variant="label-stacked" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Payment_Monthly__c" data-field="Rental_Payment_Monthly__c"  label = "Monthly Rental Payment" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Term_Start__c" data-field="Rental_Term_Start__c" label = "Rental Start Date" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Term_End__c" data-field="Rental_Term_End__c"  label = "Rental End Date" variant="label-stacked" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Security_Deposit_Residential__c" data-field="Security_Deposit_Residential__c"  label = "Security Deposit" variant="label-stacked" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Lease_Insurance_Premium__c" data-field="Rental_Lease_Insurance_Premium__c"  label = "Rental Insurance Premium" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Lease_Insurance_Provider__c" data-field="Rental_Lease_Insurance_Provider__c"  label = "Rental Insurance Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Rental_Property_Owner__c" data-field="Rental_Property_Owner__c"  label = "Owner’s Name (Individual or Business)" variant="label-stacked" class="custom-input" onchange={handleOnChange} style="height:60px" autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+		</lightning-record-edit-form>
+	</div>
+</template>

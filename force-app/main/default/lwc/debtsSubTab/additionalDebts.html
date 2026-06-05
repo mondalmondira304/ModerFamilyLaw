@@ -1,0 +1,181 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Additional Debts</div>
+		<template if:false={addDebitCard}>
+
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small subheading">
+
+				</div>
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small alignAddButton">
+					<button class="custom-button" onclick={handleAddDebitCard}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div
+					class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Debt Name</th>
+								<th>Account (last 4)</th>
+								<th>Payment</th>
+								<th>Balance</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={recordsDataAdditional} for:item="row" for:index="index">
+								<tr key={row.fields.Id.value}>
+									<td>
+										<span class="rowName" onclick={handleAddDebitCellClick} data-id={row.fields.Id.value}
+											data-field="Debt__c">{row.fields.Name.value}<lightning-icon icon-name="utility:edit"
+												size="xx-small" class="edit-icon"></lightning-icon></span>
+									</td>
+									<td>{row.fields.Account_Number_Last_4__c.value}</td> 
+									<td>{row.fields.Monthly_Payment__c.displayValue}</td>
+									<td>{row.fields.Balance__c.displayValue}</td>
+									<td><span data-id={row.fields.Id.value} data-field="Debt__c" onclick={handleDeleteChild}>
+										<lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"> </lightning-icon>
+										</span>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+		<template if:true={addDebitCard}>
+			<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Debt__c" onsuccess={handleSuccess}>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Name" data-field="Name" label="Debt Name" autocomplete="off"
+									variant="label-stacked" class="custom-input icon-color" 
+									onchange={handleCreation} required></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Account_Number_Last_4__c"
+									data-field="Account_Number_Last_4__c"  label="Last 4 of the Account Number" autocomplete="off"
+									variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Marital_or_Separate_Property__c"
+									data-field="Marital_or_Separate_Property__c"  label="Marital or Separate" autocomplete="off"
+									variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Monthly_Payment__c" data-field="Monthly_Payment__c" autocomplete="off"
+									label="Monthly Payment" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Balance__c" data-field="Balance__c" autocomplete="off"
+									label="Balance on Debt" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Related_To_Text__c" data-field="Related_To_Text__c" autocomplete="off"
+									label="Primary Debtor" variant="label-stacked" class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+								<lightning-input-field field-name="Other_Debtor_Text__c" data-field="Other_Debtor_Text__c" autocomplete="off"
+									label="If Other Debtor, Provide Name" variant="label-stacked" class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Bank_Loan_Holder__c" data-field="Bank_Loan_Holder__c" autocomplete="off"
+									 label="Bank/Loan Holder" variant="label-stacked"
+									class="custom-input icon-color" 
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+
+								<lightning-input-field field-name="Type_of_Loan__c" data-field="Type_of_Loan__c" autocomplete="off"
+									label="Type of Debt" variant="label-stacked" class="custom-input icon-color"
+									onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<template if:true={selectedRecordIdIsSet}> <!-- If the record Id exists, then we can attach files to it -->    
+								<div class="upload-container slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+									<div class="upload-header">
+										<span>UPLOAD DOCUMENTS</span>
+										<lightning-helptext content="Please upload the required documents."
+											class="icon-color"></lightning-helptext>
+									</div>
+									<p class="upload-instructions">Please upload the following files:</p>
+									<ul class="file-list">
+										<li><strong>Six Months of Additional Debt Statements</strong></li>
+									</ul>
+									<div class="upload-box">
+										<p class="file-types">JPG, PDF, CSV, DOCX, XLSX</p>
+										<lightning-file-upload
+											name="fileUploader"
+											accept={acceptedFormats}
+											record-id={selectedRecordId}
+											multiple
+											onuploadfinished={handleUploadFinished}
+										>
+										</lightning-file-upload>
+									</div>								
+									<template if:true={listOfUploadedFileNames}>
+										<template for:each={listOfUploadedFileNames} for:item="file" for:index="index">
+											<lightning-pill label={file.name} name={index} key={file.id} data-id={file.id}
+												data-field="uploadFile" onremove={handleFileDelete}>
+											</lightning-pill>
+										</template>
+									</template>									
+								</div>
+							</template>
+						</div>
+						<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+					</div>
+				</div>
+
+			</lightning-record-edit-form>
+		</template>
+	</div>
+	<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center  slds-p-vertical_medium">
+		<template if:false={addDebitCard}>
+			<button class="next-button nextBtnPadding" onclick={handleSubmitDebit}>SUBMIT SECTION
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+	</div>
+	<template if:true={addDebitCard}>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<button class="cancel-button" onclick={handleAdditionalCancel}>
+				CANCEL
+			</button>
+			<!-- saveRecord -->
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SUBMIT
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+	</template>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal}
+						class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={debitLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

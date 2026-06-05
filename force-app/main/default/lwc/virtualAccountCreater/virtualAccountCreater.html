@@ -1,0 +1,606 @@
+<template>
+
+  <template lwc:if={openMatterPopup}>
+    <section class="slds-modal slds-fade-in-open slds-align_absolute-center popup-backdrop">
+      <div class="slds-modal__container popup-container">
+        <div class="crossIconMobile">
+          <lightning-icon icon-name="utility:close" size="small" onclick={closeMatterPopup}
+            class="slds-float_right crossIcon automation-cmtCustomSplash-close-icon"
+            data-id="crossIcon"></lightning-icon>
+        </div>
+        <div class="container">
+          <div style="display: flex;">
+            <div class="slds-grid slds-grid_vertical">
+              <div style="position: relative">
+                <img src={matterBackgroundImg} alt="Children playing" class="header-img" />
+                <img src={loginGradientImg} alt="image sample" class="gradiantLine" />
+              </div>
+              <div class="footerLine slds-p-bottom_large">
+                <div class="content">
+                  <p class="slds-p-bottom_medium input-container textFont">Hello,</p>
+                  <p class="input-container textFont">Welcome! Please select the Matter you would like to begin with.
+                    Let’s get started collecting, organizing, and putting this information to work!</p>
+
+                  <template for:each={allMatterCases} for:item="caseItem">
+                    <div class="case-box" key={caseItem.id}>
+                      <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-grid slds-size_1-of-1 slds-border_bottom slds-p-bottom_xxx-small">
+                          <div class="slds-col slds-size_8-of-12 slds-grid slds-grid_vertical"
+                            style="justify-content: end">
+                            <p><span class="input-container textFont">Type of Case:</span> <span
+                                class="input-container highlight">{caseItem.Case_Type__c}</span></p>
+                          </div>
+                          <div class="slds-col slds-size_4-of-12 slds-p-bottom_x-small" style="text-align: end">
+                            <span onclick={handleStart} data-id={caseItem.Id}><button class="start-btn">START<img
+                                  src={editIconImg} alt="Children playing" class="edit-icon" /></button></span>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-border_bottom slds-p-bottom_xxx-small">
+                          <p><span class="input-container textFont">Opposing Party:</span> <span
+                              class="input-container highlight">{caseItem.Opposing_Party_a__r.Name}</span></p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-border_bottom slds-p-bottom_xxx-small">
+                          <p><span class="input-container textFont">Attorney:</span> <span
+                              class="input-container highlight">{caseItem.Primary_Attorney__r.Name}</span></p>
+                        </div>
+                        <template if:true={caseItem.Primary_Paralegal__c}>
+                          <div class="slds-col slds-size_1-of-1 slds-border_bottom slds-p-bottom_xxx-small">
+                            <p><span class="input-container textFont">Paralegal:</span> <span
+                                class="input-container highlight">{caseItem.Primary_Paralegal__r.Name}</span></p>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+
+
+                  <p class="footer-text input-container textFont">
+                    If you have any questions or need clarification about which Matter to select, please reach out to
+                    your team for guidance and support.
+                  </p>
+                  <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_6-of-12">
+                      <div class="footer-text input-container textFont">Thank you,</div>
+                      <div class="input-container textFont">MFL Team</div>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12">
+                      <div class="slds-col footer-text ">
+                        <img src={logoImg} alt="image sample" class="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+
+  <div class="">
+    <!-- Header Section — hidden when the userDashboard is showing, since the
+         dashboard renders its own welcome header (with logout) and the two
+         stacked looked weird. -->
+    <template if:false={showUserDashboard}>
+    <div class="slds-grid slds-wrap slds-p-bottom_large">
+      <!-- Left: Logo Section -->
+      <div class="slds-col slds-size_12-of-12 slds-medium-size_8-of-12">
+        <div class="display">
+          <!-- Clickable logo doubles as "back to dashboard" once a sub-flow
+               has been entered. No effect otherwise. -->
+          <img src={logoImg} alt="Logo" class="logo logo-clickable" onclick={returnToDashboard} />
+        </div>
+        <template lwc:if={canReturnToDashboard}>
+          <div class="back-to-dashboard">
+            <button class="back-to-dashboard-link" type="button" onclick={returnToDashboard}>
+              &lsaquo; Back to Dashboard
+            </button>
+          </div>
+        </template>
+      </div>
+
+      <!-- Right: User Info Section -->
+      <div class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12">
+        <div class="slds-grid slds-medium-grid_align-end slds-p-around_small">
+
+          <!-- Upload Image -->
+          <template lwc:if={NotSimpleStart}>
+            <div class="slds-col slds-size_4-of-12 slds-medium-size_4-of-12 upload-container">
+              <div class="upload-img-container">
+                <template lwc:if={profilePicture}>
+                  <div class="uploaded-img">
+                    <img src={profilePicture} alt="Profile" class="preview-image" />
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+
+          <!-- Client Info -->
+          <div class="slds-col slds-size_8-of-12 slds-medium-size_8-of-12 client-info-section">
+            <div class="client-info">
+              <template lwc:if={NotSimpleStart}>
+                <span class="client-name">Client Name: {clientName}</span>
+                <span class="matter-number">Matter: #{matter}</span>
+                <span class="primary-info">Primary Attorney/LLP: {primaryAttorney}</span>
+                <span class="primary-paralegal">Primary Paralegal: {primaryParalegal}</span>
+              </template>
+              <template lwc:if={IsSimpleStart}>
+                <span class="client-name">Client Name: {clientName}</span>
+                <span class="primary-info">Primary Attorney/LLP: {primaryAttorney}</span>
+                <span class="primary-paralegal">Primary Paralegal: {primaryParalegal}</span>
+              </template>
+            </div>
+            <div class="client-info logout-button" onclick={handleLogout}>Logout</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </template>
+
+    <!-- TODO: Wrap mobile markup in <template if:true={isMobile}> rather than using CSS -->
+    <!-- Main Body -->
+    <template lwc:if={isMobile}>
+      <div class="body-mobile" style="position:relative;">
+
+        <template lwc:if={ShowClientInterview}>
+
+          <div class="slds-show slds-medium-hide slds-p-around_small">
+            <div class="slds-grid slds-grid_align-end">
+              <lightning-button-menu alternative-text="Select a section" variant="border-filled"
+                icon-name="utility:rows" menu-alignment="right" icon-size="medium" nubbin
+                onselect={handleMobileMenuSelect}>
+                <template for:each={mobileSteps} for:item="step">
+
+                  <!-- <lightning-menu-subheader key={step.headerKey} label={step.name}>
+                  </lightning-menu-subheader> -->
+
+                  <lightning-menu-item key={step.parentKey} value={step.value} label={step.name}
+                    disabled={step.disabled} checked={step.isCurrent}>
+                  </lightning-menu-item>
+
+                  <template if:true={step.subSteps}>
+                    <template for:each={step.subSteps} for:item="sub">
+                      <lightning-menu-item key={sub.key} value={sub.value} label={sub.label} disabled={sub.disabled}
+                        checked={sub.isCurrent}>
+                      </lightning-menu-item>
+                    </template>
+                  </template>
+
+                  <lightning-menu-divider key={step.dividerKey}></lightning-menu-divider>
+                </template>
+              </lightning-button-menu>
+            </div>
+          </div>
+
+          <template lwc:if={ShowClientInterview}>
+            <div class="slds-col cardBody">
+              <p class={editWarningClass}>Please save changes before navigating</p>
+              <template lwc:if={NotAdditionalUploads}>
+                <p class="save-info">Please complete each section fully and click <strong>Submit</strong> on the final page to save your information.</p>
+              </template>
+              <template lwc:else>
+                <p class="save-info">If your legal team requested any additional files, you can upload them here anytime.</p>
+              </template>              
+              <div class="slds-p-bottom_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_12-of-12 cardSubBody">
+                <c-virtual-account-creater-pages  pages={tabName} sub-pages={subTabName} matter-id={matterIdAuto} 
+                  matter-activity-id-parent={matterIdFromParent} client-id ={clientAccountId} client-name={clientName} form-status={CIFormStatus} 
+                  onisediting={handleIsEditing}  onvideochange={handleVideoChange} onsubchild={handleChildInParent} 
+                  onresetsubchild={handleResetPrgressChild} ontogglesubchild={handleToggleInParent} 
+                  onsubmitsubchild={handleSubmitVitalSection} onvisibleselfemployee={handleVisibleSelfEmployee} 
+                  onnewprofilephoto={handlenewprofilephoto} onvalidationsubchild={handleValidationOP} 
+                  onvitalvalidationsubchild={handleValidationVital} onsavesubchild={handleSaveChildInParent} 
+                  oncancelsubchild={handleCancelChildInParent} oncurrentselfemployeesubchild={handleCurrentSelfEmployee} 
+                  ondonewiththeprovider={handleDoneWithTheProvider}>
+                </c-virtual-account-creater-pages>
+                <template lwc:if={manageButtons}>
+                  <template lwc:if={managePreviousANDNextButtons}>
+                    <div class="slds-col slds-size_1-of-1 slds-p-top_medium controls slds-grid_align-center">
+
+                      <template lwc:if={managePreviousBtn}>
+                        <template if:true={managePreviousButtons}>
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_x-small slds-align_absolute-center">
+                            <button class="next-button previousBtnPadding" onclick={handlePrevious}>
+                              <span class="arrow previousBtnArrow">←</span>
+                              PREVIOUS
+                            </button>
+                          </div>
+                        </template>
+                      </template>
+
+                      <template lwc:if={manageNextBtn}>
+                        <template if:true={manageNextButtons}>
+                          <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_x-small slds-align_absolute-center">
+                            <button class="next-button nextBtnPadding" onclick={handleNext}>
+                              SAVE & CONTINUE
+                              <span class="arrow nextBtnArrow">→</span>
+                            </button>
+                          </div>
+                        </template>
+                      </template>
+
+                    </div>
+                  </template>
+                </template>
+
+              </div>
+            </div>
+          </template>
+
+          <!-- <div class="mobile-chat-container">
+            <button class="chatbot-modal-btn" type="button" onclick={openModal}>
+              <span>?</span>
+            </button>
+
+            <template if:true={isModalOpen}>
+              <div class="chat-modal" data-id="chat-modal">
+                <div class="modal-content">
+                  <button class="close" type="button" onclick={closeModal} aria-label="Close">&times;</button>
+
+                  <div class="slds-p-bottom_large">
+                    <iframe width="100%" height="150" src={srcUrl} frameborder="0"></iframe>
+                  </div>
+
+                  <div class="chatbot-container">
+                    <div class="chat-header">How can I help?</div>
+
+                    <div class="chat-box" id="chatBoxMobile">
+                      <div class="messages-container" lwc:dom="manual" id="messagesContainerMobile"></div>
+                    </div>
+
+                    <div class="input-container">
+                      <input class="user-input" type="text" placeholder="Type your message..." value={userMessage}
+                        oninput={handleInput} onkeydown={handleKeyDown} />
+                      <button class="send-button" type="button" onclick={handleSendMessage}>Send</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            
+          </div> -->
+
+          <div class="mobile-chat-container">
+
+            <button class="chatbot-modal-btn" type="button" onclick={openChat}>
+              <span>?</span>
+            </button>
+
+          </div>
+
+        </template>
+    
+        <template lwc:if={attorneyTransition}>
+              <c-attorney-transition record-id-in={recordIdToPass} retaining-clients-in={retainingClients}></c-attorney-transition>          
+        </template>
+
+        <template lwc:if={IsSimpleStart}>
+
+            <div class="slds-col cardBody simpleStart">
+              <template lwc:if={ShowSimpleStartLandingPage}>
+                <c-ss-landing-page onsimplestart={handleSimpleStartForm}></c-ss-landing-page>
+              </template>
+
+              <template lwc:if={ShowSimpleStartApplication}>
+                <c-ss-client-application-form record-id={clientAccountId}
+                  onsimplestart={handleSimpleStartForm}></c-ss-client-application-form>
+              </template>
+
+              <template lwc:if={ShowSimpleStartAddress}>
+                <c-ss-client-application-address record-id={clientAccountId}
+                  onsimplestart={handleSimpleStartForm}></c-ss-client-application-address>
+              </template>
+              <template lwc:if={ShowConsent}>
+                <c-consent-form record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-consent-form>
+              </template>
+              <template lwc:if={ShowWaiting}>
+                <c-waiting-for-credit-result record-id={clientAccountId}
+                  onsimplestart={handleSimpleStartForm}></c-waiting-for-credit-result>
+              </template>
+              <template lwc:if={ShowRetainerDecision}>
+                <c-ss-retainer-decision record-id={clientAccountId}
+                  onsimplestart={handleSimpleStartForm}></c-ss-retainer-decision>
+              </template>
+            </div>
+
+        </template>
+
+         <!-- Wrap all fee agreement in template wrapper -->
+        <template lwc:if={IsFeeAgreement}>
+          <div class="slds-col cardBody feeagreement">
+
+            <template lwc:if={ShowFeeAgreementLanding}>
+                <c-fee-agreement-landing record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement-landing>
+            </template>
+    
+            <template lwc:if={ShowFeeAgreement}>
+                <c-fee-agreement record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement>
+            </template>
+    
+            <template lwc:if={ShowPaymentLink}>
+                <c-payment-link record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-payment-link>
+            </template>
+    
+            <template lwc:if={ShowThankYouPage}>
+                <c-thank-you-page record-id={clientAccountId} oncontinuetointerview={handleContinueToInterview} ></c-thank-you-page>
+            </template>
+
+          </div>
+        </template>
+      </div>
+    </template>
+
+    <!-- userDashboard renders on BOTH desktop and mobile (its own CSS handles
+         responsiveness). Kept outside the isDesktop/isMobile gates so phone
+         users with >=1 matter actually see the dashboard. Mutually exclusive
+         with the IsFeeAgreement / IsSimpleStart / ShowClientInterview flags
+         per the gating in connectedCallback. -->
+    <template lwc:if={showUserDashboard}>
+      <c-user-dashboard
+        matters={allMatterCases}
+        account={currentUserAccount}
+        onpaynow={handlePayNow}
+        oncontinuestep={handleContinueStep}
+        onlogout={handleLogout}
+        onviewallfaqs={handleViewAllFaqs}
+        onviewallupdates={handleViewAllUpdates}
+        onfinancesent={handleFinanceSent}>
+      </c-user-dashboard>
+    </template>
+
+    <!-- Dashboard sub-pages (Phase 2 items C, E). Each dispatches `back`
+         which we route via the generic returnToDashboard handler. -->
+    <template lwc:if={showFaq}>
+      <c-faq-page onback={returnToDashboard}></c-faq-page>
+    </template>
+
+    <template lwc:if={showAllUpdates}>
+      <c-view-all-updates onback={returnToDashboard}></c-view-all-updates>
+    </template>
+
+    <!-- <div class="slds-grid body-wrapper"> -->
+    <!-- TODO: Wrap mobile markup in <template if:true={isMobile}> rather than using CSS -->
+    <template lwc:if={isDesktop}>
+      <template if:false={IsFeeAgreement}>
+      
+      <div class="slds-grid slds-p-top_large body-desktop">
+        <div class="slds-col slds-size_2-of-12 alignProgressBar slds-m-left_xxx-small"> <!--section for displaying the left menu bar-->
+
+          <template lwc:if={ShowClientInterview}>
+            
+            <div class={progressBarClass}>
+              <template for:each={computedSteps} for:item="step">
+                <div class="slds-grid" key={step.index}>
+                  <div class="step-container slds-col slds-size_12-of-12" key={step.index} onclick={handleStepClick}
+                    data-step-index={step.index}>
+                    <div class={step.circleClass}></div>
+                    <div class={step.connectorClass} style={step.connectorStyle} if:true={step.hasConnector}></div>
+                    <div class={step.stepNameClass}>{step.name}</div>
+
+                    <template if:true={step.subSteps}>
+                      <div class="sub-steps" onclick={stopNavigateSubStep}>
+                        <template for:each={step.subSteps} for:item="subStep">
+                          <div class="sub-step-container" key={subStep.subIndex} onclick={handleSubStepClick}
+                            data-step-index={step.index} data-sub-index={subStep.subIndex}>
+                            <div class={subStep.subCircleClass}></div>
+                            <div class={subStep.subStepNameClass}>{subStep.name}</div>
+                          </div>
+                        </template>
+                      </div>
+                    </template>
+
+                  </div>
+                </div>
+              </template>
+            </div>
+          </template>
+
+
+          <template lwc:if={IsSimpleStart}>
+            <template if:false={ShowSimpleStartLandingPage}>
+              <!-- <c-ss-application-nav steps={steps} active-index={activeIndex}></c-ss-application-nav> -->
+              <c-ss-progress-nav steps={steps} active-index={activeIndex}
+                active-sub-index={activeSubIndex}></c-ss-progress-nav>
+            </template>
+          </template>
+
+        </div>
+    
+        <template lwc:if={attorneyTransition}>
+              <c-attorney-transition record-id-in={recordIdToPass} retaining-clients-in={retainingClients}></c-attorney-transition>              
+        </template>
+        
+        <template lwc:if={IsSimpleStart}>
+          <div class="slds-col slds-size_7-of-12 cardBody simpleStart">
+            <template lwc:if={ShowSimpleStartLandingPage}>
+              <c-ss-landing-page onsimplestart={handleSimpleStartForm}></c-ss-landing-page>
+            </template>
+            <template lwc:if={ShowSimpleStartApplication}>
+              <c-ss-client-application-form record-id={clientAccountId}
+                onsimplestart={handleSimpleStartForm}></c-ss-client-application-form>
+            </template>
+            <template lwc:if={ShowSimpleStartAddress}>
+              <c-ss-client-application-address record-id={clientAccountId}
+                onsimplestart={handleSimpleStartForm}></c-ss-client-application-address>
+            </template>
+            <template lwc:if={ShowConsent}>
+              <c-consent-form record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-consent-form>
+            </template>
+            <template lwc:if={ShowWaiting}>
+              <c-waiting-for-credit-result record-id={clientAccountId}
+                onsimplestart={handleSimpleStartForm}></c-waiting-for-credit-result>
+            </template>
+            <template lwc:if={ShowRetainerDecision}>
+              <c-ss-retainer-decision record-id={clientAccountId}
+                onsimplestart={handleSimpleStartForm}></c-ss-retainer-decision>
+            </template>
+          </div>
+        </template>
+
+        <!-- Wrap all fee agreement in template wrapper -->
+        <template lwc:if={IsFeeAgreement}>
+          <!-- Display Landing page while waiting for FA Signing URL to be available -->
+          <template lwc:if={ShowFeeAgreementLanding}>
+            <div class="slds-col slds-size_7-of-12 cardBody">
+              <c-fee-agreement-landing record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement-landing>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowFeeAgreement}>
+            <div class="slds-col slds-size_7-of-12 cardBody">
+              <c-fee-agreement record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowPaymentLink}>
+            <div class="slds-col slds-size_7-of-12 cardBody">
+              <c-payment-link record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-payment-link>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowThankYouPage}>
+            <div class="slds-col slds-size_7-of-12 cardBody" >
+              <c-thank-you-page record-id={clientAccountId} oncontinuetointerview={handleContinueToInterview}></c-thank-you-page>
+            </div>
+          </template>
+
+        </template>
+        
+        <template lwc:if={ShowClientInterview}>
+          <!-- <template lwc:if={NotFeeAgreement}>
+          <template lwc:if={NotFeeAgreementLanding}>
+          <template lwc:if={NotShowPaymentLink}>
+          <template lwc:if={NotShowThankYouPage}> -->
+          <div class="slds-col slds-size_7-of-12 cardBody portal">
+          <p class={editWarningClass}>Please save changes before navigating</p>
+          <template lwc:if={NotAdditionalUploads}>
+            <p class="save-info">Please complete each section fully and click <strong>Submit</strong> on the final page to save your information.</p>
+          </template>
+          <template lwc:else>
+            <p class="save-info">If your legal team requested any additional files, you can upload them here anytime.</p>
+          </template>   
+          
+            <div class="slds-p-bottom_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_12-of-12 cardSubBody" >
+              <c-virtual-account-creater-pages  pages={tabName} sub-pages={subTabName} matter-id={matterIdAuto} 
+                matter-activity-id-parent={matterIdFromParent} client-id ={clientAccountId} client-name={clientName} form-status={CIFormStatus} 
+                onisediting={handleIsEditing} onvideochange={handleVideoChange} onsubchild={handleChildInParent} 
+                onresetsubchild={handleResetPrgressChild} ontogglesubchild={handleToggleInParent} 
+                onsubmitsubchild={handleSubmitVitalSection} onvisibleselfemployee={handleVisibleSelfEmployee} 
+                onnewprofilephoto={handlenewprofilephoto} onvalidationsubchild={handleValidationOP} 
+                onvitalvalidationsubchild={handleValidationVital} onsavesubchild={handleSaveChildInParent} 
+                oncancelsubchild={handleCancelChildInParent} oncurrentselfemployeesubchild={handleCurrentSelfEmployee} 
+                ondonewiththeprovider={handleDoneWithTheProvider}>
+              </c-virtual-account-creater-pages>
+              <template lwc:if={manageButtons}>
+                <template lwc:if={managePreviousANDNextButtons}>
+                  <div
+                    class="slds-grid slds-wrap slds-col slds-size_1-of-1 slds-p-top_medium controls slds-grid_align-center">
+
+                    <template lwc:if={managePreviousBtn}>
+                      <template if:true={managePreviousButtons}>
+                        <div
+                          class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_x-small slds-align_absolute-center">
+                          <button class="next-button previousBtnPadding" onclick={handlePrevious}>
+                            <span class="arrow previousBtnArrow">←</span>
+                            PREVIOUS
+                          </button>
+                        </div>
+                      </template>
+                    </template>
+
+                    <template lwc:if={manageNextBtn}>
+                      <template if:true={manageNextButtons}>
+                        <div
+                          class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-around_x-small slds-align_absolute-center">
+                          <button class="next-button nextBtnPadding" onclick={handleNext}>SAVE & CONTINUE
+                            <span class="arrow nextBtnArrow">→</span>
+                          </button>
+                        </div>
+                      </template>
+                    </template>
+
+                  </div>
+                </template>
+              </template>
+
+            </div>
+          </div>
+
+          <!-- </template>
+          </template>
+          </template>
+          </template> -->
+        </template>
+
+        <div class="slds-col slds-size_3-of-12 right-sidebar">
+          <template if:false={ShowSimpleStartLandingPage}>
+            <template lwc:if={NotAdditionalUploads}> <!-- Additional Uploads does not have a video -->
+              <template lwc:if={NotAttorneyTransition}> <!-- Attorney Transition does not have a video -->
+                <div
+                  class="slds-p-left_small slds-p-right_small slds-p-top_x-large slds-p-bottom_x-large slds-align-top chatBotBody chat-container">
+                  <!-- Insert Vimeo Videos -->
+                  <div class="slds-p-bottom_large">
+                    <iframe width="100%" height="150" src={srcUrl} frameborder="0"> </iframe>
+                  </div>
+                  <div class="chatbot-container">
+                    <div class="chat-header">How can I help?</div>
+                    <div class="chat-box" id="chatBox">
+                      <div class="messages-container" lwc:dom="manual" id="messagesContainer"></div>
+                    </div>
+                    <div class="input-container">
+                      <input class="user-input" type="text" placeholder="Type your message..." value={userMessage}
+                        oninput={handleInput} onkeydown={handleKeyDown} />
+                      <button class="send-button" onclick={handleSendMessage}>
+                        Send
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </template>
+            </template>  
+          </template>
+
+        </div>
+
+      </div>
+      </template>
+
+      <template if:true={IsFeeAgreement}>
+        <!-- Wrap all fee agreement in template wrapper -->
+        <template lwc:if={IsFeeAgreement}>
+          <!-- Display Landing page while waiting for FA Signing URL to be available -->
+          <template lwc:if={ShowFeeAgreementLanding}>
+            <div class="slds-col slds-size_10-of-12 cardBody feeAgreement">
+              <c-fee-agreement-landing record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement-landing>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowFeeAgreement}>
+            <div class="slds-col slds-size_10-of-12 cardBody feeAgreement">
+              <c-fee-agreement record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-fee-agreement>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowPaymentLink}>
+            <div class="slds-col slds-size_10-of-12 cardBody feeAgreement">
+              <c-payment-link record-id={clientAccountId} onsimplestart={handleSimpleStartForm}></c-payment-link>
+            </div>
+          </template>
+  
+          <template lwc:if={ShowThankYouPage}>
+            <div class="slds-col slds-size_10-of-12 cardBody feeAgreement" >
+              <c-thank-you-page record-id={clientAccountId} oncontinuetointerview={handleContinueToInterview}></c-thank-you-page>
+            </div>
+          </template>
+
+        </template>
+      </template>
+    </template>
+    <!-- </div> -->
+  </div>
+
+</template>

@@ -1,0 +1,23 @@
+<apex:page standardController="Contact" lightningStylesheets="true">
+<apex:form >
+<!--Resource List--> <apex:commandButton value="Resource List" action="{!URLFOR($Action.Contact.View,Contact.Id)}" onclick="RSL()"/>
+<!--Phone Survey--> <apex:commandButton value="Phone Survey" action="{!URLFOR($Action.Contact.View,Contact.Id)}" onclick="PS()"/>
+<!--Follow Up--> <!--apex:commandButton value="Follow Up" action="{!URLFOR($Action.Contact.View,Contact.Id)}" onclick="FU()"/-->
+
+
+
+
+</apex:form>
+<Script Language="JavaScript">
+
+
+function RSL() { window.open('{!URLFOR($Action.Contact.00b61000000bbbN,Contact.Id)}', '','scrollbars=yes,menubar=no,height=620,width=1050,resizable=yes, toolbar=no,location=no,status=yes'); }
+function PS() { window.open('{!URLFOR($Action.Contact.00b61000000bbgX,Contact.Id)}', '','scrollbars=yes,menubar=no,height=620,width=1050,resizable=yes, toolbar=no,location=no,status=yes'); }
+
+
+
+
+
+
+</Script>
+</apex:page>

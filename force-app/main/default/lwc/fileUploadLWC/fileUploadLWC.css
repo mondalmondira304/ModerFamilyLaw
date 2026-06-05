@@ -1,0 +1,28 @@
+.slds-m-left_x-small {
+    margin-left: 0.5rem;
+}
+
+.slds-p-horizontal_small {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.slds-p-vertical_medium {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+.extra_small_icon{
+    position: absolute;
+    right: 18px;
+    top: 30px;
+    cursor: pointer;
+}
+.input_Box{
+    border-bottom: 1px solid #c9c9c9;
+}
+.value_box_name{
+    font-size: 14px;
+}
+.value_box{
+    height: 21px;
+}

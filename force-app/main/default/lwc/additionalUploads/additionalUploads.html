@@ -1,0 +1,29 @@
+<template>
+        <div class="slds-p-bottom_xx-large"></div>         
+        <div class="upload-container slds-p-top_large ">
+          <div class="upload-header" >
+            <span>UPLOAD DOCUMENTS</span>
+            <!--lightning-helptext content="Please upload any additional documents that your legal team requests here." class="icon-color"></lightning-helptext-->
+          </div>
+          <p class="upload-instructions">Please upload any additional documents that your legal team requests here.</p>
+              <div class="upload-box">
+                  <p class="file-types">JPG, PNG, DOC, XLS, CSV, PDF</p>
+                  <lightning-file-upload name="fileUploader" multiple accept={acceptedFormats} record-id={recordId} onuploadfinished={handleUploadFinished}></lightning-file-upload>
+              </div>             
+        <template if:true={listOfUploadedFileNames}>
+          <p class="slds-p-top_medium slds-p-bottom_medium">Previously Uploaded Files:</p>
+          <template for:each={listOfUploadedFileNames} for:item="file" for:index="index">
+            <li key={file.id} role="presentation" class="slds-listbox-item slds-m-bottom_xx-small">
+              <lightning-pill
+                label={file.name}
+                name={index} 
+                key={file.id}
+                data-id={file.id}
+                data-field="uploadFile"
+                onremove={handleFileDelete}>
+              </lightning-pill>
+            </li>
+          </template>
+        </template>        
+      </div>
+</template>

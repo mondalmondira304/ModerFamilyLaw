@@ -1,0 +1,358 @@
+<template>
+    <lightning-card>
+        <lightning-accordion class="example-accordion modernFamily_form_wpr" allow-multiple-sections-open active-section-name={allSections}>
+            <lightning-accordion-section name="personal" label="Personal & Contact Info">
+                <lightning-layout multiple-rows="true" class="custom-padding-layout">
+                    <!-- Row 1 Start-->
+
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Account Name</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.LastName}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="First Name" class="editable-input"
+                                value={account.FirstName} onchange={handleInputChange}
+                                data-field="FirstName"></lightning-input>
+                            <lightning-input type="text" label="Middle Name" class="editable-input"
+                                value={account.MiddleName} onchange={handleInputChange}
+                                data-field="MiddleName"></lightning-input>
+                            <lightning-input type="text" label="Last Name" class="editable-input"
+                                value={account.LastName} onchange={handleInputChange}
+                                data-field="LastName"></lightning-input>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Gender</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Gender__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-combobox label="Gender" data-field="Gender__c" value={account.Gender__c}
+                                onchange={handleInputChange} options={Geneder_Options}>
+                            </lightning-combobox>
+
+                        </template>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Race</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Race__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-combobox label="Race" data-field="Race__c" onchange={handleInputChange}
+                                value={account.Race__c} options={Race_options}>
+                            </lightning-combobox>
+
+                        </template>
+
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Email</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.PersonEmail}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Email" class="editable-input"
+                                value={account.PersonEmail} data-field="PersonEmail"
+                                onchange={handleInputChange}></lightning-input>
+                        </template>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Phone Number</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Phone}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Phone Number" class="editable-input"
+                                value={account.Phone} onchange={handleInputChange} data-field="Phone"></lightning-input>
+                        </template>
+                    </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                            <template if:false={isEditMode}>
+                                <div class="input_Box">
+                                    <label>Mobile Phone</label>
+                                    <div class="value_box">
+                                        <div class="value_box_name">
+                                            {account.PersonMobilePhone}
+                                        </div>
+                                        <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                            class="extra_small_icon"></lightning-icon>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={isEditMode}>
+                                <lightning-input type="text" label="Mobile Phone" class="editable-input"
+                                    value={account.PersonMobilePhone} data-field="PersonMobilePhone"
+                                    onchange={handleInputChange}></lightning-input>
+                            </template>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                            <template if:false={isEditMode}>
+                                <div class="input_Box">
+                                    <label>Mailing Address</label>
+                                    <div class="value_box">
+                                        <div class="value_box_name">
+                                            {account.PersonMailingStreet}, {account.PersonMailingCity}, {account.PersonMailingState}, {account.PersonMailingPostalCode}, {account.PersonMailingCountry}
+                                        </div>
+                                        <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                            class="extra_small_icon"></lightning-icon>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={isEditMode}>
+                                <lightning-input type="text" label="Mailing Street" class="editable-input"
+                                    value={account.PersonMailingStreet} onchange={handleInputChange}
+                                    data-field="PersonMailingStreet"></lightning-input>
+                                <lightning-input type="text" label="Mailing City" class="editable-input"
+                                    value={account.PersonMailingCity} onchange={handleInputChange}
+                                    data-field="PersonMailingCity"></lightning-input>
+                                <lightning-input type="text" label="Mailing State" class="editable-input"
+                                    value={account.PersonMailingState} onchange={handleInputChange}
+                                    data-field="PersonMailingState"></lightning-input>
+                                <lightning-input type="text" label="Mailing Postal Code" class="editable-input"
+                                    value={account.PersonMailingPostalCode} onchange={handleInputChange}
+                                    data-field="PersonMailingPostalCode"></lightning-input>
+                                <lightning-input type="text" label="Mailing Country" class="editable-input"
+                                    value={account.PersonMailingCountry} onchange={handleInputChange}
+                                    data-field="PersonMailingCountry"></lightning-input>
+                            </template>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                            <template if:false={isEditMode}>
+                                <div class="input_Box">
+                                    <label>County of Residence</label>
+                                    <div class="value_box">
+                                        <div class="value_box_name">
+                                            {account.County_of_Residence__c}
+                                        </div>
+                                        <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                            class="extra_small_icon"></lightning-icon>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={isEditMode}>
+                                <lightning-input type=“text” label="Birthdate" class="editable-input"
+                                    value={account.County_of_Residence__c} data-field="County_of_Residence__c"
+                                    onchange={handleInputChange}></lightning-input>
+                            </template>
+                        </lightning-layout-item>
+                        
+                        
+
+                <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                    <template if:false={isEditMode}>
+                        <div class="input_Box">
+                            <label>Birthdate</label>
+                            <div class="value_box">
+                                <div class="value_box_name">
+                                    {account.Birthdate__c}
+                                </div>
+                                <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                    class="extra_small_icon"></lightning-icon>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={isEditMode}>
+                        <lightning-input type="date" label="Birthdate" class="editable-input"
+                            value={account.Birthdate__c} data-field="Birthdate__c"
+                            onchange={handleInputChange}></lightning-input>
+                    </template>
+                </lightning-layout-item>
+
+
+                <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                    <div class="input_Box">
+                        <label>Upload File</label>
+                        <div class="value_box">
+                            <div class="value_box_name">
+                                <!-- Display the file name or a message indicating a file has been uploaded -->
+                                <template if:true={uploadedFileName}>
+                                    <!-- Show the file name as a link or plain text -->
+                                    <a href={uploadedFileUrl} target="_blank">{uploadedFileName}</a>
+                                </template>
+                                <template if:false={uploadedFileName}>
+                                    
+                                </template>
+                            </div>
+                            <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                class="extra_small_icon"></lightning-icon>
+                        </div>
+                    </div>
+                    <template if:true={isEditMode}>
+                        <lightning-input type="file" label="Select" class="slds-m-bottom_small" onchange={handleFilesChange}></lightning-input>
+                        <lightning-button label="Upload File" onclick={handleUpload} class="slds-m-top_small" ></lightning-button>
+                    </template>
+                </lightning-layout-item>
+                
+                
+                
+                
+                
+                
+                
+            </lightning-layout>
+
+            </lightning-accordion-section>
+            <lightning-accordion-section name="SocialMedia" label="Social Media">
+                <lightning-layout multiple-rows="true" class="custom-padding-layout">
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Facebook</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Facebook__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Facebook" class="editable-input"
+                                value={account.Facebook__c} onchange={handleInputChange}
+                                data-field="Facebook__c"></lightning-input>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Instagram</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Instagram__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Instagram" class="editable-input"
+                                value={account.Instagram__c} onchange={handleInputChange}
+                                data-field="Instagram__c"></lightning-input>
+                        </template>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>LinkedIn</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.LinkedIn__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="LinkedIn" class="editable-input"
+                                value={account.LinkedIn__c} onchange={handleInputChange}
+                                data-field="LinkedIn__c"></lightning-input>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Pinterest</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Pinterest__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Pinterest" class="editable-input"
+                                value={account.Pinterest__c} onchange={handleInputChange}
+                                data-field="Pinterest__c"></lightning-input>
+                        </template>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-around_small slds-is-relative" size="6">
+                        <template if:false={isEditMode}>
+                            <div class="input_Box">
+                                <label>Twitter</label>
+                                <div class="value_box">
+                                    <div class="value_box_name">
+                                        {account.Twitter__c}
+                                    </div>
+                                    <lightning-icon icon-name="utility:edit" size="x-small" onclick={toggleEdit}
+                                        class="extra_small_icon"></lightning-icon>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={isEditMode}>
+                            <lightning-input type="text" label="Twitter" class="editable-input"
+                                value={account.Twitter__c} onchange={handleInputChange}
+                                data-field="Twitter__c"></lightning-input>
+                        </template>
+
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-accordion-section>
+
+        </lightning-accordion>
+        <lightning-layout multiple-rows="true" class="custom-padding-layout">
+            <lightning-layout-item class="slds-p-around_small" size="6">
+                
+                <template if:true={isEditMode}>
+                    <lightning-button label="Save" variant="Brand" onclick={saveRecord}></lightning-button>
+                <lightning-button label="Cancel" variant="neutra" onclick={cancelEdit} class="slds-m-left_x-small"></lightning-button>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    
+    </lightning-card>
+</template>

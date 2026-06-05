@@ -1,0 +1,94 @@
+<template>
+    <div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+        <div class="slds-col heading slds-size_1-of-1">{addLifeInsuranceLabel} Life Insurance</div>
+        <template if:false={addLifeInsuranceAccount}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddInsurance}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Account Name</th>
+								<th>Carrier</th>
+								<th>Type</th>
+								<th>Face Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template if:true={isLifeInsurance}>   
+							<template for:each={recordsData} for:item="row">
+								<tr key={row.fields.Id.value}>
+									<td>
+										<span class="rowName" onclick={handleInsuranceCellClick} data-id={row.fields.Id.value} data-field="Life_Insurance__c">{clientSubName}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></span>
+									</td>
+									<td>{row.fields.Name.value}</td>
+									<td>{row.fields.Type_of_Policy__c.value}</td>
+									<td>{row.fields.Face_Amount_of_Policy__c.displayValue}</td>
+									<td><span data-id={row.fields.Id.value} data-field="Life_Insurance__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+								</tr>
+							</template>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+
+		<template if:true={addLifeInsuranceAccount}>
+			<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Life_Insurance__c" onsuccess={handleSuccess} >
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Name" data-field="Name" autocomplete="off" label = "Policy Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Type_of_Policy__c" data-field="Type_of_Policy__c" autocomplete="off" label = "Type of Policy" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_xx-large">
+								<lightning-input-field field-name="Life_Insurance_Joint__c" data-field="Life_Insurance_Joint__c" autocomplete="off" label = "Joint Life Insurance?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Face_Amount_of_Policy__c" data-field="Face_Amount_of_Policy__c" autocomplete="off" label = "Face Amount of Policy" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Cash_Value_Today__c" data-field="Cash_Value_Today__c" autocomplete="off" label = "Cash Value Today" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Policy_Owner__c" data-field="Policy_Owner__c" autocomplete="off" label = "Owned By?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity}></lightning-input-field>	
+						</div>
+					</div>
+				</div>
+
+			</lightning-record-edit-form>
+		</template>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:true={addLifeInsuranceAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:false={addLifeInsuranceAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+    </div>
+</template>

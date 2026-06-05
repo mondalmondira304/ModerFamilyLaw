@@ -1,0 +1,22 @@
+.image-spinner {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+.spinner-img {
+  display: block;
+  width: 180px;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+}
+
+/* Size mapping similar to lightning-spinner */
+.spinner-img.small  { width: 1.5rem;  height: 1.5rem; }
+.spinner-img.medium { width: 2.5rem;  height: 2.5rem; }
+.spinner-img.large  { width: 3.5rem;  height: 3.5rem; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

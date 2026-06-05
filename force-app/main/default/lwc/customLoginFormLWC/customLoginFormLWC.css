@@ -1,0 +1,160 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 49vh;
+    margin-bottom: 20px;
+    margin-top: -15vh;
+}
+
+.login-card {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 30vw;
+}
+
+.title {
+    font-size: 2.25rem;
+    color: #5D69B1;
+    /*font-family: sans-serif;*/
+}
+
+.gradient-line {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #ff8a00, #e52e71);
+    margin: 10px auto;
+}
+
+.input-container {
+    text-align: left;
+    /* margin-top: 15px; */
+    font-size: 16px;
+    /* font-weight: bold; */
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center everything horizontally */
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    font-size: 1.5rem;
+    color: white;
+    background-color: #3dbedb;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-text {
+    text-align: center;
+}
+
+.arrow {
+    position: absolute;
+    right: 10px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; /* keep it above background */
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 1250px) {
+
+    .login-card {
+        width: 50vw;
+    }
+
+    .login-button {
+        width: 90%;
+    }
+
+    /* .arrow {
+        display: none;
+    } */
+}
+@media only screen and (max-width: 1000px) {
+
+    .login-card {
+        width: 80vw;
+    }
+}
+
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo {
+    /* width: 380px; */
+    /* height: 10vh;
+    text-align: center; */
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.custom-input {
+    /* --slds-c-input-color-background: #f2f2f2;
+    --slds-c-input-radius-border: 8px; */
+    background: #f2f2f2;
+    border-radius: 8px;
+    min-height: 3rem !important;
+    outline: #dbdedf solid 0.5px;
+}
+
+.invalidCredCSS {
+    text-align: left;
+    color: red;
+}
+
+.loginGradientDiv {
+    margin-top: 5vh;
+    position:relative;
+}
+
+.loginGradientImg {
+    position: absolute;
+    top: 100%; 
+    left: 50%; 
+    transform: translate(-50%, -100%);
+}

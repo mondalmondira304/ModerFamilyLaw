@@ -1,0 +1,52 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Current Self-Employment</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Employment__c"  onsuccess={handleSuccess}>
+			<div class="slds-col slds-p-top_medium slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Self_Employment_Business_Name__c" data-field="Self_Employment_Business_Name__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Business_Ownership__c" data-field="Business_Ownership__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} style="margin-bottom: 0.5rem;" autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Owner_Role__c" data-field="Owner_Role__c"  variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Self_Employment_Business_Type__c" data-field="Self_Employment_Business_Type__c" variant="label-stacked" class="custom-input" onchange={handleOnChange}   autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Self_employment_number_of_years__c" data-field="Self_employment_number_of_years__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+						<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} autocomplete="off"></lightning-input-field>					
+				</div>
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-2 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Self_Employment_Income_Last_Month__c" data-field="Self_Employment_Income_Last_Month__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Self_Employment_Income_Monthly_Average__c" data-field="Self_Employment_Income_Monthly_Average__c"  variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Gross_Overtime_Last_Month__c" data-field="Gross_Overtime_Last_Month__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Gross_Overtime_Monthly_Average__c" data-field="Gross_Overtime_Monthly_Average__c" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Commissions_or_Bonuses_last_month__c" data-field="Commissions_or_Bonuses_last_month__c"  variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Commissions_or_Bonuses_Monthly_Average__c" data-field="Commissions_or_Bonuses_Monthly_Average__c" variant="label-stacked" class="custom-input" onchange={handleOnChange}   autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+    </div>
+</template>

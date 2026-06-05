@@ -1,0 +1,79 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Miscellaneous</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Major_Losses_per_month__c" data-field="Major_Losses_per_month__c" label = "Major Loss Per Month" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Major_Losses_of_months__c" data-field="Major_Losses_of_months__c"  label = "Major Losses # of Months" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Legal_Accounting_Client__c" data-field="Legal_Accounting_Client__c" label = "Legal and Accounting" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Housekeeping_Cleaning_Client__c" data-field="Housekeeping_Cleaning_Client__c" label = "Housekeeping and Cleaning" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Memberships_Clubs_Client__c" data-field="Memberships_Clubs_Client__c" label = "Membership and Clubs" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Personal_Care_Client__c" data-field="Personal_Care_Client__c" label = "Personal Care" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Investments_Non_payroll_deduction__c" data-field="Investments_Non_payroll_deduction__c" label = "Investments Non-Payroll" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Extraordinary_health_expenses_Monthly__c" data-field="Extraordinary_health_expenses_Monthly__c" label = "Extraordinary Health Expenses" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Extraordinary_health_expenses_Months__c" data-field="Extraordinary_health_expenses_Months__c"  label = "Extraordinary Health Expenses # of Months" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Laundry_Client__c" data-field="Laundry_Client__c"  label = "Dry Cleaning/Laundry" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Charity_Worship_Client__c" data-field="Charity_Worship_Client__c"  label = "Charity and Worship" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Pets_and_Pet_Care_Client__c" data-field="Pets_and_Pet_Care_Client__c" label = "Pets and Pet Care" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Subscriptions_Client__c" data-field="Subscriptions_Client__c"  label = "Subscriptions" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Home_Furnishings_Client__c" data-field="Home_Furnishings_Client__c"  label = "Home Furnishings" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+		<button class="next-button nextBtnPadding" onclick={handleSubmitExpensesSection}>SUBMIT
+			<span class="arrow nextBtnArrow">→</span>
+		</button>
+	</div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={expenseLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

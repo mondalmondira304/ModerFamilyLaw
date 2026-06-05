@@ -1,0 +1,100 @@
+<template>
+
+    <template if:true={isWaiting}>
+        <div class="slds-align_absolute-center slds-m-around_large">
+             <c-image-spinner 
+                is-loading={isWaiting}
+                size="large"
+                alternative-text="Waiting for signing link"
+                backdrop="true">
+            </c-image-spinner>
+            <p class="slds-m-top_medium">
+                We’re preparing your signing link. This page will update automatically.
+            </p>
+        </div>
+    </template>
+
+    <template if:true={hasSigningUrl}>
+        <div class="slds-grid slds-grid_vertical slds-grid_align-center slds-p-around_large" style="height:100%;">
+            <div class="slds-p-right_large slds-p-left_large slds-p-bottom_large">
+                <h2 class="text-primary slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">STEP 1</h2>
+                <h3 class="slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">Fee Agreement</h3>
+                <p class="slds-align_absolute-center">Please sign your fee agreement below then continue to pay your retainer.</p>
+            </div>
+
+            <div>
+                
+                <template if:true={showWaiting}>
+                        <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                            <button disabled class="next-button nextBtnPadding">
+                                Checking for signed agreement<span class="waiting-btn-bg"><img src={imageUrl} alt="" class="spinner-img btn-spinner slds-align_absolute-center" /></span>
+                            </button>
+                        </div>
+                    </template>
+                <div class="slds-align_absolute-center">
+                    <template if:true={showNotSigned}>
+                        <p style="color:red;">Please sign Fee Agreement to continue.</p>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-p-bottom_large slds-text-align_center slds-size_1-of-1" style="height:1000px;">
+                <template if:true={hasSigningUrl}>
+                    <iframe src={signingUrl} width="100%" height="100%" frameborder="0" style="border: 0; overflow: hidden; min-height: 500px; min-width: 600px;"></iframe>
+                </template>
+
+                <template if:false={hasSigningUrl}>
+                    <div class="slds-p-around_medium">
+                        <p>No fee agreement is available for this account.</p>
+                    </div>
+                </template>
+            </div>
+
+            <template if:false={isGoldRetainer}>
+                <div class="slds-align_absolute-center">
+                    <template if:true={showWaiting}>
+
+                        <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                            <button disabled class="next-button nextBtnPadding">
+                                Checking for signed agreement<span class="waiting-btn-bg"><img src={imageUrl} alt="" class="spinner-img btn-spinner slds-align_absolute-center" /></span>
+                            </button>
+                        </div>
+
+                        <!-- <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                            <div class="slds-col slds-size_1-of-1 slds-text-align_center">
+                                <img src={imageUrl} alt="" class="spinner-img slds-align_absolute-center" />
+                                <p>Checking for signed Fee Agreement...</p>
+                            </div>
+                        </div> -->
+
+                    </template>
+                    <div>
+
+                        <template if:false={showWaiting}>
+                            <!-- <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                                <button class="next-button nextBtnPadding" onclick={handlePaymentLink}>
+                                    Continue to payment<span class="arrow nextBtnArrow">→</span>
+                                </button>
+                            </div> -->
+                        </template>
+                        <div class="slds-align_absolute-center">
+                            <template if:true={showNotSigned}>
+                                <p style="color:red;">Please sign Fee Agreement to continue.</p>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={isGoldRetainer}>
+                <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                    <button class="next-button nextBtnPadding" onclick={handlePaymentLink}>
+                        Continue<span class="arrow nextBtnArrow">→</span>
+                    </button>
+                </div>
+            </template>
+            
+
+            
+        </div>
+    </template>
+</template>

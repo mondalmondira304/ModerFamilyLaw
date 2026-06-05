@@ -1,0 +1,4 @@
+<apex:page standardController="Matters__c" title="NetDocuments workspace corresponding to a Matter">
+<apex:iframe scrolling="true" title="Matter Workspace" 
+src="https://vault.netvoyage.com/neWeb2/goID.aspx?sfSession={!$Api.Session_ID}&sfUrl={!$Api.Partner_Server_URL_540}&smallDisplay=Y&wsParent= {!URLENCODE(Matters__c.Matter_ID_Client__c)} &ws={!URLENCODE(Matters__c.Matter_ID_Matter__c)}"/>
+</apex:page>

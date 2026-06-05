@@ -1,0 +1,147 @@
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.step-container {
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 60px;
+  /* margin-bottom: 30px; */
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #dcdcdc;
+  background-color: #dcdcdc;
+  z-index: 2;
+}
+
+.circle.active {
+  border-color: #3dbedb;
+  background-color: #3dbedb;
+}
+
+.circle.completed {
+  border-color: #3dbedb;
+  background-color: #3dbedb;
+
+}
+
+.connector {
+  position: absolute;
+  top: 20px;
+  left: 9px;
+  width: 2px;
+  height: 100%;              
+  background-color: #dcdcdc;
+}
+
+/* stretch to the bottom WHEN the step has sub-steps */
+.step-container:has(.sub-steps) .connector {
+  height: auto;              /* let it stretch */
+  bottom: 0;                 /* reach container bottom */
+}
+
+.step-container:last-child .connector {
+  display: none;
+}
+
+/* keep your state colors */
+.connector.completed { background-color: #3dbedb; }
+
+.step-name {
+  margin-left: 40px;
+  font-size: 16px;
+  Color: #b5b5b5;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  cursor: pointer;
+  top: -20px;
+}
+
+.alignAddIcon {
+  margin-left: 40px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.step-name.active {
+  margin-left: -10px;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  border-style: solid;
+  color: white;
+  background: #3dbedb;
+  border-color: #3dbedb;
+  padding: 5px 25px 5px 25px;
+  border-radius: 25px;
+  z-index: 2;
+}
+
+.sub-steps {
+
+  margin-left: 2vw;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.sub-step-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.sub-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #dcdcdc;
+  background-color: #dcdcdc;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+.sub-circle.active {
+  border-color: #4dc5e1;
+  background-color: #4dc5e1;
+}
+
+.sub-circle.completed {
+  border-color: #3dbedb;
+  background-color: #3dbedb;
+
+}
+
+.sub-step-name {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sub-step-name.active {
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 30px;
+  border-radius: 25px;
+  margin-left: -30px;
+}

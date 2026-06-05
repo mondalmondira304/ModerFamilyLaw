@@ -1,0 +1,63 @@
+<template>
+	<template if:true={showServiceSpinner}>
+		<lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+	</template>
+
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Opposing Party - Information for Service of Process</div>
+
+	  	<lightning-record-edit-form record-id={selectedRecordId} onsuccess={handleSuccess} object-api-name="Account">
+
+		  	<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1">
+				<!-- Column A -->
+			  	<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+		  	<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-2">
+					  	<lightning-input-field field-name="Height__c" data-field="Height__c" autocomplete="off" label = "[OP’s First Name]’s Height" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} pattern="^[1-9]'(1[0-1]|[0-9])&quot;$" message-when-pattern-mismatch="Enter height in feet and inches such as 5' 7&quot;"></lightning-input-field>
+					</div>
+						<div class="slds-col slds-size_1-of-2">
+					  	<lightning-input-field field-name="Hair_Color__c" data-field="Hair_Color__c" autocomplete="off" label = "Hair Color" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+					  <lightning-input-field min="0" max="500" pattern="^(?:[1-4]?[0-9]{1,2}|500)$" field-name="Weight__c" data-field="Weight__c" autocomplete="off" label = "Weight" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					  <lightning-input-field field-name="Identifying_Features__c" data-field="Identifying_Features__c" autocomplete="off" label = "Identifying Features" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					  <lightning-input-field field-name="Vehicle__c" data-field="Vehicle__c" autocomplete="off" label = "Type of Vehicle" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+				  	</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Days_Time_for_Best_Location__c" data-field="Days_Time_for_Best_Location__c" autocomplete="off" label = "Day/Time for Best Location" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Best_Location__c" data-field="Best_Location__c" autocomplete="off" label = "Best Location for Service" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Alternate_Location_for_Service__c" data-field="Alternate_Location_for_Service__c" autocomplete="off" label = "Alternate Location for Service" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Day_Time_for_Alternate_Location__c" data-field="Day_Time_for_Alternate_Location__c" autocomplete="off" label = "Day/Time for Alternate Location" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+					
+				</div>
+		  	</div>
+
+	  	</lightning-record-edit-form>
+
+  	</div>
+
+
+	<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_12-of-12">
+		<template if:true={manageNextANDSAVEButtons}>
+			<button class="next-button nextBtnPadding" onclick={handleSubmitOPSection}>SUBMIT
+			<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+	</div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={opposingLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

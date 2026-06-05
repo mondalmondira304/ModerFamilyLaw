@@ -1,0 +1,49 @@
+<template>
+    <div class="page-shell">
+        <header class="page-header">
+            <button class="back-link" type="button" onclick={handleBack}>
+                &lsaquo; Back to Dashboard
+            </button>
+            <h1 class="page-title">Recent Updates</h1>
+            <p class="page-subtitle">Stay up to date on important activity across your matters.</p>
+        </header>
+
+        <template lwc:if={isLoading}>
+            <div class="card skeleton-block">
+                <div class="skeleton-line skeleton-line-lg"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line skeleton-line-short"></div>
+            </div>
+        </template>
+
+        <template lwc:elseif={loadError}>
+            <div class="card error-card">
+                <div class="error-title">Couldn&rsquo;t load updates</div>
+                <div class="error-desc">{loadError}</div>
+            </div>
+        </template>
+
+        <template lwc:elseif={isEmpty}>
+            <div class="card empty-card">
+                <div class="empty-title">No recent updates yet</div>
+                <div class="empty-desc">You&rsquo;ll see activity here as your matters progress.</div>
+            </div>
+        </template>
+
+        <template lwc:elseif={hasItems}>
+            <ul class="feed">
+                <template for:each={items} for:item="item">
+                    <li class="feed-row" key={item.id}>
+                        <div class={item.iconClass}>
+                            <lightning-icon icon-name={item.icon} size="xx-small"></lightning-icon>
+                        </div>
+                        <div class="feed-content">
+                            <div class="feed-text">{item.text}</div>
+                            <div class="feed-date">{item.dateLabel}</div>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </template>
+    </div>
+</template>

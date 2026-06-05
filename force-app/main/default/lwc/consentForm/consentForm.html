@@ -1,0 +1,71 @@
+<template>
+    <!-- <lightning-card> -->
+    <div class="slds-p-around_large">
+
+        <div class="slds-align_absolute-center slds-p-around_large">
+
+            <h3 slot="title" class="slds-m-bottom_medium slds-card__header-title slds-text-align_center">Consent &
+                Confirmation</h3>
+
+        </div>
+
+        <h4 class="slds-m-bottom_medium">Consent to Electronic Disclosures</h4>
+
+        <!-- Replace with editable content -->
+        <p class="scroll-box"><lightning-formatted-rich-text value={templateHtml}></lightning-formatted-rich-text></p>
+        
+
+        <p class="slds-m-bottom_medium">
+            You understand that by clicking the I AGREE box, you are providing 'written
+            instructions' to Modern Family Law under the Fair Credit Reporting Act,
+            authorizing Modern Family Law to obtain information from your personal
+            credit profile or other information from Experian. You authorize Modern
+            Family Law to obtain such information solely to conduct a pre-qualification
+            for credit.
+        </p>
+
+        <div class="slds-m-bottom_medium slds-grid_align-center">
+
+            <div class="slds-m-bottom_xx-small">
+                <lightning-input type="checkbox"
+                    label="I certify that I have read and agreed to the Consent to Electronic Disclosures"
+                    checked={consentChecked} onchange={handleConsentChange} required>
+                </lightning-input>
+            </div>
+
+            <div class="">
+                <lightning-input type="checkbox" label="I AGREE to the Terms above" checked={termsChecked}
+                    onchange={handleTermsChange} required>
+                </lightning-input>
+            </div>
+
+            <div>
+                <lightning-input type="checkbox" name="fcra" value="fcra" checked={creditConsentChecked}
+                    label="You understand that by clicking the I AGREE box, you are providing 'written instructions' to Modern Family Law under the Fair Credit Reporting Act, authorizing Modern Family Law to obtain information from your personal credit profile or other information from Experian. You authorize Modern Family Law to obtain such information solely to conduct a pre-qualification for credit."
+                    onchange={handleCreditConsentChange} required>
+                </lightning-input>
+            </div>
+
+            <p class="slds-m-vertical_medium">
+                By checking all boxes and clicking "I AGREE", you confirm you have read and agree to the Consent to
+                Electronic Disclosures, the Terms of Service, and you authorize Modern Family Law to obtain your credit
+                profile under the Fair Credit Reporting Act.
+            </p>
+
+            <!-- Agree Button -->
+            <!-- <div class="slds-text-align_center">
+                <lightning-button label="I AGREE" onclick={handleAgree} disabled={buttonDisabled} variant="brand">
+                </lightning-button>
+            </div> -->
+        </div>
+
+        <div class="slds-align_absolute-center slds-p-bottom_large">
+            <!-- <lightning-button label="I AGREE" variant="brand" onclick={handleAgree} disabled={buttonDisabled}></lightning-button> -->
+
+            <button class="next-button nextBtnPadding" onclick={handleAgree} disabled={buttonDisabled}>I AGREE
+                <span class="arrow nextBtnArrow">→</span>
+            </button>
+        </div>
+    </div>
+    <!-- </lightning-card> -->
+</template>

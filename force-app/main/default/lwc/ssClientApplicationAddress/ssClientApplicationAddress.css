@@ -1,0 +1,67 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: white;
+}
+
+.custom-form-container {
+  width: 100%;
+  background-color: #e9e9f7;
+  padding: 16px;
+  border-radius: 12px;
+  
+}
+
+lightning-card {
+    width: 600px;
+    max-width: 100%;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.custom-form {
+    width: 100%;
+}
+
+.custom-input {
+    --slds-c-input-color-background: #f2f2f2;
+    --slds-c-input-radius-border: 8px;
+    width: 100%;
+}
+
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  /* font-weight: bold; */
+  color: white;
+  background-color: #3dbedb;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.next-button .arrow {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 7px 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nextBtnPadding {
+  /* padding: 5px 5px 5px 35px; */
+  padding: 5px 5px 5px 55px;
+}
+
+.nextBtnArrow {
+  margin-left: 40px;
+}

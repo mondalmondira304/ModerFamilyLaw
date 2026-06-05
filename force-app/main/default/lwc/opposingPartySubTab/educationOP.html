@@ -1,0 +1,29 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+      	<div class="slds-col heading slds-size_1-of-1">Opposing Party - Education</div>
+
+		<lightning-record-edit-form record-id={selectedRecordId} onsuccess={handleSuccess} object-api-name="Account">
+
+			<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Level_of_Education__c" data-field="Level_of_Education__c" autocomplete="off" label = "Level of Education" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field autocomplete="off" min="0" max="20" field-name="Years_of_college__c" data-field="Years_of_college__c" label = "Years of College" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field autocomplete="off" min="0" max="20" field-name="Years_of_Graduate_School__c" data-field="Years_of_Graduate_School__c" label = "Years of Graduate School" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+
+				  </div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Degree_Obtained__c" data-field="Degree_Obtained__c" label = "Highest Degree Obtained" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Professional_Licenses__c" data-field="Professional_Licenses__c" label = "Professional Licenses" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+
+	</div>
+</template>

@@ -1,0 +1,30 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+      	<div class="slds-col heading slds-size_1-of-1">Opposing Party - Identity</div>
+
+		<lightning-record-edit-form record-id={selectedRecordId} onsuccess={handleSuccess} object-api-name="Account">
+
+			<div class="slds-grid slds-wrap slds-gutters">
+                <!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Birthdate__c" data-field="Birthdate__c" autocomplete="off" label = "Date of Birth" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field autocomplete="off" pattern="^\D*(\d\D*){9}$" field-name="Social_Security_Number__c" data-field="Social_Security_Number__c" label = "Social Security Number" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Birth_City__c" data-field="Birth_City__c" autocomplete="off" label = "City of Birth" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Birth_State__c" data-field="Birth_State__c" autocomplete="off" label = "State of Birth" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+				  </div>
+                <!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Birth_Country__c" data-field="Birth_Country__c" autocomplete="off" label = "Country of Birth" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Race__c" data-field="Race__c" autocomplete="off" label = "Race" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+						<lightning-input-field field-name="Gender__c" data-field="Gender__c" autocomplete="off" label = "Gender" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+					</div>
+				</div>
+
+			</div>
+
+		</lightning-record-edit-form>
+	</div>
+</template>

@@ -1,0 +1,140 @@
+.heading-large {
+  font-size: 2.5rem;
+  color: #5D69B2;
+}
+
+.heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subheading {
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.text-primary {
+  color: #3dbedb
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  /* font-weight: bold; */
+  color: white;
+  background-color: #3dbedb;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.next-button:active {
+	transform: translateY(2px);
+	box-shadow: 0 5px 3px #dcdcdc;
+}
+
+.next-button:hover {
+  cursor: pointer;
+}
+.next-button:disabled {
+  background-color: #dcdcdc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+
+.next-button .arrow {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 7px 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nextBtnPadding {
+  /* padding: 5px 5px 5px 35px; */
+  padding: 5px 5px 5px 55px;
+}
+
+.nextBtnArrow {
+  margin-left: 40px;
+}
+
+.generate {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 25px;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.step-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.step-icon {
+    --slds-c-icon-color-foreground-default: #3bb2d0;
+    margin-bottom: 1rem;
+}
+
+.step-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-card p {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.4;
+}
+
+/* Waiting Spinner */
+.spinner-img {
+  display: block;
+  width: 100px;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 850px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    padding: 16px; /* optional: tighten spacing on small screens */
+  }
+}

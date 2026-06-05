@@ -1,0 +1,23 @@
+<template>
+    <div class="page-shell">
+        <header class="page-header">
+            <button class="back-link" type="button" onclick={handleBack}>
+                &lsaquo; Back to Dashboard
+            </button>
+            <h1 class="page-title">Frequently Asked Questions</h1>
+            <p class="page-subtitle">Quick answers to common questions about your portal and your matters.</p>
+        </header>
+
+        <div class="faq-card">
+            <lightning-accordion allow-multiple-sections-open="false"
+                                 active-section-name={activeSectionName}
+                                 onsectiontoggle={handleSectionToggle}>
+                <template for:each={faqs} for:item="faq">
+                    <lightning-accordion-section key={faq.id} name={faq.id} label={faq.question}>
+                        <p class="faq-answer">{faq.answer}</p>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion>
+        </div>
+    </div>
+</template>

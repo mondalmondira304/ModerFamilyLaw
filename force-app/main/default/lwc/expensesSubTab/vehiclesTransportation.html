@@ -1,0 +1,51 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Transportation and Vehicle Expenses</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			
+			<div class="slds-col slds-p-top_medium slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Primary_Vehicle_Payment__c" data-field="Primary_Vehicle_Payment__c" label = "Primary Vehicle Payment" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Fuel_Expense__c" data-field="Fuel_Expense__c"  label = "Fuel Expense" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Maintenance_Repair__c" data-field="Maintenance_Repair__c" label = "Maintenance/Repairs" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Auto_Insurance_Premium__c" data-field="Auto_Insurance_Premium__c" label = "Auto Insurance Premium" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Auto_Insurance_Provider__c" data-field="Auto_Insurance_Provider__c" label = "Auto Insurance Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Other_Vehicle_Payments_Client__c" data-field="Other_Vehicle_Payments_Client__c" label = "Other Vehicle Payments" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Parking_Expense__c" data-field="Parking_Expense__c" label = "Parking Expense" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Bus_Commuter_Fees_Client__c" data-field="Bus_Commuter_Fees_Client__c" label = "Bus and Commuter Fees" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Licensing_Registration_fees__c" data-field="Licensing_Registration_fees__c" label = "Licensing and Registration Fees (Monthly)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Vehicles__c" data-field="Vehicles__c" label = "Which Vehicle?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</lightning-record-edit-form>
+  </div>
+</template>

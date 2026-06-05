@@ -1,0 +1,222 @@
+/*/
+@font-face {
+    font-family: "RalewayBold";
+    src: url('/resource/RalewayBold') format('TrueType');
+}
+
+@font-face {
+    font-family: "RalewayMedium";
+    src: url('/resource/RalewayMedium') format('TrueType');
+}*/
+
+.heading {
+    padding-top: 20px;
+    text-align: center;
+    /* padding-bottom: 25px; */
+    font-size: 28px;
+    Color: #4e4d4e;
+}
+
+.subheading {
+	font-size: 14px;
+    Color: #4e4d4e;
+    /* font-weight: bold; */
+}
+
+.buttonCSS {
+    background-color: #4dc5e1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+	margin-right: 20px;
+}
+
+.custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #25c0eb;
+    background: transparent;
+    color: #25c0eb;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.custom-button:hover {
+    background: #25c0eb;
+    color: white;
+}
+
+.icon-style {
+    margin-left: 5px;
+    --slds-c-icon-color-foreground-default: #25c0eb;
+}
+
+.custom-button:hover .icon-style {
+    --slds-c-icon-color-foreground-default: white;
+}
+
+.custom-table th {
+    text-align: left;
+    padding-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.custom-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    color: #333;
+}
+
+.custom-table th:nth-child(1), .custom-table td:nth-child(1) {
+    width: 40%;
+}
+
+.custom-table th:nth-child(2), .custom-table td:nth-child(2) {
+    width: 30%;
+}
+
+.custom-table th:nth-child(3), .custom-table td:nth-child(3) {
+    width: 20%;
+}
+
+.name-link {
+    color: #25c0eb;
+    text-decoration: none;
+}
+
+.name-link:hover {
+    text-decoration: underline;
+}
+
+.custom-input {
+    --slds-c-input-color-background: #f2f2f2;
+    --slds-c-input-radius-border: 8px;
+}
+
+.icon-color {
+    --lwc-colorTextIconDefault: #4dc5e1!important;
+}
+
+.next-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #3dbedb;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.cancel-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    Outline: 2px #3dbedb;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #3dbedb;
+    background-color: transparent;
+    border: 2pt solid #3dbedb;
+    border-radius: 50px;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background-color 0.3sease, color 0.3sease;
+    margin-right: 20px;
+  }
+
+.next-button .arrow {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    border-radius: 50%;
+    /* margin-left: 30px; */
+    transition: all 0.3s ease;
+}
+
+.previousBtnPadding {
+    padding: 5px 35px 5px 5px;
+    margin-right: 20px;
+}
+
+.previousBtnArrow {
+    margin-right: 30px;
+}
+
+.nextBtnPadding {
+    padding: 5px 5px 5px 35px;
+}
+
+.nextBtnArrow {
+    margin-left: 30px;
+}
+
+.edit-icon {
+    margin-left: 15px;
+    --slds-c-icon-color-foreground-default: #25c0eb;
+    position: relative;
+    bottom: 3px;
+    cursor: pointer;
+}
+
+.rowName {
+    cursor: pointer;
+    Color: #3dbedb;
+    font-size: 12px;
+}
+
+.popupbackground {
+    /* background-color: #F8DADF; */
+    background-color: transparent;
+    max-width: 38rem;
+    padding: 1rem;
+    /* border: 0.5px solid #8A8C8C; */
+    border-radius: 1rem;
+}
+
+.fitIcon {
+    width: fit-content;
+}
+
+.slide-in-top {
+    animation-name: slideInTop;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes slideInTop {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.cross-icon-color {
+    --lwc-colorTextIconDefault: white;
+    cursor: pointer;
+}

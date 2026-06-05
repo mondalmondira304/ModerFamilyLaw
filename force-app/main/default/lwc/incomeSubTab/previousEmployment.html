@@ -1,0 +1,119 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<template if:false={addPreviousEmployer}>
+			<div class="slds-col heading slds-size_1-of-1">Previous Employment</div>
+		</template>
+		<template if:true={addPreviousEmployer}>
+			<div class="slds-col heading slds-size_1-of-1">{addpreviousEmployment} Previous Employer</div>
+		</template>
+		<template if:false={addPreviousEmployer}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<!-- <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small subheading">
+					<span>5 Years of Previous Employment</span>
+					<lightning-helptext content="test" class="helpTextMargin"></lightning-helptext>
+				</div> -->
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-vertical_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddPreviousEmployer}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Employment Name</th>
+								<th>Job Title</th>
+								<th>Start</th>
+								<th>End</th>
+								<!-- <th>Income</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={previousData} for:item="row">
+								<tr key={row.id}>
+									<td>
+										<span class="rowName" onclick={handlePreviousEmployerCellClick} data-id={row.Id} data-field="Employment__c">{row.Name}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></span>
+									</td>
+									<td>{row.Job_Title__c}</td>
+									<td>{row.Date_of_Hire__c}</td>
+									<td>{row.Date_Employment_Ended__c}</td>
+									<td><span data-id={row.Id} data-field="Employment__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</template>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Employment__c"  onsuccess={handleSuccess}>
+			<template if:true={addPreviousEmployer}>
+
+				<div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Employment Name</label>
+								<lightning-input-field field-name="Name" data-field="Name" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+							</div>
+							<!--div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<label class="labelCSS">Previous Employment Name</label>
+								<lightning-input-field field-name="Employment_Name__c" data-field="Employment_Name__c"  variant="label-hidden" value={recordDetail.Employment_Name__c} class="custom-input icon-color"  onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+							</div-->
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Employer__c" data-field="Employer__c" variant="label-stacked" class="custom-input icon-color"  onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Employer_Phone__c" data-field="Employer_Phone__c" variant="label-stacked" class="custom-input icon-color"  onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Employer_Website__c" data-field="Employer_Website__c" variant="label-stacked" class="custom-input icon-color"  onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Employer_Address__c" data-field="Employer_Address__c"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Self_Employed_at_this_Job__c" data-field="Self_Employed_at_this_Job__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+					<!-- Column B -->
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Job_Title__c" data-field="Job_Title__c" variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Date_of_Hire__c" data-field="Date_of_Hire__c"  required  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Date_Employment_Ended__c" data-field="Date_Employment_Ended__c"  required  variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Length_of_Employment__c" data-field="Length_of_Employment__c"  variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Hours_Weekly__c" data-field="Hours_Weekly__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" required value={childMatterActivity}  autocomplete="off"></lightning-input-field>							
+						</div>
+					</div>
+				</div>
+
+			</template>
+		</lightning-record-edit-form>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<template if:false={addPreviousEmployer}>
+				<button class="next-button nextBtnPadding" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+			<template if:true={addPreviousEmployer}>
+				<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+</template>

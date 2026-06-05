@@ -1,0 +1,54 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Investment Income</div>
+
+		<lightning-record-edit-form record-id={otherIncomeRecordId} object-api-name="Other_Income__c" onsuccess={handleSuccess}>
+
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Investment Income Last Month</label>
+							<lightning-input-field field-name="Other_Investment_Income_Last_Month__c" data-field="Other_Investment_Income_Last_Month__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Average Investment Income</label>
+							<lightning-input-field field-name="Other_Investment_Income_Avg_Monthly__c" data-field="Other_Investment_Income_Avg_Monthly__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Royalty and Other Income</label>
+							<lightning-input-field field-name="Royalty_and_Other_Income_Monthly__c" data-field="Royalty_and_Other_Income_Monthly__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Interest & Dividends Last Month</label>
+							<lightning-input-field field-name="Interest_Dividends_Last_Monthly__c" data-field="Interest_Dividends_Last_Monthly__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Average Interest and Dividend Income</label>
+							<lightning-input-field field-name="Interest_Dividends_Avg_Monthly__c" data-field="Interest_Dividends_Avg_Monthly__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS">Interest and Dividend Income Last Year</label>
+							<lightning-input-field field-name="Interest_Dividends_Last_Year__c" data-field="Interest_Dividends_Last_Year__c" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+							<lightning-input-field field-name="Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>
+					</div>
+				</div>
+
+			</div>
+
+		</lightning-record-edit-form>
+
+		 <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+	</div>
+</template>

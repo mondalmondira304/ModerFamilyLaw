@@ -1,0 +1,25 @@
+<apex:page standardController="Contact" lightningStylesheets="true">
+<apex:form >
+<!--Fee Agreements (Opens a window with all FAs)--> <apex:commandButton value="Fee Agreements" action="{!URLFOR($Action.Contact.View,Contact.Id)}" onclick="FAS()"/>
+
+
+
+
+
+
+</apex:form>
+<Script Language="JavaScript">
+
+function FAS() { window.open('{!URLFOR($Action.Contact.00b61000000bbR8,Contact.Id)}', '','scrollbars=yes,menubar=no,height=630,width=1000,resizable=yes, toolbar=no,location=no,status=yes');}
+function SCH() { window.open('{!URLFOR($Action.Contact.00b61000000bdHM,Contact.Id)}', '','scrollbars=yes,menubar=no,height=620,width=1050,resizable=yes, toolbar=no,location=no,status=yes'); }
+function NSHOW() { window.open('{!URLFOR($Action.Contact.00b61000000bbgr,Contact.Id)}', '','scrollbars=yes,menubar=no,height=620,width=1050,resizable=yes, toolbar=no,location=no,status=yes'); }
+function CS() { window.open('{!URLFOR($Action.Contact.00b61000000bdJc,Contact.Id)}', '','scrollbars=yes,menubar=no,height=620,width=1050,resizable=yes, toolbar=no,location=no,status=yes'); }
+
+
+
+
+
+
+
+</Script>
+</apex:page>

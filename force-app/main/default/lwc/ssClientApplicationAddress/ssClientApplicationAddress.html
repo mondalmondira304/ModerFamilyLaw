@@ -1,0 +1,34 @@
+<template>
+    <div class="slds-p-around_large">
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <h3 slot="title" class="slds-m-bottom_medium slds-card__header-title">Address</h3>
+        </div>
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <lightning-record-edit-form density="comfy" object-api-name="Account" record-id={recordId}
+                onsuccess={handleSuccess} onerror={handleError} class="custom-form">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+                        <lightning-input-field field-name="PersonMailingStreet" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="PersonMailingCity" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="State_A__c" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="PersonMailingCountry" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                        <lightning-input-field field-name="PersonMailingPostalCode" class="custom-input" required="true" onchange={handleChange}></lightning-input-field>
+                    </div>
+                    <div class="slds-m-top_medium slds-text-align_center">
+                        <template if:true={isLoading}>
+                            <c-image-spinner is-loading={isLoading} alternative-text="Loading records…" size="large" backdrop> <!-- optional: dim the background --></c-image-spinner>
+                        </template>
+                    </div>             
+                </div>
+                <div class="slds-col slds-grid slds-size_1-of-1 slds-p-vertical_medium slds-grid_align-center">
+                    <button class="next-button nextBtnPadding" onclick={handleSave}>NEXT
+                        <span class="arrow nextBtnArrow">→</span>
+                    </button>
+                </div>
+            </lightning-record-edit-form>
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-m-top_small">{errorMessage}</div>
+            </template>
+        </div>
+    </div>
+</template>

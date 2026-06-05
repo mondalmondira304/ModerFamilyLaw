@@ -1,0 +1,49 @@
+<template>
+    <!-- <div style={loginBackground}> -->
+        <div class="">
+            <img src={logoImg} alt="image sample"  />
+        </div>
+        <div class="login-container slds-m-vertical_large">
+            <div class="login-card ">
+                <div class="slds-grid slds-wrap ">
+                    <div class="title slds-col slds-size_1-of-1 slds-m-top_small" >Client Portal</div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <img src={loginGradientImg} alt="image sample"/>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="input-container">
+                        <label for="username">Registered Email</label>
+                        <input type="text" id="username" class="input-field custom-input" value={username} onchange={handleUsernameChange} required/>
+                    </div>
+                    <template if:true={missingUsername}>
+                        <div class="invalidCredCSS slds-p-top_small">
+                            Please enter your registered email
+                        </div>
+                    </template>
+                    <div class="input-container slds-p-top_large">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="input-field custom-input" onchange={handlePasswordChange} required/>
+                    </div>
+                    <template if:true={isValidCred}>
+                        <div class="invalidCredCSS slds-p-top_small">
+                            Please enter username and password
+                        </div>
+                    </template>
+                    
+                    <div class="slds-col slds-p-top_xx-large"></div>
+                    <div class="login-button slds-grid slds-grid_align-center" onclick={handleClick}>
+                        <span class="login-text">Login</span>
+                        <span class="arrow">➜</span>
+                    </div>
+                    <div class="slds-col slds-p-top_large">
+                        <div class="forgot-password" onclick={handleForgetPasswordCreate}>New User? <br> Set password <span style="color: #3dbedb;">HERE</span>.</div>
+                    </div>
+                    <div class="slds-col slds-p-top_large">
+                        <div class="forgot-password" onclick={handleForgetPasswordReset}>Forgot password? <br> Reset password <span style="color: #3dbedb;">HERE</span>.</div>
+                    </div>
+                    <div class="slds-col slds-p-bottom_large"></div>
+                </div>
+            </div>
+        </div>
+</template>

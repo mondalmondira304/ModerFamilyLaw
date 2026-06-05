@@ -1,0 +1,129 @@
+<template>
+    
+    <template if:true={isPaymentLanding}>
+
+        <div class="slds-p-around_x-large slds-grid slds-grid_vertical slds-align_absolute-center payment-landing-container">
+
+            <div class="slds-p-bottom_large slds-text-align_center slds-size_1-of-1">
+                <iframe class="landing-video"
+                    src="https://player.vimeo.com/video/1164410721?h=c527ea9240&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+
+                    frameborder="0">
+                </iframe>
+            </div>
+
+            <template if:true={showWaiting}>
+                <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                    <button disabled class="next-button nextBtnPadding">
+                        Checking your payment status<span class="waiting-btn-bg"><img src={imageUrl} alt="" class="spinner-img btn-spinner slds-align_absolute-center" /></span>
+                    </button>
+                </div>
+            </template>
+
+            <template if:false={showWaiting}>
+                <div class="slds-grid slds-grid_align-center slds-p-bottom_large slds-size_1-of-1">
+                    <button class="next-button nextBtnPadding" onclick={handleContinueToPayment}>
+                        Continue <span class="arrow nextBtnArrow">→</span>
+                    </button>
+                </div>
+            </template>
+
+        </div>
+
+    </template>
+
+    <template if:true={isProcessing}>
+        <div class="slds-p-around_x-large slds-grid slds-grid_vertical slds-align_absolute-center waiting-container"
+            style="min-height: 400px;">
+
+            <div class="slds-col slds-size_1-of-1 slds-text-align_center">
+
+                
+                <img src={imageUrl} alt="" class="spinner-img slds-align_absolute-center" />
+                <h2 class="heading-large slds-m-top_large">Checking your payment status</h2>
+                <p class="slds-text-body_regular slds-text-color_weak slds-m-top_small">
+                    Please wait while we check your payment status...
+                </p>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={isPaymentLanding}>
+        <template if:false={isProcessing}>
+        
+            <div class="slds-grid slds-grid_vertical slds-grid_align-center slds-p-around_large" style="height:100%;">
+
+                <div class="slds-p-right_large slds-p-left_large slds-p-bottom_large">
+                    <h2 class="text-primary slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">STEP 2</h2>
+                    <h3 class="slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">Post Retainer</h3>
+                </div>
+
+                <!-- <h3>How to complete your payment:</h3> -->
+                <div class="info-grid">
+                    <div class="info-step">
+                        <h3>Step 1.</h3>
+                        <p>Click “Pay via Credit Card” or “Pay via Bank Account (ACH)”, depending on your preference.</p>
+                    </div>
+                    <div class="info-step">
+                        <h3>Step 2.</h3>
+                        <p>Enter your payment information in the form.</p>
+                    </div>
+                    <div class="info-step">
+                        <h3>Step 3.</h3>
+                        <p>Click “Submit Payment" in lower right corner and wait for the payment confirmation message.</p>
+                    </div>
+                    <div class="info-step">
+                        <h3>Step 4.</h3>
+                        <p>After your payment has been successfully processed, click “Continue.”</p>
+                    </div>
+
+                </div>
+
+                <div class="slds-p-bottom_large slds-text-align_center slds-size_1-of-1" style="height:700px;">
+                    <iframe src={invoiceRetainerUrl} width="100%" height="100%" frameborder="0" class="payment-iframe"></iframe>
+                </div>
+                
+                <div>
+
+                    <template if:false={showWaiting}>
+                        <div class="slds-text-align_center">
+                            <lightning-input type="checkbox" checked={paymentCompleteChecked}
+                                label="By clicking here I confirm that I have completed my retainer payment."
+                                onchange={handlePaymentComplete} required>
+                            </lightning-input>
+                        </div>
+
+                        <div class="slds-grid slds-align_absolute-center slds-p-bottom_large slds-size_1-of-1">
+                            <button class="next-button nextBtnPadding" onclick={handleCheckTrustBalance} disabled={buttonDisabled}>
+                                Continue<span class="arrow nextBtnArrow">→</span>
+                            </button>
+                        </div>
+                        <div class="slds-align_absolute-center">
+                            <template if:true={showNotPaid}>
+                                <p style="color:red;">Please complete retainer payment to continue.</p>
+                            </template>
+                        </div>
+                        <template if:false={isPaymentLanding}>
+                            <div class="slds-col slds-p-top_large slds-align_absolute-center">
+                                <div class="payment-link slds-text-align_center" onclick={handleGoToTimesolv}>Having trouble loading the payment form? <br> Click <span style="color: #3dbedb; text-align:center;">HERE</span>.</div>
+                            </div>
+                        </template>
+                        <!-- <a href=""> <span style="color: #3dbedb;">HERE</span></a> -->
+                    </template>
+                    
+                    <template if:true={showWaiting}>
+                        <div class="slds-grid slds-align_absolute-center slds-p-bottom_large slds-size_1-of-1">
+                            <button disabled class="next-button nextBtnPadding">
+                                Checking for paid retainer<span class="waiting-btn-bg"><img src={imageUrl} alt="" class="spinner-img btn-spinner slds-align_absolute-center" /></span>
+                            </button>
+                        </div>
+                    </template>
+
+                </div>
+            
+            </div>
+        </template>
+    </template>
+
+    
+</template>

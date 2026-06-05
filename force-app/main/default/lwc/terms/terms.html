@@ -1,0 +1,978 @@
+<template>
+
+  <!-- Header Section -->
+  <div class="slds-grid slds-wrap slds-p-bottom_large">
+    <!-- Left: Logo Section -->
+    <div class="slds-col slds-size_12-of-12 slds-medium-size_8-of-12">
+      <div class="display">
+        <img src={logoImg} alt="Logo" class="logo" />
+      </div>
+    </div>
+
+    <!-- Right: User Info Section -->
+    <div class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12">
+      <div class="slds-grid slds-medium-grid_align-end slds-p-around_small">
+
+        <!-- Upload Image -->
+        <template lwc:if={NotSimpleStart}>
+          <div class="slds-col slds-size_4-of-12 slds-medium-size_4-of-12 upload-container">
+            <div class="upload-img-container">
+              <template lwc:if={profilePicture}>
+                <div class="uploaded-img">
+                  <img src={profilePicture} alt="Profile" class="preview-image" />
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+
+      </div>
+    </div>
+  </div>
+
+  <lightning-accordion active-section-name={activeSections} onsectiontoggle={handleSectionToggle}
+    class="example-accordion">
+    <lightning-accordion-section name="conditions" label="Conditions of Use">
+
+      <p><i>Last Updated: March 14, 2026</i></p>
+      <p>Welcome to www.modernfamilylaw.com. Johnson Family Law, PC, dba Modern Family Law and its affiliates
+        (collectively, "Modern Family Law," "we," "us," or "our") provide this website and related services
+        (collectively, the "Services") subject to the following conditions. By accessing or using our website and
+        Services, you agree to be bound by these Conditions of Use. Please read them carefully.</p>
+
+      <p>If you use our Services, you are responsible for maintaining the confidentiality of your account credentials
+        and for all activities that occur under your account. Modern Family Law reserves the right to refuse service,
+        terminate accounts, or remove or edit content at our sole discretion.</p>
+
+      <h3>PRIVACY</h3>
+      <p>Your use of our Services is also governed by our Privacy Policy, which is incorporated into these Conditions of
+        Use by reference. Please review our Privacy Policy at www.modernfamilylaw.com/privacy-policy to understand how
+        we collect, use, and protect your personal information. Our handling of client information is further governed
+        by applicable attorney-client privilege and professional responsibility rules.</p>
+
+      <h3>ELECTRONIC COMMUNICATIONS</h3>
+      <p>When you use our Services or send emails, text messages, or other communications to us, you are communicating
+        with us electronically. You consent to receive communications from us electronically, including but not limited
+        to emails, text messages, and notices posted on our website. You agree that all agreements, notices,
+        disclosures, and other communications we provide to you electronically satisfy any legal requirement that such
+        communications be in writing.</p>
+      <p>
+        <i>Important: Electronic communications through our website, including contact forms, email inquiries, and
+          chat features, do not create an attorney-client relationship. An attorney-client relationship is only
+          established through a signed engagement agreement between you and Modern Family Law.</i>
+      </p>
+      <h3>COPYRIGHT AND INTELLECTUAL PROPERTY</h3>
+      <p>All content included on or made available through our Services, including but not limited to text, graphics,
+        logos, images, audio and video clips, digital downloads, data compilations, and software, is the property of
+        Modern Family Law or its content suppliers and is protected by United States and international copyright laws.
+        The compilation of all content on our website is the exclusive property of Modern Family Law and is protected by
+        U.S. and international copyright laws.</p>
+      <h3>TRADEMARKS</h3>
+      <p>The Modern Family Law name, logo, and all related names, logos, product and service names, designs, and slogans
+        are trademarks of Modern Family Law or its affiliates. You may not use such marks without the prior written
+        permission of Modern Family Law. All other names, logos, product and service names, designs, and slogans on our
+        website are the trademarks of their respective owners.</p>
+      <h3>LICENSE AND ACCESS</h3>
+      <p>Subject to your compliance with these Conditions of Use, Modern Family Law grants you a limited, non-exclusive,
+        non-transferable, non-sublicensable license to access and make personal, non-commercial use of our Services.
+        This license does not include any resale or commercial use of our Services or their contents; any collection or
+        use of any listings, descriptions, or other content; any derivative use of our Services or their contents; any
+        downloading, copying, or other use of account information for the benefit of any third party; or any use of data
+        mining, robots, or similar data gathering and extraction tools.</p>
+      <p>All rights not expressly granted to you in these Conditions of Use are reserved and retained by Modern Family
+        Law. You may not reproduce, duplicate, copy, sell, resell, visit, or otherwise exploit our Services for any
+        commercial purpose without express written consent of Modern Family Law. You may not frame or utilize framing
+        techniques to enclose any trademark, logo, or other proprietary information (including images, text, page
+        layout, or form) of Modern Family Law without express written consent. You may not misuse our Services, and you
+        may only use our Services as permitted by law.</p>
+      <h3>YOUR ACCOUNT</h3>
+      <p>If you use our Services, you are responsible for maintaining the confidentiality of your account and password
+        and for restricting access to your computer or device. You agree to accept responsibility for all activities
+        that occur under your account or password. Modern Family Law reserves the right to refuse service, terminate
+        accounts, remove or edit content, or cancel consultations at its sole discretion.</p>
+      <h3>NO LEGAL ADVICE DISCLAIMER</h3>
+      <p>The information provided on our website is for general informational purposes only and does not constitute
+        legal advice. No attorney-client relationship is formed by your use of this website or by any communication
+        through the website. The information on this site may not reflect the most current legal developments and may
+        vary by jurisdiction. You should not act or refrain from acting based on any content on this website without
+        seeking appropriate legal counsel licensed to practice in your jurisdiction.</p>
+      <p>Modern Family Law practices family law in the states of California, Colorado, Texas, Georgia, Pennsylvania,
+        Virginia, and Washington. Our attorneys are licensed in the jurisdictions in which they practice. Nothing on
+        this website is intended to constitute the practice of law in any jurisdiction where our attorneys are not
+        licensed.</p>
+      <h3>REVIEWS, COMMENTS, AND OTHER CONTENT</h3>
+      <p>Visitors may submit reviews, comments, suggestions, ideas, questions, or other content, provided that such
+        content is not illegal, obscene, threatening, defamatory, invasive of privacy, infringing of intellectual
+        property rights, or otherwise injurious to third parties. Such content must not consist of or contain software
+        viruses, political campaigning, commercial solicitation, chain letters, mass mailings, or any form of spam. You
+        may not use a false email address, impersonate any person or entity, or otherwise mislead as to the origin of
+        any content.</p>
+      <p>If you do submit content, you grant Modern Family Law a nonexclusive, royalty-free, perpetual, irrevocable, and
+        fully sublicensable right to use, reproduce, modify, adapt, publish, translate, create derivative works from,
+        distribute, and display such content throughout the world in any media. You represent and warrant that you own
+        or otherwise control all of the rights to the content that you submit; that the content is accurate; and that
+        use of the content will not cause injury to any person or entity.</p>
+      <h3>DISCLAIMER OF WARRANTIES AND LIMITATION OF LIABILITY</h3>
+      <p>THE SERVICES AND ALL INFORMATION, CONTENT, MATERIALS, AND OTHER ITEMS INCLUDED ON OR OTHERWISE MADE AVAILABLE
+        TO YOU THROUGH THE SERVICES ARE PROVIDED BY MODERN FAMILY LAW ON AN "AS IS" AND "AS AVAILABLE" BASIS, UNLESS
+        OTHERWISE SPECIFIED IN WRITING. MODERN FAMILY LAW MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR
+        IMPLIED, AS TO THE OPERATION OF THE SERVICES, OR THE INFORMATION, CONTENT, MATERIALS, OR OTHER ITEMS INCLUDED ON
+        OR OTHERWISE MADE AVAILABLE TO YOU THROUGH THE SERVICES, UNLESS OTHERWISE SPECIFIED IN WRITING. YOU EXPRESSLY
+        AGREE THAT YOUR USE OF THE SERVICES IS AT YOUR SOLE RISK.</p>
+      <p>TO THE FULL EXTENT PERMISSIBLE BY LAW, MODERN FAMILY LAW DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED,
+        INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+        MODERN FAMILY LAW DOES NOT WARRANT THAT THE SERVICES, INFORMATION, CONTENT, MATERIALS, OR OTHER ITEMS INCLUDED
+        ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH THE SERVICES, OR ITS SERVERS, ARE FREE OF VIRUSES OR OTHER HARMFUL
+        COMPONENTS. TO THE FULL EXTENT PERMISSIBLE BY LAW, MODERN FAMILY LAW WILL NOT BE LIABLE FOR ANY DAMAGES OF ANY
+        KIND ARISING FROM THE USE OF ANY SERVICE, OR FROM ANY INFORMATION, CONTENT, MATERIALS, OR OTHER ITEMS INCLUDED
+        ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH THE SERVICES, INCLUDING, BUT NOT LIMITED TO, DIRECT, INDIRECT,
+        INCIDENTAL, PUNITIVE, AND CONSEQUENTIAL DAMAGES, UNLESS OTHERWISE SPECIFIED IN WRITING.</p>
+      <p><i>This disclaimer does not apply to any claims arising from an executed engagement agreement or the
+          professional duties owed by our attorneys to their clients under applicable rules of professional conduct.</i>
+      </p>
+      <h3>GOVERNING LAW AND DISPUTES</h3>
+      <p>Any dispute or claim relating in any way to your use of our Services, or to any products or services provided
+        by Modern Family Law, will be resolved by binding arbitration, rather than in court, except that you may assert
+        claims in small claims court if your claims qualify. The Federal Arbitration Act and federal arbitration law
+        apply to this agreement.</p>
+      <p>By using our Services, you agree that the laws of the State of Colorado, without regard to principles of
+        conflict of laws, will govern these Conditions of Use and any dispute of any sort that might arise between you
+        and Modern Family Law.</p>
+      <p>To the extent that litigation is permitted under these Conditions of Use, you and Modern Family Law each agree
+        to submit to the personal and exclusive jurisdiction of the state and federal courts located in Denver County,
+        Colorado.</p>
+      <p><i>This arbitration and governing law provision does not apply to disputes arising from an executed engagement
+          agreement between you and Modern Family Law, which may contain its own dispute resolution provisions.</i></p>
+      <h3>SITE POLICIES, MODIFICATION, AND SEVERABILITY</h3>
+      <p>We reserve the right to make changes to our website, policies, service terms, and these Conditions of Use at
+        any time. If any of these conditions shall be deemed invalid, void, or for any reason unenforceable, that
+        condition shall be deemed severable and shall not affect the validity and enforceability of any remaining
+        condition. Your continued use of our Services following the posting of changes to these Conditions of Use
+        constitutes your acceptance of those changes.</p>
+      <h3>CONTACT INFORMATION</h3>
+      <p>If you have any questions regarding these Conditions of Use, please contact us at:</p>
+
+      <p><b>Modern Family Law, PLLC</b> <br>4500 Cherry Creek Dr. S., Suite 700 <br>Denver, Colorado 80246
+        <br>www.modernfamilylaw.com
+      </p>
+      <hr>
+      <p>
+        <i>These Conditions of Use are effective as of the "Last Updated" date above. Modern Family Law practices in
+          California, Colorado, Texas, Georgia, Pennsylvania, Virginia, and Washington.</i>
+      </p>
+
+    </lightning-accordion-section>
+
+    <lightning-accordion-section name="Privacy" label="Privacy Notice">
+
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <h3>1. INTRODUCTION</h3>
+      <p>Johnson Family Law, PC, DBA Modern Family Law and its affiliates (collectively, "Modern Family Law," "the
+        Firm," "we," "us," or "our") are committed to protecting the privacy and confidentiality of the personal
+        information entrusted to us by our clients, prospective clients, and users of our client portal and website
+        (collectively, the "Services"). This Privacy Notice explains how we collect, use, disclose, and safeguard your
+        information when you access our client portal at www.modernfamilylaw.com (the "Portal") or otherwise interact
+        with our Services.</p>
+
+      <p>Modern Family Law practices family law in the states of California, Colorado, Texas, Georgia, Pennsylvania,
+        Virginia, and Washington. Our registered office is located at 4500 Cherry Creek Dr. S., Suite 700, Denver,
+        Colorado 80246.</p>
+
+      <p>By accessing or using our Portal, you acknowledge that you have read, understood, and agree to the terms of
+        this Privacy Notice. If you do not agree with the practices described herein, please do not access or use the
+        Portal.</p>
+
+      <h3>2. INFORMATION WE COLLECT</h3>
+
+      <h4>2.1 Information You Provide Directly</h4>
+      <p>When you use our Portal, schedule consultations, or engage our legal services, we may collect the following
+        categories of personal information that you voluntarily provide:</p>
+      <ul>
+        <li>Identifiers: Full name, date of birth, and government-issued identification numbers</li>
+        <li>Contact Information: Home address, email address, telephone number, and other contact details</li>
+        <li>Financial Information: Income, assets, debts, bank account details, tax returns, pay stubs, retirement
+          account statements, and real property records</li>
+        <li>Marriage and Relationship Records: Marital status, marriage certificates, prenuptial or postnuptial
+          agreements, separation agreements, and prior court orders</li>
+        <li>Children and Dependent Information: Names, dates of birth, school records, medical records, and
+          custody-related information for minor children involved in your matter</li>
+        <li>Employment and Professional Information: Employment history, employer information, benefits documentation,
+          and professional licenses</li>
+        <li>Health and Medical Information: Health records, mental health records, substance abuse records, and
+          insurance information relevant to your family law matter</li>
+        <li>Case-Related Information: Case narratives, witness information, evidence, correspondence, and any other
+          information you share with us in connection with your legal matter</li>
+      </ul>
+
+      <h4>2.2 Information Collected Automatically</h4>
+      <p>When you access our Portal, we may automatically collect certain technical information, including:</p>
+      <ul>
+        <li>Device and Usage Data: IP address, browser type and version, operating system, device identifiers, and
+          referring URLs</li>
+        <li>Portal Activity: Pages viewed, features accessed, time spent on pages, and clickstream data within the
+          Portal</li>
+        <li>Cookies and Tracking Technologies: We use cookies and similar tracking technologies to enhance your
+          experience, maintain session security, and analyze Portal usage. You may adjust your browser settings to
+          refuse cookies, though some Portal features may not function properly without them.</li>
+      </ul>
+
+      <h4>2.3 Information from Third Parties</h4>
+      <p>We may receive personal information about you from third-party sources, including opposing counsel, courts,
+        government agencies, financial institutions, employers, medical providers, and other parties involved in your
+        family law matter, as permitted or required by law.</p>
+
+      <h3>3. HOW WE USE YOUR INFORMATION</h3>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li>Legal Services: To provide legal representation and advice in connection with your family law matter,
+          including divorce, child custody, child support, spousal maintenance, property division, adoption, paternity,
+          and related proceedings</li>
+        <li>Client Communication: To communicate with you about your case, share documents, schedule appointments, and
+          facilitate secure messaging through the Portal</li>
+        <li>Court Filings and Litigation: To prepare, file, and serve legal documents with courts and opposing parties
+          as required by applicable rules of civil procedure and family law statutes</li>
+        <li>Billing and Payment Processing: To process invoices, collect payments, and manage billing in connection with
+          our engagement</li>
+        <li>Legal and Regulatory Compliance: To comply with our legal and ethical obligations, including those imposed
+          by applicable rules of professional conduct, court orders, and statutory requirements</li>
+        <li>Portal Administration and Security: To maintain, secure, and improve the Portal, detect and prevent
+          unauthorized access, and troubleshoot technical issues</li>
+        <li>Conflict Checks and Identity Verification: To perform conflict checks and verify client identity as required
+          by professional responsibility rules</li>
+      </ul>
+
+      <h3>4. ATTORNEY-CLIENT PRIVILEGE AND CONFIDENTIALITY</h3>
+      <p>Modern Family Law is bound by the rules of professional conduct governing attorneys in each jurisdiction where
+        we practice. Information you provide to us in the course of seeking or receiving legal advice is protected by
+        attorney-client privilege and the duty of confidentiality, subject to certain exceptions described below.</p>
+
+      <p>Our duty of confidentiality applies to all information relating to the representation of a client, regardless
+        of the source of that information, in accordance with ABA Model Rule 1.6 and the corresponding rules adopted in
+        each state where we are licensed to practice. This duty of confidentiality is separate from and in addition to
+        our obligations under applicable data privacy laws.</p>
+
+      <p>This Privacy Notice does not limit, waive, or modify any protections afforded by attorney-client privilege or
+        the attorney work-product doctrine. In the event of any conflict between this Privacy Notice and our
+        professional obligations, our professional obligations shall control.</p>
+
+      <h3>5. DISCLOSURE OF YOUR INFORMATION</h3>
+      <p>We understand the sensitive nature of family law matters. We do not sell, rent, or trade your personal
+        information to third parties for marketing purposes. However, we may disclose your information in the following
+        circumstances:</p>
+
+      <h4>5.1 Disclosures Required by Family Law Proceedings</h4>
+      <p>Family law matters, including divorce, custody, and support proceedings, often require the disclosure of
+        personal, financial, and other sensitive information. Depending on the jurisdiction and the nature of your case,
+        we may be required to disclose your information in connection with:</p>
+      <ul>
+        <li>Mandatory Financial Disclosures: Courts in each of our practice states require parties to exchange financial
+          disclosures, including income, assets, debts, and expenses. These disclosures are mandated by statute and may
+          become part of the court record.</li>
+        <li>Custody and Parenting Evaluations: Information relevant to custody, parenting time, and the best interests
+          of the child may be disclosed to courts, guardians ad litem, child and family investigators, custody
+          evaluators, parenting coordinators, and other court-appointed professionals.</li>
+        <li>Court Filings and Public Records: Pleadings, motions, affidavits, exhibits, financial disclosures, and other
+          documents filed with the court may become part of the public record unless sealed by court order. We take
+          reasonable steps to redact sensitive information such as Social Security numbers and financial account numbers
+          where permitted by court rules.</li>
+        <li>Discovery Obligations: Responses to subpoenas, interrogatories, requests for production, and depositions may
+          require the disclosure of personal information to opposing parties and their counsel.</li>
+        <li>Mediation and Alternative Dispute Resolution: Information may be shared with mediators, arbitrators, and
+          collaborative law professionals in connection with alternative dispute resolution processes.</li>
+      </ul>
+
+      <h4>5.2 Other Permitted Disclosures</h4>
+      <p>We may also disclose your personal information to:</p>
+      <ul>
+        <li>Service Providers and Experts: Experts, consultants, investigators, forensic accountants, appraisers, and
+          other professionals engaged in connection with your matter</li>
+        <li>Legal and Regulatory Requirements: Law enforcement agencies, government regulators, or courts when required
+          by law, subpoena, court order, or governmental regulation</li>
+        <li>Business Transfers: In connection with a merger, acquisition, reorganization, or sale of firm assets,
+          provided that the receiving entity agrees to protect your information consistent with this Privacy Notice and
+          applicable professional obligations</li>
+        <li>Protection of Rights and Safety: To prevent imminent harm, protect our legal rights, or as otherwise
+          permitted by the applicable rules of professional conduct (e.g., ABA Model Rule 1.6(b))</li>
+      </ul>
+
+      <h3>6. DATA SECURITY</h3>
+      <p>We implement administrative, technical, and physical safeguards designed to protect your personal information
+        from unauthorized access, use, alteration, or destruction. These measures include:</p>
+      <ul>
+        <li>Encryption of data in transit (TLS/SSL) and at rest within the Portal</li>
+        <li>Multi-factor authentication for Portal access</li>
+        <li>Role-based access controls limiting information access to authorized personnel</li>
+        <li>Regular security assessments and vulnerability testing</li>
+        <li>Secure document storage and transmission protocols</li>
+        <li>Employee training on data privacy and information security practices</li>
+      </ul>
+
+      <p>While we strive to protect your personal information, no method of electronic transmission or storage is
+        completely secure. We cannot guarantee absolute security of your data. If you have reason to believe that your
+        interaction with us is no longer secure, please notify us immediately.</p>
+
+      <h3>7. DATA RETENTION</h3>
+      <p>We retain your personal information for as long as necessary to fulfill the purposes for which it was
+        collected, including to satisfy legal, regulatory, accounting, or reporting requirements. For client matters, we
+        generally retain case files and related information in accordance with our document retention policy, applicable
+        rules of professional conduct, and the statutes of limitation governing potential claims.</p>
+
+      <p>Upon the conclusion of your matter, we may retain your information in our records for a period consistent with
+        industry standards and our professional obligations. You may request information about our retention practices
+        by contacting us using the information provided in Section 12 of this Notice.</p>
+
+      <h3>8. YOUR PRIVACY RIGHTS</h3>
+
+      <h4>8.1 California Residents (CCPA/CPRA)</h4>
+      <p>If you are a California resident, the California Consumer Privacy Act, as amended by the California Privacy
+        Rights Act (collectively, "CCPA"), provides you with specific rights regarding your personal information,
+        subject to certain exceptions. These rights include:</p>
+      <ul>
+        <li>The right to know what personal information we collect, use, disclose, and sell</li>
+        <li>The right to request deletion of your personal information</li>
+        <li>The right to correct inaccurate personal information</li>
+        <li>The right to opt out of the sale or sharing of your personal information</li>
+        <li>The right to limit the use and disclosure of sensitive personal information</li>
+        <li>The right to non-discrimination for exercising your privacy rights</li>
+      </ul>
+      <p>Modern Family Law does not sell personal information and does not use or disclose sensitive personal
+        information for purposes other than those permitted by the CCPA. Certain information collected in the course of
+        providing legal services may be exempt from the CCPA under the attorney-client privilege or other applicable
+        exemptions.</p>
+
+      <h4>8.2 Colorado Residents (Colorado Privacy Act)</h4>
+      <p>If you are a Colorado resident, the Colorado Privacy Act ("CPA") provides you with the following rights with
+        respect to your personal data:</p>
+      <ul>
+        <li>The right to access your personal data</li>
+        <li>The right to correct inaccuracies in your personal data</li>
+        <li>The right to delete your personal data</li>
+        <li>The right to obtain a portable copy of your personal data</li>
+        <li>The right to opt out of the processing of your personal data for targeted advertising, sale of personal
+          data, or profiling in furtherance of decisions that produce legal or similarly significant effects</li>
+      </ul>
+      <p>To exercise any of these rights, please contact us using the information provided in Section 12. We will
+        respond to verifiable consumer requests within the timeframes required by applicable law.</p>
+
+      <h4>8.3 Texas, Georgia, Pennsylvania, Virginia, and Washington Residents</h4>
+      <p>Residents of Texas, Virginia, and other states with comprehensive data privacy laws may have additional rights
+        under their respective state privacy statutes. These rights may include the right to access, correct, delete,
+        and obtain a copy of your personal data, as well as the right to opt out of certain processing activities. We
+        will honor privacy rights requests in accordance with the laws of your state of residence.</p>
+
+      <h3>9. CHILDREN'S PRIVACY</h3>
+      <p>Our Portal is not directed at children under 13 years of age, and we do not knowingly collect personal
+        information from children under 13 through the Portal. However, in the course of providing family law services,
+        we may collect and process information relating to minor children involved in custody, support, and other family
+        law matters. Such information is collected solely for the purpose of providing legal services and is subject to
+        the same confidentiality protections as all other client information.</p>
+
+      <h3>10. THIRD-PARTY LINKS AND SERVICES</h3>
+      <p>Our Portal may contain links to third-party websites, services, or applications that are not operated or
+        controlled by Modern Family Law. This Privacy Notice does not apply to third-party services, and we are not
+        responsible for the privacy practices of any third party. We encourage you to review the privacy notices of any
+        third-party services before providing your personal information.</p>
+
+      <h3>11. CHANGES TO THIS PRIVACY NOTICE</h3>
+      <p>We may update this Privacy Notice from time to time to reflect changes in our practices, technology, legal
+        requirements, or other factors. When we make material changes to this Privacy Notice, we will notify you by
+        posting the updated Notice on the Portal with a revised effective date. We may also provide notice through the
+        Portal's messaging system or by email. Your continued use of the Portal after any changes constitutes your
+        acceptance of the revised Privacy Notice.</p>
+
+      <h3>12. CONTACT INFORMATION</h3>
+      <p>If you have questions about this Privacy Notice, wish to exercise your privacy rights, or have concerns about
+        our data practices, please contact us at:</p>
+
+      <p>
+        Modern Family Law, PLLC<br>
+        Attn: Privacy Officer<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+
+      <p>If you are a California resident and wish to exercise your CCPA rights, you may also submit a verifiable
+        consumer request through our Portal or by contacting us at the address above.</p>
+
+      <h3>13. GOVERNING LAW</h3>
+      <p>This Privacy Notice shall be governed by and construed in accordance with the laws of the State of Colorado,
+        without regard to its conflict of laws principles, except to the extent that applicable state or federal data
+        privacy laws require the application of different standards.</p>
+
+      <p>This Privacy Notice is provided in compliance with applicable federal and state privacy laws and the rules of
+        professional conduct governing attorneys in the jurisdictions where Modern Family Law is licensed to practice.
+        Nothing in this Privacy Notice is intended to create or modify any attorney-client relationship or to waive any
+        applicable privilege.</p>
+    </lightning-accordion-section>
+
+    <lightning-accordion-section name="ConsumerHealth" label="Consumer Health Data Privacy Policy">
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <h3>1. SCOPE AND PURPOSE OF THIS POLICY</h3>
+      <p>This Consumer Health Data Privacy Policy ("Policy") is published by Johnson Family Law, PC, dba Modern Family
+        Law ("Modern Family Law," "the Firm," "we," "us," or "our") pursuant to the Washington My Health My Data Act,
+        RCW 19.373 (the "MHMDA"), and applicable California consumer health data privacy laws. This Policy applies to
+        the collection, use, sharing, and sale of "consumer health data" as defined under the MHMDA.</p>
+
+      <p>"Consumer health data" means personal information that is linked or reasonably linkable to a consumer and that
+        identifies the consumer's past, present, or future physical or mental health status. This includes, but is not
+        limited to, information regarding individual health conditions, treatment, diseases, or diagnosis; social,
+        psychological, behavioral, and medical interventions; bodily functions, vital signs, symptoms, or measurements
+        of the foregoing; diagnoses or diagnostic testing, treatment, or medication; gender-affirming care information;
+        reproductive or sexual health information; biometric data; genetic data; precise location information that could
+        reasonably indicate a consumer's attempt to acquire or receive health services or supplies; and data that
+        identifies a consumer seeking health care services.</p>
+
+      <p>This Policy is a standalone disclosure as required by the MHMDA and supplements, but does not replace, our
+        general Privacy Notice, which addresses our broader data practices.</p>
+
+      <h3>2. CATEGORIES OF CONSUMER HEALTH DATA WE COLLECT AND PURPOSES FOR COLLECTION</h3>
+      <p>In the course of providing family law legal services — including divorce, child custody, child support, spousal
+        maintenance, property division, protective orders, adoption, and related proceedings — Modern Family Law may
+        collect the following categories of consumer health data for the purposes described below:</p>
+
+      <h4>2.1 Physical and Mental Health Information</h4>
+      <ul>
+        <li>Medical records and history of physical health conditions, diagnoses, and treatments</li>
+        <li>Mental health records, including psychological evaluations, counseling records, and psychiatric treatment
+          records</li>
+        <li>Substance abuse treatment records and recovery documentation</li>
+        <li>Disability or impairment information relevant to custody, support, or property matters</li>
+      </ul>
+      <p><strong>Purpose:</strong> This information is collected to provide legal representation and advice in family
+        law matters where the physical or mental health of a party or child is relevant. Health information may be
+        necessary for custody evaluations, parenting plan determinations, spousal support calculations, protective order
+        proceedings, and other matters where health status is material to the legal proceeding.</p>
+
+      <h4>2.2 Reproductive and Sexual Health Information</h4>
+      <ul>
+        <li>Reproductive health records, pregnancy-related information, and fertility treatment records</li>
+        <li>Sexual health information when relevant to the legal matter</li>
+      </ul>
+      <p><strong>Purpose:</strong> This information is collected only when directly relevant to a family law matter,
+        such as paternity proceedings, custody disputes, or where reproductive health is otherwise material to the legal
+        representation.</p>
+
+      <h4>2.3 Biometric and Genetic Data</h4>
+      <ul>
+        <li>DNA or genetic testing results, including paternity test results</li>
+        <li>Biometric identifiers used for Portal authentication (e.g., fingerprint or facial recognition data)</li>
+      </ul>
+      <p><strong>Purpose:</strong> Genetic data is collected when paternity or genetic testing is relevant to the legal
+        matter. Biometric data may be collected to secure access to the client portal.</p>
+
+      <h4>2.4 Health Insurance and Benefits Information</h4>
+      <ul>
+        <li>Health insurance plan details, coverage information, and claims data</li>
+        <li>Employee health benefits documentation</li>
+        <li>Medical expense records and healthcare cost information</li>
+      </ul>
+      <p><strong>Purpose:</strong> This information is collected in connection with the division of marital property,
+        calculation of support obligations, determination of health insurance coverage for minor children, and other
+        financial aspects of family law proceedings.</p>
+
+      <h4>2.5 Precise Location Data Related to Health Services</h4>
+      <ul>
+        <li>Location information that could reasonably indicate a consumer's attempt to acquire or receive health
+          services or supplies</li>
+      </ul>
+      <p><strong>Purpose:</strong> We do not intentionally collect precise location data related to health services.
+        However, documents or records provided to us in connection with your legal matter may incidentally contain such
+        information. Any such data is used solely in connection with your legal representation.</p>
+
+      <h3>3. CATEGORIES OF SOURCES FROM WHICH CONSUMER HEALTH DATA IS COLLECTED</h3>
+      <p>We may collect consumer health data from the following categories of sources:</p>
+      <ul>
+        <li><strong>Directly from You:</strong> You, the consumer, when you provide information directly through our
+          client portal, during consultations, or in connection with your legal matter</li>
+        <li><strong>Healthcare Providers:</strong> Medical providers, hospitals, clinics, mental health professionals,
+          and substance abuse treatment facilities, with your authorization or as permitted by law</li>
+        <li><strong>Courts and Court-Appointed Professionals:</strong> Courts, guardians ad litem, child and family
+          investigators, custody evaluators, parenting coordinators, and other court-appointed professionals</li>
+        <li><strong>Opposing Parties and Counsel:</strong> The opposing party and their legal counsel through the
+          discovery process, mandatory disclosures, and other litigation-related exchanges</li>
+        <li><strong>Insurance Companies and Government Agencies:</strong> Health insurance companies, employee benefits
+          administrators, and government agencies such as Medicaid or state health departments</li>
+        <li><strong>Third-Party Experts and Consultants:</strong> Expert witnesses, forensic evaluators, vocational
+          experts, and other professionals retained in connection with your matter</li>
+      </ul>
+
+      <h3>4. CATEGORIES OF CONSUMER HEALTH DATA THAT IS SHARED</h3>
+      <p>We may share the following categories of consumer health data in connection with your legal matter:</p>
+      <ul>
+        <li>Physical and mental health records, diagnoses, and treatment information</li>
+        <li>Substance abuse and recovery records</li>
+        <li>Reproductive and sexual health information</li>
+        <li>Genetic and paternity testing results</li>
+        <li>Health insurance and medical expense information</li>
+        <li>Psychological evaluations and custody-related health assessments</li>
+      </ul>
+      <p>We share consumer health data only when necessary to provide legal services, as required by law, or with your
+        consent. We do not sell consumer health data.</p>
+
+      <h3>5. CATEGORIES OF THIRD PARTIES AND AFFILIATES WITH WHOM WE SHARE CONSUMER HEALTH DATA</h3>
+      <p>We may share consumer health data with the following categories of third parties and affiliates:</p>
+      <ul>
+        <li>Courts: State and federal courts in California, Colorado, Texas, Georgia, Pennsylvania, Virginia, and
+          Washington, as required by applicable rules of procedure and family law statutes</li>
+        <li>Opposing Counsel: Attorneys representing other parties in your matter, pursuant to discovery obligations,
+          mandatory disclosure requirements, and stipulated agreements</li>
+        <li>Court-Appointed Professionals: Guardians ad litem, child and family investigators, custody evaluators,
+          parenting coordinators, and other professionals appointed by the court</li>
+        <li>Mediators and Arbitrators: Mediators, arbitrators, and collaborative law professionals engaged in connection
+          with your matter</li>
+        <li>Expert Witnesses and Consultants: Forensic accountants, vocational experts, medical experts, mental health
+          experts, appraisers, and other professionals retained to support your case</li>
+        <li>Government and Law Enforcement Agencies: Law enforcement agencies and government regulators when required by
+          law, subpoena, or court order</li>
+        <li>Technology Service Providers (Processors): Cloud hosting, document management, e-discovery, and other
+          technology providers that process data on our behalf under written data processing agreements</li>
+        <li>Firm Affiliates: Other Modern Family Law offices and attorneys within the Firm who are involved in your
+          representation</li>
+      </ul>
+
+      <h3>6. YOUR RIGHTS REGARDING YOUR CONSUMER HEALTH DATA</h3>
+
+      <h4>6.1 Right to Access</h4>
+      <p>You have the right to confirm whether we are collecting, sharing, or selling your consumer health data. You
+        also have the right to access your consumer health data, including a list of all third parties and affiliates
+        with whom we have shared or sold your consumer health data during the preceding twelve (12) months.</p>
+
+      <h4>6.2 Right to Deletion</h4>
+      <p>You have the right to request that we delete your consumer health data. Upon receiving a verified deletion
+        request, we will delete the requested data from our records, including from archives and backups, and will
+        notify all affiliates, processors, contractors, and other third parties to whom we have shared your consumer
+        health data to delete the data as well. Please note that deletion may be subject to exceptions under applicable
+        law, including where retention is necessary to comply with a legal obligation, court order, or professional
+        responsibility requirement.</p>
+
+      <h4>6.3 Right to Withdraw Consent</h4>
+      <p>You have the right to withdraw your consent to our collection, sharing, or selling of your consumer health
+        data. Withdrawal of consent will not affect the lawfulness of any processing conducted prior to your withdrawal.
+        Please be aware that withdrawing consent may affect our ability to provide legal services in connection with
+        your matter, particularly where health data is required for court filings, mandatory disclosures, or other
+        litigation obligations.</p>
+
+      <h4>6.4 Right to Appeal</h4>
+      <p>If we deny your request to exercise any of the rights described above, you have the right to appeal our
+        decision. We will consider your appeal within forty-five (45) days and will provide you with a written decision,
+        including the reasons for our determination. If we deny your appeal, we will provide you with contact
+        information to submit a complaint to the Washington State Attorney General.</p>
+
+      <h3>7. HOW TO EXERCISE YOUR RIGHTS</h3>
+      <p>To exercise any of the rights described in Section 6, you may contact us by:</p>
+      <ul>
+        <li>Submitting a request through the client portal at www.modernfamilylaw.com</li>
+        <li>Sending a written request to:</li>
+      </ul>
+
+      <p>
+        Modern Family Law, PLLC<br>
+        Attn: Privacy Officer<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246
+      </p>
+
+      <p>We will verify your identity before processing your request. We will respond to verified requests within the
+        timeframes required by applicable law. We will not discriminate against you for exercising any of the rights
+        provided under the MHMDA or other applicable privacy laws.</p>
+
+      <h3>8. SALE OF CONSUMER HEALTH DATA</h3>
+      <p>Modern Family Law does not sell consumer health data. We have not sold consumer health data in the preceding
+        twelve (12) months and have no plans to do so.</p>
+
+      <h3>9. DATA SECURITY</h3>
+      <p>We maintain administrative, technical, and physical safeguards designed to protect consumer health data from
+        unauthorized access, use, alteration, and destruction. These safeguards include encryption of data in transit
+        and at rest, multi-factor authentication for portal access, role-based access controls, and regular security
+        assessments. Consumer health data transmitted through the client portal is encrypted using industry-standard
+        protocols.</p>
+
+      <h3>10. GEOFENCING RESTRICTIONS</h3>
+      <p>In compliance with the MHMDA and applicable California law, Modern Family Law does not implement or use
+        geofencing technology around any health care facility, mental health facility, reproductive health care
+        facility, or substance abuse treatment facility for the purpose of identifying, tracking, collecting data from,
+        or sending notifications to consumers at or near such facilities.</p>
+
+      <h3>11. CHANGES TO THIS POLICY</h3>
+      <p>We may update this Policy from time to time to reflect changes in our practices or applicable law. When we make
+        material changes, we will update the effective date at the top of this Policy and provide notice through our
+        client portal. Your continued use of our services following the posting of changes constitutes your acceptance
+        of the revised Policy.</p>
+
+      <h3>12. CONTACT INFORMATION</h3>
+      <p>If you have questions about this Policy or wish to exercise your rights, please contact:</p>
+
+      <p>
+        Modern Family Law, PLLC<br>
+        Attn: Privacy Officer<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+
+      <p>This Consumer Health Data Privacy Policy is published pursuant to the Washington My Health My Data Act, RCW
+        19.373, and applicable California consumer health data privacy laws. A link to this Policy must be prominently
+        displayed on the homepage of www.modernfamilylaw.com. This Policy does not modify or waive any protections
+        afforded by attorney-client privilege or the duty of confidentiality under applicable rules of professional
+        conduct.</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="Disclaimer" label="Disclaimer">
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <p><strong>PLEASE READ THIS DISCLAIMER CAREFULLY BEFORE USING THIS WEBSITE OR CLIENT PORTAL.</strong></p>
+
+      <h3>NO ATTORNEY-CLIENT RELATIONSHIP</h3>
+      <p>Use of this website, client portal, or any of the resources provided by Johnson Family Law, PC, dba Modern
+        Family Law ("Modern Family Law," "the Firm," "we," "us," or "our") does not create an attorney-client
+        relationship between you and Modern Family Law or any of its attorneys. An attorney-client relationship is
+        established only through a written engagement agreement signed by both you and an authorized representative of
+        Modern Family Law.</p>
+
+      <p>Submitting information through a contact form, email, phone call, chat feature, intake questionnaire, or client
+        portal inquiry does not create an attorney-client relationship. Until a formal engagement agreement is executed,
+        any information you provide to Modern Family Law is not protected by attorney-client privilege and may not be
+        treated as confidential.</p>
+
+      <h3>NO LEGAL ADVICE</h3>
+      <p>The information provided on this website and through the client portal is intended for general informational
+        purposes only. Nothing on this website or portal constitutes legal advice or creates a professional relationship
+        of any kind. The information presented should not be relied upon as a substitute for consultation with a
+        qualified attorney licensed in your jurisdiction.</p>
+
+      <p>Family law matters are highly fact-specific and vary significantly by jurisdiction. The laws governing divorce,
+        child custody, child support, spousal maintenance, property division, and related matters differ across the
+        states in which we practice — California, Colorado, Texas, Georgia, Pennsylvania, Virginia, and Washington.
+        Information on this website may not reflect the current state of the law in your jurisdiction and should not be
+        relied upon for making legal decisions.</p>
+
+      <h3>COMMUNICATIONS PRIOR TO ENGAGEMENT</h3>
+      <p>Communications made through this website or client portal prior to the execution of a formal engagement
+        agreement are not considered privileged or confidential. You should not send us sensitive, confidential, or
+        privileged information until you have received written confirmation that Modern Family Law has agreed to
+        represent you and an engagement agreement has been fully executed.</p>
+
+      <p>If you are a prospective client, please be mindful that any information you transmit through the website or
+        portal before an engagement agreement is signed may not be protected by attorney-client privilege, although we
+        will make reasonable efforts to maintain the confidentiality of such communications to the extent permitted by
+        applicable rules of professional conduct.</p>
+
+      <h3>NO GUARANTEE OF RESULTS</h3>
+      <p>The outcome of any legal matter depends on many factors, including facts and circumstances unique to each case,
+        applicable law, and the discretion of the court. Modern Family Law makes no representations, warranties, or
+        guarantees regarding the outcome of any legal matter. Any prior results, case summaries, testimonials, or
+        examples of past successes described on this website or portal do not guarantee, warrant, or predict a similar
+        outcome in your case.</p>
+
+      <h3>TESTIMONIALS AND REVIEWS</h3>
+      <p>Client testimonials, reviews, and endorsements displayed on this website reflect the individual experiences of
+        those particular clients. Testimonials are not indicative of future performance or results and should not be
+        construed as a guarantee, warranty, or prediction of the outcome of your legal matter. Each case is different,
+        and results vary depending on the specific facts and legal issues involved.</p>
+
+      <h3>JURISDICTIONS AND LICENSURE</h3>
+      <p>Modern Family Law and its attorneys are licensed to practice law in specific jurisdictions. We currently
+        maintain offices and practice in California, Colorado, Texas, Georgia, Pennsylvania, Virginia, and Washington.
+        Nothing on this website is intended to constitute the practice of law in any jurisdiction where our attorneys
+        are not licensed. Information on this website is not intended to solicit clients in jurisdictions where Modern
+        Family Law or its attorneys are not authorized to practice.</p>
+
+      <h3>THIRD-PARTY CONTENT AND LINKS</h3>
+      <p>This website and client portal may contain links to third-party websites, resources, or content that are not
+        owned, controlled, or maintained by Modern Family Law. We provide these links for your convenience and
+        informational purposes only. Modern Family Law does not endorse, guarantee, or assume responsibility for the
+        accuracy, reliability, or completeness of any third-party content. Your use of third-party websites is at your
+        own risk and subject to the terms and conditions of those sites.</p>
+
+      <h3>ACCURACY OF INFORMATION</h3>
+      <p>While Modern Family Law strives to keep the information on this website and portal accurate and current, we
+        make no representations or warranties of any kind, express or implied, about the completeness, accuracy,
+        reliability, suitability, or availability of the information, products, services, or related graphics contained
+        on the website. Laws and legal standards change frequently, and the information provided may not reflect the
+        most recent legal developments. Any reliance you place on such information is at your own risk.</p>
+
+      <h3>LIMITATION OF LIABILITY</h3>
+      <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, MODERN FAMILY LAW, ITS ATTORNEYS, EMPLOYEES, AGENTS,
+          AND AFFILIATES SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE
+          DAMAGES ARISING FROM YOUR USE OF OR INABILITY TO USE THIS WEBSITE OR CLIENT PORTAL, OR FROM ANY INFORMATION,
+          CONTENT, OR MATERIALS OBTAINED THROUGH THE WEBSITE OR PORTAL, WHETHER BASED ON WARRANTY, CONTRACT, TORT, OR
+          ANY OTHER LEGAL THEORY, AND WHETHER OR NOT MODERN FAMILY LAW HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+          DAMAGES.</strong></p>
+
+      <p>This limitation of liability does not apply to claims arising from an executed engagement agreement or the
+        professional duties owed by our attorneys to their clients under applicable rules of professional conduct.</p>
+
+      <h3>YOUR CONSENT</h3>
+      <p>By accessing and using this website and client portal, you acknowledge that you have read, understood, and
+        agree to be bound by the terms of this Disclaimer. If you do not agree with any part of this Disclaimer, you
+        should not access or use this website or client portal.</p>
+
+      <h3>CONTACT INFORMATION</h3>
+      <p>If you have questions about this Disclaimer or would like to schedule a consultation to discuss your family law
+        matter, please contact us at:</p>
+
+      <p>
+        Modern Family Law, PLLC<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+
+      <p>This Disclaimer is governed by and construed in accordance with the laws of the State of Colorado, without
+        regard to its conflict of laws provisions. This Disclaimer supplements our Conditions of Use, Privacy Notice,
+        and Consumer Health Data Privacy Policy, which are available at www.modernfamilylaw.com.</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="Cookies" label="Cookie Notice">
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <h3>What Are Cookies?</h3>
+      <p>Cookies are small text files that are placed on your computer or mobile device when you visit a website. They
+        are widely used to make websites function efficiently, provide a better user experience, and supply information
+        to website operators. This Cookie Notice explains how Modern Family Law, PLLC ("Modern Family Law," "we," "us,"
+        or "our") uses cookies and similar tracking technologies on our website and client portal at
+        www.modernfamilylaw.com.</p>
+
+      <h3>Types of Cookies We Use</h3>
+
+      <h4>Strictly Necessary Cookies</h4>
+      <p>These cookies are essential for the operation of our website and client portal. They enable core functionality
+        such as security, session management, and user authentication. Without these cookies, the Portal cannot function
+        properly. These cookies do not collect personal information for marketing purposes and cannot be disabled.</p>
+      <ul>
+        <li>Session authentication and Portal login</li>
+        <li>Security tokens and cross-site request forgery (CSRF) protection</li>
+        <li>Load balancing and server session management</li>
+        <li>Cookie consent preferences</li>
+      </ul>
+
+      <h4>Functional Cookies</h4>
+      <p>These cookies enable enhanced functionality and personalization, such as remembering your preferences, language
+        settings, and display options within the Portal. They may be set by us or by third-party providers whose
+        services we have integrated into our pages.</p>
+      <ul>
+        <li>User interface preferences and display settings</li>
+        <li>Language and region preferences</li>
+        <li>Previously viewed content and navigation history within the Portal</li>
+      </ul>
+
+      <h4>Analytics and Performance Cookies</h4>
+      <p>These cookies collect information about how visitors use our website and Portal, including which pages are
+        visited most often, how visitors navigate between pages, and whether users encounter error messages. This
+        information is used to improve the performance and usability of our website and Portal. All information
+        collected by these cookies is aggregated and anonymized.</p>
+      <ul>
+        <li>Page visit counts and navigation patterns</li>
+        <li>Error reporting and performance monitoring</li>
+        <li>Feature usage analytics to improve the Portal experience</li>
+      </ul>
+
+      <h3>How to Manage Cookies</h3>
+      <p>When you first visit our website, you will be presented with a cookie consent banner that allows you to accept
+        or decline non-essential cookies. You may change your cookie preferences at any time by clicking the "Cookie
+        Settings" link in our website footer.</p>
+
+      <p>You may also manage cookies through your browser settings:</p>
+      <ul>
+        <li>Most browsers allow you to view, manage, and delete cookies through the browser settings or preferences menu
+        </li>
+        <li>You may configure your browser to block all cookies, accept all cookies, or notify you when a cookie is set
+        </li>
+        <li>If you block all cookies, some features of our website and Portal may not function properly, including login
+          and session management</li>
+      </ul>
+
+      <h3>Opt-Out of Targeted Advertising and Sale of Personal Data</h3>
+      <p>Modern Family Law does not use cookies for targeted advertising and does not sell personal information
+        collected through cookies. We do not engage in cross-context behavioral advertising. If we change these
+        practices in the future, we will update this Cookie Notice and provide you with the opportunity to opt out in
+        accordance with the California Consumer Privacy Act (CCPA), the Colorado Privacy Act (CPA), and other applicable
+        state privacy laws.</p>
+
+      <h3>Universal Opt-Out Mechanisms</h3>
+      <p>In compliance with the Colorado Privacy Act, we honor universal opt-out mechanisms, including the Global
+        Privacy Control (GPC) browser signal. If your browser sends a GPC signal, we will treat it as a valid opt-out
+        request for the sale of personal data and targeted advertising, to the extent applicable.</p>
+
+      <h3>Third-Party Cookies</h3>
+      <p>Some cookies on our website may be set by third-party service providers that we use for analytics, security, or
+        functionality purposes. These third parties may collect information about your online activities over time and
+        across different websites. We require our third-party service providers to use cookies only for the purposes we
+        have specified and in compliance with applicable privacy laws.</p>
+
+      <h3>Do Not Track Signals</h3>
+      <p>Some browsers offer a "Do Not Track" (DNT) setting. At this time, there is no uniform industry standard for
+        responding to DNT signals. However, we honor the Global Privacy Control (GPC) signal as described above.</p>
+
+      <h3>Updates to This Cookie Notice</h3>
+      <p>We may update this Cookie Notice from time to time. When we make changes, we will update the effective date at
+        the top of this Notice and, where required, provide you with additional notice or obtain your consent.</p>
+
+      <h3>Contact Information</h3>
+      <p>If you have questions about our use of cookies, please contact:</p>
+
+      <p>
+        Modern Family Law<br>
+        Attn: Privacy Officer<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="Accessibility" label="Accessibility Statement">
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <h3>Our Commitment to Accessibility</h3>
+      <p>Johnson Family Law, PC, dba Modern Family Law ("Modern Family Law") is committed to ensuring that our website
+        and client portal at www.modernfamilylaw.com are accessible to all individuals, including those with
+        disabilities. We strive to provide an inclusive digital experience that enables all users to access our
+        services, information, and resources.</p>
+
+      <h3>Accessibility Standards</h3>
+      <p>We endeavor to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA, published by the World
+        Wide Web Consortium (W3C). These guidelines provide a framework for making web content more accessible to people
+        with a wide range of disabilities, including visual, auditory, physical, speech, cognitive, language, learning,
+        and neurological disabilities.</p>
+
+      <p>Our ongoing accessibility efforts include:</p>
+      <ul>
+        <li>Providing text alternatives for non-text content, including images and icons</li>
+        <li>Ensuring sufficient color contrast between text and background elements</li>
+        <li>Making all functionality available from a keyboard for users who cannot use a mouse</li>
+        <li>Providing clear and consistent navigation throughout the website and portal</li>
+        <li>Ensuring content is compatible with assistive technologies, including screen readers, screen magnifiers, and
+          voice recognition software</li>
+        <li>Using clear, plain language to make legal information as understandable as possible</li>
+        <li>Providing captions and transcripts for multimedia content where applicable</li>
+        <li>Ensuring that forms and interactive elements are properly labeled and operable</li>
+      </ul>
+
+      <h3>Ongoing Efforts</h3>
+      <p>We recognize that accessibility is an ongoing effort. We regularly review our website and portal to identify
+        and remediate accessibility barriers. Our efforts include periodic accessibility audits conducted by qualified
+        professionals, training for our content creators and web development team, and incorporating accessibility
+        considerations into the design and development of new features and content.</p>
+
+      <p>We do not use automated accessibility overlay tools as a substitute for genuine remediation, consistent with
+        current best practices and FTC guidance.</p>
+
+      <h3>Known Limitations</h3>
+      <p>While we strive to ensure accessibility of our website and client portal, some content may not yet be fully
+        accessible. This may include certain legacy documents (such as older PDF files), third-party content or
+        applications embedded on our site, and content generated dynamically by the client portal. We are actively
+        working to address these limitations and welcome your feedback to help us improve.</p>
+
+      <h3>Accessible Document Formats</h3>
+      <p>If you require a document from our website or client portal in an alternative format (such as large print,
+        Braille, or an accessible electronic format), please contact us and we will make reasonable efforts to provide
+        the information in a format that meets your needs.</p>
+
+      <h3>Feedback and Contact Information</h3>
+      <p>We welcome your feedback on the accessibility of our website and client portal. If you encounter any
+        accessibility barriers, have difficulty accessing any content or functionality, or have suggestions for
+        improvement, please contact us:</p>
+
+      <p>
+        Modern Family Law<br>
+        Attn: Website Accessibility Coordinator<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+
+      <p>We will make reasonable efforts to respond to accessibility feedback within five (5) business days and to
+        resolve reported accessibility issues in a timely manner.</p>
+
+      <h3>Applicable Law</h3>
+      <p>This Accessibility Statement is provided in connection with our commitment to compliance with Title III of the
+        Americans with Disabilities Act (ADA), Section 508 of the Rehabilitation Act (to the extent applicable), and
+        applicable state and local accessibility laws in the jurisdictions where we operate, including the California
+        Unruh Civil Rights Act and the California Disabled Persons Act.</p>
+
+      <p><strong>Implementation Note:</strong> This Accessibility Statement should be accessible via a link in the
+        website footer on every page, typically labeled "Accessibility" or "Accessibility Statement."</p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="Attorney Advertising" label="Attorney Advertising">
+      <p><i>Last Updated: March 14, 2026</i></p>
+
+      <h3>Attorney Advertising Notice</h3>
+      <p>The materials on this website and within the Modern Family Law client portal have been prepared by Johnson
+        Family Law, PC, dba Modern Family Law for informational purposes only and are not legal advice. This website may
+        be considered attorney advertising under the rules of professional conduct governing attorneys in certain
+        jurisdictions.</p>
+
+      <h3>No Attorney-Client Relationship</h3>
+      <p>Transmission of information through this website, the client portal, or any contact form does not create an
+        attorney-client relationship between you and Modern Family Law. An attorney-client relationship is formed only
+        through a written engagement agreement signed by both you and an authorized representative of Modern Family Law.
+      </p>
+
+      <h3>No Guarantee of Results</h3>
+      <p>Case results, verdicts, settlements, and testimonials presented on this website are not a guarantee, warranty,
+        or prediction of the outcome of any future case. Each family law matter is unique, and results depend on a
+        variety of factors specific to each case, including the facts, applicable law, and the discretion of the court.
+        Prior results do not guarantee a similar outcome.</p>
+
+      <h3>Jurisdictional Limitations</h3>
+      <p>Modern Family Law and its attorneys are licensed to practice in California, Colorado, Texas, Georgia,
+        Pennsylvania, Virginia, and Washington. The information on this website is not intended to constitute the
+        practice of law in any jurisdiction where our attorneys are not licensed, and is not intended to solicit clients
+        in any jurisdiction where such solicitation would violate applicable rules of professional conduct.</p>
+
+      <h3>Responsible Attorney</h3>
+      <p>The attorney responsible for this website is:</p>
+
+      <p>
+        M. David Johnson, Esq.<br>
+        Modern Family Law<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246
+      </p>
+
+      <h3>State-Specific Advertising Disclosures</h3>
+      <p>The following disclosures are provided in accordance with the attorney advertising rules of the jurisdictions
+        in which Modern Family Law practices:</p>
+      <ul>
+        <li><strong>California:</strong> This website may constitute advertising under California Rules of Professional
+          Conduct, Rule 7.1 et seq. The information on this site is not a guarantee of any particular result.</li>
+        <li><strong>Colorado:</strong> This website may constitute advertising under the Colorado Rules of Professional
+          Conduct. The office address of the firm responsible for this advertising is 4500 Cherry Creek Dr. S., Suite
+          700, Denver, Colorado 80246.</li>
+        <li><strong>Texas:</strong> This website is designed for general informational purposes and may constitute
+          attorney advertising under the Texas Disciplinary Rules of Professional Conduct, Rule 7.01 et seq. Not all
+          attorneys are certified by the Texas Board of Legal Specialization.</li>
+        <li><strong>Georgia:</strong> This website may constitute attorney advertising under the Georgia Rules of
+          Professional Conduct, Rule 7.1 et seq.</li>
+        <li><strong>Pennsylvania:</strong> This website may constitute attorney advertising under the Pennsylvania Rules
+          of Professional Conduct, Rule 7.1 et seq.</li>
+        <li><strong>Virginia:</strong> This website may constitute attorney advertising under the Virginia Rules of
+          Professional Conduct, Rule 7.1 et seq. The content of this website is not intended to imply any
+          unsubstantiated comparison to the quality of legal services provided by other attorneys.</li>
+        <li><strong>Washington:</strong> This website may constitute attorney advertising under the Washington Rules of
+          Professional Conduct, Rule 7.1 et seq.</li>
+      </ul>
+
+      <h3>Testimonials and Endorsements</h3>
+      <p>Client testimonials, reviews, ratings, and endorsements appearing on this website reflect the experiences of
+        individual clients and do not constitute a guarantee, warranty, or prediction of the outcome of any particular
+        matter. No aspect of this advertisement has been approved by the Supreme Court of any state.</p>
+
+      <h3>Contact Information</h3>
+      <p>
+        Modern Family Law<br>
+        4500 Cherry Creek Dr. S., Suite 700<br>
+        Denver, Colorado 80246<br>
+        www.modernfamilylaw.com
+      </p>
+    </lightning-accordion-section>
+    <lightning-accordion-section name="EEO" label="EEO Statement">
+      <p>Johnson Family Law, PC, dba Modern Family Law is an Equal Opportunity Employer. We are committed to fostering
+        an inclusive workplace and do not discriminate on the basis of race, color, religion, sex, sexual orientation,
+        gender identity or expression, national origin, age, disability, genetic information, veteran status, or any
+        other characteristic protected by applicable federal, state, or local law. We encourage all qualified
+        individuals to apply..</p>
+    </lightning-accordion-section>
+  </lightning-accordion>
+</template>

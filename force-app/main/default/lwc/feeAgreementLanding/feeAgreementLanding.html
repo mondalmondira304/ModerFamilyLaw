@@ -1,0 +1,81 @@
+<template>
+    <div class="header slds-align_absolute-center">
+        <img src={headerImg} alt="Modern Family Law" class="header-img" loading="lazy" />
+    </div>
+    <template if:true={showMainContent}>
+        <section class="landing-container slds-grid slds-grid_vertical slds-grid_align-center slds-p-around_large">
+            <!-- <h1 class="heading">Fee Agreement Process</h1>
+            <p class="subheading">
+                Just three simple steps to get started.
+            </p> -->
+
+            <!-- <h2 class="text-primary slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">Fee Agreement Process</h2> -->
+            <h3 class="slds-align_absolute-center slds-m-bottom_medium slds-card__header-title">3 Easy Steps to Get Started.</h3>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <lightning-icon
+                        icon-name="utility:signature"
+                        size="large"
+                        class="step-icon">
+                    </lightning-icon>
+                    <h3>Review & Sign</h3>
+                    <p>
+                        Review and sign your fee agreement.
+                        Your attorney will review and countersign.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <lightning-icon
+                        icon-name="utility:moneybag"
+                        size="large"
+                        class="step-icon">
+                    </lightning-icon>
+                    <h3>Retainer Payment</h3>
+                    <p>
+                        Submit your retainer payment securely to activate your case.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <lightning-icon
+                        icon-name="utility:form"
+                        size="large"
+                        class="step-icon">
+                    </lightning-icon>
+                    <h3>Client Interview</h3>
+                    <p>
+                        Continue to the client interview to start your case.
+                    </p>
+                </div>
+            </div>
+            <div class="generate">
+                <lightning-input type="checkbox" checked={agreeChecked}
+                    label="I understand that this process will generate a proposed fee agreement for my review only. I am not agreeing to hire the firm at this time, and the firm is not agreeing to represent me unless a fee agreement is later signed and any required retainer remitted."
+                    onchange={handleAgreeChange} required>
+                </lightning-input>
+            </div>
+
+
+            <div class="slds-grid slds-grid_align-center slds-p-around_large slds-size_1-of-1">
+                <button class="next-button nextBtnPadding" onclick={handleFeeAgreement} disabled={buttonDisabled}>
+                    Step 1 - Review & Sign<span class="arrow nextBtnArrow">→</span>
+                </button>
+            </div>
+        </section>
+    </template>
+
+    <template if:true={showWaiting}>
+        <div class="slds-p-around_x-large slds-grid slds-grid_vertical slds-align_absolute-center"
+            style="min-height: 400px;">
+            <div class="slds-col slds-size_1-of-1 slds-text-align_center">
+                <img src={imageUrl} alt="" class="spinner-img slds-align_absolute-center" />
+                <h2 class="heading-large slds-m-top_large">Preparing Your Fee Agreement</h2>
+                <p class="slds-text-body_regular slds-text-color_weak slds-m-top_small">
+                    Please wait while we generate your documents...
+                </p>
+            </div>
+        </div>
+    </template>
+</template>

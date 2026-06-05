@@ -1,0 +1,143 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<template if:false={addTax}>
+			<div class="slds-col heading slds-size_1-of-1">Tax Returns</div>
+		</template>
+		<template if:true={addTax}>
+			<div class="slds-col heading slds-size_1-of-1">{addTaxLabel} Tax Returns</div>
+		</template>
+		<template if:false={addTax}>
+			<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-vertical_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddTax}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Year of Return</th>
+								<th>Form</th>
+								<th>Filing Status</th>
+								<th>Reported Income</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={recordsData} for:item="row">
+								<tr key={row.id}>
+									<td>
+										<span class="rowName" onclick={handleTaxCellClick} data-id={row.Id} data-field="Taxes__c">{row.Year__c}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></span>
+									</td>
+									<td>{row.IRS_Form__c}</td>
+									<td>{row.Filing_Status__c}</td>
+									<td>{row.Taxable_Income__c}</td>
+									<td><span data-id={row.Id} data-field="Taxes__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</template>
+
+		<template if:true={addTax}>
+			<div class="slds-col slds-size_1-of-1">
+
+				<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Taxes__c" onsuccess={handleSuccess}>
+
+					<div class="slds-grid slds-wrap slds-gutters">
+						<!-- Column A -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-size_1-of-1">
+								<lightning-input-field field-name="Year__c" data-field="Year__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="IRS_Form__c" data-field="IRS_Form__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Related_To_Text__c" data-field="Related_To_Text__c"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>													
+								<lightning-input-field field-name="Filing_Status__c" data-field="Filing_Status__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Joint_Filer_Text__c" data-field="Joint_Filer_Text__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>							
+								<lightning-input-field field-name="Exemptions__c" data-field="Exemptions__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Matter_ID__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} autocomplete="off"></lightning-input-field>								
+							</div>						
+						</div>
+						<!-- Column B -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-p-top_medium">
+								<lightning-input-field field-name="Taxable_Income__c" data-field="Taxable_Income__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+							
+							<template if:true={selectedRecordIdIsSet}> <!-- If the record Id exists, then we can attach files to it -->
+
+								<div class="upload-container slds-col slds-size_1-of-1 slds-p-top_medium">
+									<div class="upload-header">
+										<span>UPLOAD DOCUMENTS</span>
+										<lightning-helptext content="Please upload the required documents." class="icon-color"></lightning-helptext>
+									</div>
+									<p class="upload-instructions">Please upload the following files:</p>
+									<ul class="file-list">
+										<li><strong>Tax Return for this Tax Year</strong></li>
+									</ul>
+									<div class="upload-box">
+										<p class="file-types">JPG, PDF, CSV, DOCX, XLSX</p>
+										<lightning-file-upload
+											name="fileUploader"
+											accept={acceptedFormats}
+											record-id={selectedRecordId}
+											multiple
+											onuploadfinished={handleUploadFinished}
+										>
+										</lightning-file-upload>
+									</div>
+						
+									<template if:true={uploadedTaxReturnFile}>
+										<template for:each={uploadedTaxReturnFile} for:item="file" for:index="index">
+											<lightning-pill
+												label={file.name}
+												name={index} 
+												key={file.id}
+												data-id={file.id}
+												data-field="uploadFile"
+												onremove={handleFileDelete}>
+											</lightning-pill>
+										</template>
+									</template>
+								</div>
+							</template>
+
+						</div>
+
+					</div>
+					
+				</lightning-record-edit-form>
+			</div>
+		</template>
+
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<template if:false={addTax}>
+				<button class="next-button nextBtnPadding" onclick={handleSubmitIncome}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+			<template if:true={addTax}>
+				<button class="next-button nextBtnPadding" onclick={handleSave} disabled={disableButton}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+	<template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={incomeLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

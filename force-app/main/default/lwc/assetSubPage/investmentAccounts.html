@@ -1,0 +1,151 @@
+<template>
+    <div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+        <div class="slds-col heading slds-size_1-of-1">{addInvestmentAccountsLabel} Investment Account</div>
+        <template if:false={addInvestmentAccount}>
+            <div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+                <div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+                    <button class="custom-button" onclick={handleAddInvestment}>
+                        <span class="button-text">Add</span>
+                        <lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+                    </button>
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked-horizontal">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Account Name">Account Name</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Bank">Bank</div>
+                                </th>
+                                <th scope="col" class="slds-hide_x-small slds-show_medium">
+                                    <div class="slds-truncate" title="Account Number">Account Number</div>
+                                </th>
+                                <th scope="col" class="slds-text-align_right">
+                                    <div class="slds-truncate" title="Balance">Balance</div>
+                                </th>
+                                <th scope="col" class="slds-text-align_right">
+                                    <div class="slds-truncate" title="Actions">Actions</div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        	<template if:true={isInvestmentAccount}>
+                            <template for:each={recordsData} for:item="row">
+                                <tr key={row.fields.Id.value} class="slds-hint-parent">
+                                    <!-- Row header in stacked view -->
+                                    <th scope="row" data-label="Account Name">
+                                        <div class="slds-truncate" title={row.fields.Name.value}>
+                                            <span class="rowName" onclick={handleInvestmentCellClick} data-id={row.fields.Id.value} data-field="Investment_Account__c">{row.fields.Name.value}
+                                                <lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon>
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <td data-label="Bank">
+                                        <div class="slds-truncate" title={row.fields.NAME_OF_BANK__c}>{row.fields.NAME_OF_BANK__c.value}</div>
+                                    </td>
+                                    <td data-label="Account Number" class="slds-hide_x-small slds-show_medium">
+                                        <div class="slds-truncate" title={row.fields.ACCOUNT_NUMBER_LAST_4__c}>{row.fields.ACCOUNT_NUMBER_LAST_4__c.value}</div>
+                                    </td>
+                                    <td data-label="Balance" class="slds-text-align_right">
+                                        <div class="slds-truncate" title={row.fields.ACCOUNT_BALANCE__c}>{row.fields.ACCOUNT_BALANCE__c.displayValue}</div>
+                                    </td>
+                                    <td data-label="Actions" class="slds-cell-shrink slds-text-align_right">
+                                        <button class="slds-button slds-button_icon slds-button_icon-border-filled"
+                                            title="Delete" data-id={row.fields.Id.value} data-field="Investment_Account__c"
+                                            onclick={handleDeleteChild}>
+                                            <lightning-icon icon-name="utility:delete" size="x-small"></lightning-icon>
+                                            <span class="slds-assistive-text">Delete</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </template>
+
+        <template if:true={addInvestmentAccount}>
+            <lightning-record-edit-form record-id={selectedRecordId} object-api-name="Investment_Account__c" onsuccess={handleSuccess} >
+
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <!-- Column A -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Investment Account Name</label>
+                                <lightning-input-field field-name="Name" data-field="Name" autocomplete="off" label="Investment Account Name" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} required></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Account Owner (Party)</label>
+                                <lightning-input-field field-name="Account_Owner_Party__c" data-field="Account_Owner_Party__c" autocomplete="off" label="Account Owner (Party)" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Account Titled</label>
+                                <lightning-input-field field-name="ACCOUNT_TITLED__c" data-field="ACCOUNT_TITLED__c" autocomplete="off" label="Account Titled" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Last 4 Digits of Account Number</label>
+                                <lightning-input-field field-name="ACCOUNT_NUMBER_LAST_4__c" data-field="ACCOUNT_NUMBER_LAST_4__c" autocomplete="off" label="Last 4 Digits of Account Number" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Average Monthly Savings and Investment</label>
+                                <lightning-input-field field-name="AVERAGE_MONTHLY_SAVINGS_AND_INVESTMENTS__c" data-field="AVERAGE_MONTHLY_SAVINGS_AND_INVESTMENTS__c" autocomplete="off" label="Average Monthly Savings and Investment" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column B -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Name of Investment Firm</label>
+                                <lightning-input-field field-name="NAME_OF_BANK__c" data-field="NAME_OF_BANK__c" autocomplete="off" label="Name of Investment Firm" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Account Balance</label>
+                                <lightning-input-field field-name="ACCOUNT_BALANCE__c" data-field="ACCOUNT_BALANCE__c"   autocomplete="off" label="Account Balance" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Marital or Separate</label>
+                                <lightning-input-field field-name="MARITAL_OR_SEPARATE__c" data-field="MARITAL_OR_SEPARATE__c"   autocomplete="off" label="Marital or Separate" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">Type of Account</label>
+                                <lightning-input-field field-name="TYPE_OF_ACCOUNT__c" data-field="TYPE_OF_ACCOUNT__c"  autocomplete="off" label="Type of Account" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                                <label class="labelCSS">If Other, what Type of Account?</label>
+                                <lightning-input-field field-name="TYPE_OF_ACCOUNT_OTHER__c" data-field="TYPE_OF_ACCOUNT_OTHER__c"  autocomplete="off" label="If Other, what Type of Account?" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+                            </div>
+                            <lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+                        </div>
+                    </div>
+                </div>
+
+            </lightning-record-edit-form>
+        </template>
+
+        <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+            <template if:true={addInvestmentAccount}>
+                <button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+                    <span class="arrow nextBtnArrow">→</span>
+                </button>
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+            <template if:false={addInvestmentAccount}>
+                <button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSaveChild}>SUBMIT SECTION
+                    <span class="arrow nextBtnArrow">→</span>
+                </button>
+            </template>
+        </div>
+    </div>
+</template>

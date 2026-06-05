@@ -1,0 +1,43 @@
+/* contactFinanceForm.css — inside a LightningModal */
+
+.intro-text {
+    font-size: 13px;
+    color: #5a6072;
+    margin: 0 0 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.readonly-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.readonly-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5a6072;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.readonly-value {
+    font-size: 13px;
+    color: #141820;
+    background: #f8f9fc;
+    border: 1px solid #e4e7ef;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+
+.error-banner {
+    background: #fcebeb;
+    color: #a32d2d;
+    border: 1px solid rgba(163, 45, 45, 0.25);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+}

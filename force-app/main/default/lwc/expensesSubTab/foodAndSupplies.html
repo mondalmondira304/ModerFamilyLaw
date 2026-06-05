@@ -1,0 +1,23 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Food And Supplies</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			<div class="slds-col slds-p-top_medium slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Groceries</label>
+						<lightning-input-field field-name="Groceries_Client__c" data-field="Groceries_Client__c"  label = "Groceries" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Dining Out</label>
+						<lightning-input-field field-name="Dining_Out_Client__c" data-field="Dining_Out_Client__c"  label = "Dining Out" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-vertical_medium">
+						<label class="labelCSS">Household Supplies</label>
+						<lightning-input-field field-name="Household_Supplies_Client__c" data-field="Household_Supplies_Client__c"  label = "Household Supplies" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+    </div>
+</template>

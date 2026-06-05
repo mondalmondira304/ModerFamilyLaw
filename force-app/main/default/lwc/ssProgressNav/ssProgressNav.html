@@ -1,0 +1,22 @@
+<template>
+  <div class="progress-bar slds-grid slds-wrap">
+    <template for:each={computedSteps} for:item="step">
+      <div key={step.index} class="slds-col slds-size_12-of-12 step-container" data-step-index={step.index}>
+        <div class={step.circleClass}></div>
+        <div class={step.connectorClass}></div>
+        <div class={step.stepNameClass}>{step.label}</div>
+
+        <template if:true={step.hasSubSteps}>
+          <div class="sub-steps">
+            <template for:each={step.subSteps} for:item="sub">
+              <div key={sub.index} class={sub.containerClass} data-sub-index={sub.index}>
+                <div class={sub.subCircleClass}></div>
+                <div class={sub.subNameClass}>{sub.label}</div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</template>

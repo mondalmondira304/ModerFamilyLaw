@@ -1,0 +1,39 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Utilities</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+
+			<div class="slds-grid slds-wrap slds-gutters">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Gas and Electric</label>
+							<lightning-input-field field-name="Gas_Electric_Client__c" data-field="Gas_Electric_Client__c"  label = "Gas and Electric" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Internet/Cable/Satellite</label>
+							<lightning-input-field field-name="Internet_Cable_and_Satellite__c" data-field="Internet_Cable_and_Satellite__c"  label = "Internet" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Water, Sewer, Trash</label>
+							<lightning-input-field field-name="Water_Sewer_Trash_Client__c" data-field="Water_Sewer_Trash_Client__c"  label = "Water, Sewer, Trash" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<label class="labelCSS">Telephone/Mobile</label>
+							<lightning-input-field field-name="Telephone_Cell_and_Email_Client__c" data-field="Telephone_Cell_and_Email_Client__c"  label = "Telephone/Mobile" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+							<lightning-input-field field-name="Property_Care_client__c" data-field="Property_Care_client__c"  label = "Property Care (Not covered by HOA or landlord)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+	</div>
+</template>

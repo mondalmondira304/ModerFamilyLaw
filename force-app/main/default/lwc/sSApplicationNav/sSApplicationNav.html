@@ -1,0 +1,42 @@
+<template>
+    <div class="progress-bar">
+          <!-- Step 1 (active, with sub-steps) -->
+          <div class="slds-grid">
+            <div class="step-container slds-col slds-size_12-of-12" data-step-index="0">
+              <div class="circle active"></div>
+              <div class="connector completed"></div> <!-- TODO: addClass 'completed' on submit -->
+              <div class="step-name active">Applicant Vitals</div>
+
+              <!-- <div class="sub-steps">
+                <div class="sub-step-container" data-step-index="0" data-sub-index="0">
+                  <div class="sub-circle active"></div>
+                  <div class="sub-step-name active">Test One</div>
+                </div>
+                <div class="sub-step-container" data-step-index="0" data-sub-index="1">
+                  <div class="sub-circle"></div>
+                  <div class="sub-step-name">Test Two</div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+          <!-- Step 2 (completed) -->
+          <div class="slds-grid">
+            <div class="step-container slds-col slds-size_12-of-12" data-step-index="1">
+              <div class="circle "></div>
+              <div class="connector"></div>
+              <div class="step-name">Consent</div>
+            </div>
+          </div>
+
+          <div class="slds-grid">
+            <div class="step-container slds-col slds-size_12-of-12" data-step-index="1">
+              <div class="circle "></div>
+              <div class=""></div>
+              <div class="step-name"></div>
+            </div>
+          </div>
+
+
+        </div>
+</template>

@@ -1,0 +1,11 @@
+<apex:page standardController="Contact" lightningStylesheets="true">
+<apex:form >
+<!--New Hire--> <apex:commandButton value="New Hire" action="{!URLFOR($Action.Contact.View,Contact.Id)}" onclick="NH()"/>
+
+</apex:form>
+<Script Language="JavaScript">
+
+function NH() { window.open('{!URLFOR($Action.Contact.00b61000000bbhB,Contact.Id)}', '','scrollbars=yes,menubar=no,height=630,width=1000,resizable=yes, toolbar=no,location=no,status=yes'); }
+
+</Script>
+</apex:page>

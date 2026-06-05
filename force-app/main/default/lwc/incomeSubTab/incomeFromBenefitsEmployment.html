@@ -1,0 +1,32 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Income from Benefits</div>
+		<lightning-record-edit-form record-id={otherIncomeRecordId} object-api-name="Other_Income__c"  onsuccess={handleSuccess}>
+			<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1">
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+				  	<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Disability_SSDI_Monthly__c" data-field="Disability_SSDI_Monthly__c" variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Supp_Security_Income_SSI_Monthly__c" data-field="Supp_Security_Income_SSI_Monthly__c"  variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Workers_Comp_Last_Month__c" data-field="Workers_Comp_Last_Month__c" variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Worker_Comp_Avg_Monthly__c" data-field="Worker_Comp_Avg_Monthly__c"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Unemployment_Comp_Last_Month__c" data-field="Unemployment_Comp_Last_Month__c" variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange}   autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+				  	<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Veterans_Benefit_Monthly__c" data-field="Veterans_Benefit_Monthly__c"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Social_Security_Monthly__c" data-field="Social_Security_Monthly__c"  variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Expense_Account__c" data-field="Expense_Account__c"  variant="label-stacked"  class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						<lightning-input-field field-name="Unemployment_Comp_Monthly__c" data-field="Unemployment_Comp_Monthly__c" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>						
+					</div>
+				</div>
+
+			</div>
+		</lightning-record-edit-form>
+		 <div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<button class="next-button nextBtnPadding" onclick={handleSave}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</div>
+    </div>
+</template>

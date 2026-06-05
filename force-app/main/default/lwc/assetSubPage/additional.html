@@ -1,0 +1,110 @@
+<template>
+    <div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+        <div class="slds-col heading slds-size_1-of-1">{addAdditionalLabel} Additional Asset</div>
+        <template if:false={addAdditionalAccount}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddAdditional}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table class="custom-table">
+						<thead>
+							<tr>
+								<th>Asset Name</th>
+								<th>Type</th>
+								<th>Asset Value</th>
+							</tr>
+						</thead>
+						<template if:true={isAdditional}>
+							<tbody>
+								<template for:each={recordsData} for:item="row">
+									<tr key={row.fields.Id.value}>
+										<td>
+											<span class="rowName" onclick={handleAdditionalCellClick} data-id={row.fields.Id.value} data-field="Additional_Asset__c">{row.fields.Name.value}<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon></span>
+										</td>
+										<td>{row.fields.Type_of_Additional_Asset__c.value}</td>
+										<td>{row.fields.Asset_Value__c.value}</td>
+										<td><span data-id={row.fields.Id.value} data-field="Additional_Asset__c" onclick={handleDeleteChild}><lightning-icon icon-name="utility:delete" size="x-small" class="edit-icon"></lightning-icon></span></td>
+									</tr>
+								</template>
+							</tbody>
+						</template>
+					</table>
+				</div>
+			</div>
+		</template>
+        <template if:true={addAdditionalAccount}>
+            <lightning-record-edit-form record-id={selectedRecordId} object-api-name="Additional_Asset__c" onsuccess={handleSuccess}>
+
+                <div class="slds-grid slds-wrap slds-gutters">
+					<!-- Column A -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Name" data-field="Name" autocomplete="off" label = "Policy Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Marital_or_Separate__c" data-field="Marital_or_Separate__c" autocomplete="off" label = "Policy Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Asset_Value__c" data-field="Asset_Value__c" autocomplete="off" label = "Policy Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Related_To_Text__c" data-field="Related_To_Text__c" autocomplete="off" label ="Type of Policy" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+							<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>					
+						</div>
+                    </div>
+					<!-- Column B -->
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Type_of_Additional_Asset__c" data-field="Type_of_Additional_Asset__c" autocomplete="off" label = "Face Amount of Policy" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Asset_Titled__c" data-field="Asset_Titled__c" autocomplete="off" label = "Owned By?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  ></lightning-input-field>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="Jointly_Owned_With_Text__c" data-field="Jointly_Owned_With_Text__c" autocomplete="off" label = "Joint Life Insurance?" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>						
+							<div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+								<lightning-input-field field-name="If_Other_what_Type_of_Asset__c" data-field="If_Other_what_Type_of_Asset__c" autocomplete="off" label = "If Other, what Type of Asset" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}></lightning-input-field>
+							</div>
+						</div>
+                    </div>
+                </div>
+
+            </lightning-record-edit-form>
+        </template>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:true={addAdditionalAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-vertical_medium">
+			<template if:false={addAdditionalAccount}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSubmitAsset}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+    </div>
+    <template if:true={isModalOpen}>
+		<section class="slds-modal slds-fade-in-open slide-in-top">
+			<div class="slds-modal__container fitIcon">
+				<div>
+					<lightning-icon icon-name="utility:close" size="small" onclick={closeModal} class="slds-float_right cross-icon-color"></lightning-icon>
+				</div>
+				<div class="popupbackground">
+					<div><img src={assetLogoImg} alt="image sample" class="logo" /></div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

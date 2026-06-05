@@ -1,0 +1,139 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 30vw;
+    margin-top: -5vh;
+    /*font-family: sans-serif;*/
+}
+
+.title {
+    font-size: 2.25rem;
+    color: #5D69B1;
+    font-weight: 400;
+    /*justify-content: center;*/
+}
+
+.gradient-line {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #ff8a00, #e52e71);
+    margin: 10px auto;
+}
+
+/* Skyler Updates */
+
+.login-card {
+    /* min-width set so email does not break */
+    min-width: 402px; 
+}
+
+.text-container > p {
+    font-size: 18px;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    font-size: 1.5rem;
+    color: white;
+    background-color: #3dbedb;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-text {
+    text-align: center;
+}
+
+.formatted-url {
+    font-size: 1.5rem;
+    color: white !important;
+    display: inline-flex;
+}
+
+.arrow {
+    position: absolute;
+    right: 10px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    /* keep it above background */
+}
+
+@media only screen and (max-width: 1550px) {
+    .login-button {
+        width: 90%;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* End Skyler Updates */
+
+.logo {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.input-container {
+    text-align: left;
+    font-size: 16px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.custom-input {
+    /* --slds-c-input-color-background: #f2f2f2;
+    --slds-c-input-radius-border: 8px; */
+    background: #f2f2f2;
+    border-radius: 8px;
+    min-height: 3rem !important;
+    outline: #dbdedf solid 0.5px;
+}

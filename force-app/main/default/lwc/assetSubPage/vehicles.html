@@ -1,0 +1,210 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<template if:false={addVehicles}>
+			<div class="slds-col heading slds-size_1-of-1">Assets-Vehicles</div>
+		</template>
+		<template if:true={addVehicles}>
+			<div class="slds-col heading slds-size_1-of-1">{addVehicleLabel} Vehicle</div>
+		</template>
+		<template if:true={financingAndExpenses}>
+			<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center subheading">
+				Financing and Expenses</div>
+		</template>
+		<template if:true={valuation}>
+			<div
+				class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-grid slds-grid_align-center slds-p-bottom_xx-large subheading">
+				Valuation</div>
+		</template>
+		<template if:false={addVehicles}>
+			<div class="slds-p-top_large slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+				<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-bottom_medium alignAddButton">
+					<button class="custom-button" onclick={handleAddVehicles}>
+						<span class="button-text">Add</span>
+						<lightning-icon icon-name="utility:add" size="xx-small" class="icon-style"></lightning-icon>
+					</button>
+				</div>
+
+				<div
+					class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-vertical_medium custom-table-container">
+					<table
+						class="slds-table slds-table_cell-buffer slds-table_bordered slds-max-medium-table_stacked-horizontal">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th>
+									<div class="slds-truncate" title="Vehicle’s Name">Vehicle’s Name</div>
+								</th>
+								<th>
+									<div class="slds-truncate" title="Year">Year</div>
+								</th>
+								<th>
+									<div class="slds-truncate" title="Make">Make</div>
+								</th>
+								<th>
+									<div class="slds-truncate" title="Model">Model</div>
+								</th>
+								<th>
+									<div class="slds-truncate" title="Our Value">Our Value</div>
+								</th>
+								<th class="slds-text-align_right">
+									<div class="slds-truncate" title="Actions">Actions</div>
+								</th>
+							</tr>
+						</thead>
+					<template if:true={isVehicle}>
+						<tbody>
+							<template for:each={recordsData} for:item="row" for:index="index">
+								<tr key={row.fields.Id.value} class="slds-hint-parent">
+									<!-- First cell becomes the row header for stacked view -->
+									<th scope="row" data-label="Vehicle’s Name">
+										<div class="slds-truncate" title={row.fields.Namenew}>
+											<span class="rowName" onclick={handleVehiclesCellClick} data-id={row.fields.Id.value}	data-field="Vehicle__c" data-index={index}>
+												{row.fields.Name.value}
+												<lightning-icon icon-name="utility:edit" size="xx-small" class="edit-icon"></lightning-icon>
+											</span>
+										</div>
+									</th>
+
+									<td data-label="Year">
+										<div class="slds-truncate" >{row.fields.Year__c.value}</div>
+									</td>
+									<td data-label="Make">
+										<div class="slds-truncate" >{row.fields.Make__c.value}</div>
+									</td>
+									<td data-label="Model">
+										<div class="slds-truncate" >{row.fields.Model__c.value}</div>
+									</td>
+									<td data-label="Our Value">
+										<div class="slds-truncate" >{row.fields.Client_Estimate_of_Value__c.displayValue}</div>
+									</td>
+
+									<td data-label="Actions" class="slds-cell-shrink slds-text-align_right">
+										<button class="slds-button slds-button_icon slds-button_icon-border-filled"
+											title="Delete" data-id={row.fields.Id.value} data-field="Vehicle__c" data-index={index}
+											onclick={handleDeleteChild}>
+											<lightning-icon icon-name="utility:delete" size="x-small"></lightning-icon>
+											<span class="slds-assistive-text">Delete</span>
+										</button>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</template>
+				</table>
+			</div>
+
+
+			</div>
+		</template>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Vehicle__c" onsuccess={handleSuccess} >
+			<template lwc:if={addVehiclePage}>
+
+				<div class="slds-grid slds-wrap slds-gutters">
+
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Name" data-id="required" data-field="Name" name="name" label="Vehicle Name" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="License_Plate_Number__c" data-id="required" data-field="License_Plate_Number__c" name="licensePlateNumber" label="License Plate Number" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="VIN_Number__c" data-id="required" data-field="VIN_Number__c" name="VINNumber" label="VINNumber" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="Marital_or_Separate__c" data-id="required" data-field="Marital_or_Separate__c" name="maritalorSeparate" label="Marital or Separate" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="Related_To_Text__c" label="Who is in Possession?" data-id="required" id="Related_To_Text__c" data-field="Related_To_Text__c" name="relatedTo" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+
+					<div class="slds-col slds-grid slds-wrap slds-size_1-of-1 slds-medium-size_1-of-2">
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Year__c" data-id="required" data-field="Year__c" name="year" label="Year (YYYY)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Make__c" data-id="required" data-field="Make__c" name="make" label="Make" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Model__c" data-id="required" data-field="Model__c" name="model" label="Model" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Date_of_Acquisition__c" data-id="required" data-field="Date_of_Acquisition__c" name="dateofAcquisition" label="Date of Purchase" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Registered_Owner_Text__c" label="Registered Owner" data-id="required" id="Registered_Owner_Text__c" data-field="Registered_Owner_Text__c" name="registeredOwner" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Auto_Titled__c" data-id="required" data-field="Auto_Titled__c" name="autoTitled" label="Vehicle Titled" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="Jointly_Owned_With_Text__c" label="Jointly Owned With" data-id="required" data-field="Jointly_Owned_With_Text__c" id="Jointly_Owned_With_Text__c" name="jointlyOwnedWith" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+
+				</div>
+
+			</template>
+
+			<template lwc:elseif={financingAndExpenses}>
+				<div class="slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-left_large slds-p-top_medium subheading">Financing and
+						Expenses – {year} {make}</div>
+
+					<div class="slds-grid slds-wrap slds-gutters">
+						<!-- Column A -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+							<lightning-input-field field-name="Auto_Lender__c" data-field="Auto_Lender__c" name="autoLender" label="Auto Lender" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="Last_4_of_Account_Number__c" data-field="Last_4_of_Account_Number__c" name="Last4ofAccountNumber" label="Last 4 Digits of Account Number" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="Loan_Balance__c" data-field="Loan_Balance__c" name="loanBalance" label="Loan Balance" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							<lightning-input-field field-name="Monthly_Payment__c" data-field="Monthly_Payment__c" name="monthlyPayment" label="Monthly Payment" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+
+							</div>
+						</div>
+						
+						<!-- Column B -->
+						<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+							<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+								<lightning-input-field field-name="Auto_Insurance_Premium__c" data-field="Auto_Insurance_Premium__c" name="AutoInsurancePremium" label="Auto Insurance Premium Monthly" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Parking_Expense__c" data-field="Parking_Expense__c" name="parkingExpense" label="Parking Expense" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Monthly_Auto_Maintenance__c" data-field="Monthly_Auto_Maintenance__c" name="monthlyAutoMaintenance" label="Monthly Auto Maintenance" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+								<lightning-input-field field-name="Annual_Registration_Fees__c" data-field="Annual_Registration_Fees__c" name="annualRegistrationFees" label="Licensing and Registration Fees (Monthly)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</template>
+			<template lwc:elseif={valuation}>
+				<div class="slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_x-small slds-p-vertical_large subheading"> Valuation of your {year} {make}</div>
+
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<lightning-input-field field-name="Client_Estimate_of_Value__c" data-id="required" data-field="Client_Estimate_of_Value__c" name="clientEstimateofValue" label="Your Estimate of the Value" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</template>
+			<lightning-input-field field-name="Related_Matter__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity}  autocomplete="off"></lightning-input-field>	
+			<!--lightning-input-field field-name="Related_To__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parentRecId} ></lightning-input-field-->	
+		</lightning-record-edit-form>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center slds-p-top_medium">
+			<template if:false={manageVehiclesNextButtons}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSaveChild}>SUBMIT SECTION
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+		<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center">
+			<template if:true={manageVehiclesPreviousButtons}>
+				<button class="next-button previousBtnPadding slds-m-top_xx-large" onclick={handleAssetPrevious}>
+					<span class="arrow previousBtnArrow">←</span>
+					PREVIOUS
+				</button>
+			</template>
+			<template if:true={manageVehiclesNextButtons1}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleAssetNext}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+			<template if:true={manageVehiclesSaveButtons}>
+				<button class="next-button nextBtnPadding slds-m-top_xx-large" onclick={handleSave}>SAVE & CONTINUE
+					<span class="arrow nextBtnArrow">→</span>
+				</button>
+			</template>
+		</div>
+	</div>
+</template>

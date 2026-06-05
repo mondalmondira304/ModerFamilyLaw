@@ -1,0 +1,53 @@
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.scroll-box {
+  height: 300px;
+  overflow: scroll;
+  border: solid 2px #3dbedb;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  /* font-weight: bold; */
+  color: white;
+  background-color: #3dbedb;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.next-button:disabled {
+  background-color: #dcdcdc;
+  /* opacity: 0.5; */
+  cursor: not-allowed;
+  /* If your enabled state uses pointer-events, keep it off when disabled */
+  pointer-events: none;
+}
+
+.next-button .arrow {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 7px 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nextBtnPadding {
+  /* padding: 5px 5px 5px 35px; */
+  padding: 5px 5px 5px 55px;
+}
+
+.nextBtnArrow {
+  margin-left: 40px;
+}

@@ -1,0 +1,14 @@
+<template>
+  <template if:true={isLoading}>
+    <section
+      class={containerClass}
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <span class="slds-assistive-text">{alternativeText}</span>
+      <img src={imageUrl} alt="" class="spinner-img" />
+    </section>
+  </template>
+  <slot></slot>
+</template>

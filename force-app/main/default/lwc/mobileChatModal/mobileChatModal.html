@@ -1,0 +1,28 @@
+<template>
+  <!-- <lightning-modal-header label="How can I help?"></lightning-modal-header> -->
+
+  <lightning-modal-body>
+    <div class="slds-p-top_large slds-p-bottom_large">
+      <iframe width="100%" height="150" src={srcUrl} frameborder="0"></iframe>
+    </div>
+
+    <div class="chatbot-container">
+      <div class="chat-header">How can I help?</div>
+
+      <div class="chat-box">
+        <div class="mobile-messages-container" lwc:dom="manual"></div>
+      </div>
+
+      <div class="input-container">
+        <input class="user-input"
+               type="text"
+               placeholder="Type your message..."
+               value={userMessage}
+               oninput={handleInput}
+               onkeydown={handleKeyDown}/>
+        <lightning-button label="Send" variant="brand" onclick={handleSendMessage}></lightning-button>
+      </div>
+    </div>
+  </lightning-modal-body>
+
+</template>

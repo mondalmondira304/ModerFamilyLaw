@@ -1,0 +1,155 @@
+/* viewAllUpdates.css — uses the same design tokens as userDashboard.
+   TODO: extract these tokens into a shared CSS resource (c/portalTokens)
+   once a third consumer needs them. */
+
+:host {
+    --bg: #f0f2f7;
+    --surface: #ffffff;
+    --surface-alt: #f8f9fc;
+    --border: #e4e7ef;
+    --border-strong: #c8cdd8;
+    --text-primary: #141820;
+    --text-secondary: #5a6072;
+    --text-muted: #8c94a6;
+    --blue: #185fa5;
+    --blue-light: #e6f1fb;
+    --blue-dark: #0c447c;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --teal-dark: #085041;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --red: #a32d2d;
+    --red-light: #fcebeb;
+    --green: #3b6d11;
+    --green-light: #eaf3de;
+    --brand-primary: #3dbedb;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --transition: 150ms ease;
+
+    display: block;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.page-shell {
+    background: linear-gradient(160deg, #f5f4fb 0%, #eef1f9 55%, #e8edf6 100%);
+    min-height: 100%;
+    padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2rem;
+    box-sizing: border-box;
+}
+
+.page-header { margin-bottom: 1.5rem; }
+
+.back-link {
+    background: none;
+    border: none;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 0 0.5rem;
+    font-family: inherit;
+}
+.back-link:hover { text-decoration: underline; }
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+}
+.page-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    padding: 1.25rem;
+}
+
+/* Feed */
+.feed {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+}
+.feed-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+.feed-row:last-child { border-bottom: none; }
+
+.feed-content { flex: 1; min-width: 0; }
+.feed-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+.feed-date {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Icon wraps (reused names match userDashboard) */
+.update-icon-wrap {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.update-icon-teal  { background: var(--teal-light);  color: var(--teal-dark); }
+.update-icon-blue  { background: var(--blue-light);  color: var(--blue-dark); }
+.update-icon-green { background: var(--green-light); color: var(--green); }
+.update-icon-amber { background: var(--amber-light); color: var(--amber); }
+
+.update-icon-teal  lightning-icon { --slds-c-icon-color-foreground-default: var(--teal-dark); }
+.update-icon-blue  lightning-icon { --slds-c-icon-color-foreground-default: var(--blue-dark); }
+.update-icon-green lightning-icon { --slds-c-icon-color-foreground-default: var(--green); }
+.update-icon-amber lightning-icon { --slds-c-icon-color-foreground-default: var(--amber); }
+
+/* States */
+.skeleton-block { min-height: 160px; }
+.skeleton-line {
+    height: 14px;
+    background: linear-gradient(90deg, var(--surface-alt) 0%, var(--border) 50%, var(--surface-alt) 100%);
+    background-size: 200% 100%;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    animation: shimmer 1.4s infinite linear;
+}
+.skeleton-line-lg { height: 22px; width: 60%; }
+.skeleton-line-short { width: 40%; }
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.error-card, .empty-card { text-align: center; }
+.error-title, .empty-title { font-weight: 600; margin-bottom: 0.25rem; }
+.error-desc, .empty-desc { font-size: 12px; color: var(--text-secondary); }
+
+@media (max-width: 600px) {
+    .page-shell { padding: 1rem 0.75rem 1.5rem; }
+    .feed-row { padding: 0.75rem 1rem; }
+}

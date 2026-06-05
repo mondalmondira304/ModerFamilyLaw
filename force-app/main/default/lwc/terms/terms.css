@@ -1,0 +1,126 @@
+.logo {
+  object-fit: contain;
+  width: 380px;
+  height: auto;
+  display: block;
+}
+
+h3 {
+    margin: 20px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #3dbedb !important;
+}
+
+h4 {
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #3dbedb;
+}
+
+ul {
+    margin-left: 25px;
+    list-style-type: disc;
+}
+
+
+/* Overall page spacing around the accordion */
+.example-accordion {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+ 
+}
+
+
+
+/* Content inside each accordion section */
+.example-accordion p,
+.example-accordion li,
+.example-accordion div,
+.example-accordion span {
+    color: #475569;
+    line-height: 1.65;
+    /* font-size: 0.95rem; */
+}
+
+/* Headings inside accordion content */
+.example-accordion h1,
+.example-accordion h2,
+.example-accordion h3,
+.example-accordion h4 {
+    /* color: #0f172a; */
+    font-weight: 700;
+    /* margin-top: 1.25rem;
+    margin-bottom: 0.5rem; */
+    letter-spacing: 0.01em;
+}
+
+.example-accordion h3 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: #2563eb;
+}
+
+/* Better paragraph spacing */
+.example-accordion p {
+    margin-bottom: 0.85rem;
+}
+
+/* Optional polish for long legal text blocks */
+.example-accordion {
+    max-width: 90%;
+}
+
+.example-accordion .section-content {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.875rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+/* Logo cleanup if you want the header to match the modern look */
+.logo {
+    max-height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Profile image styling */
+.uploaded-img,
+.upload-img-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.preview-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.14);
+}
+
+/* Mobile adjustments */
+@media only screen and (max-width: 768px) {
+    .example-accordion {
+        padding: 0.5rem;
+        border-radius: 0.75rem;
+    }
+
+    .example-accordion .section-content {
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .preview-image {
+        width: 52px;
+        height: 52px;
+    }
+}

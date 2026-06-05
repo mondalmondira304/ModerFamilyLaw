@@ -1,0 +1,292 @@
+<template>
+	<lightning-record-edit-form object-api-name="Children__c" record-id={selectedChildRecordId} density="comfy" onsuccess={handleSuccess}   >
+		<template lwc:if={addChild}>
+			<div class="slds-col heading headingPadding slds-size_1-of-1">{addLabel} a Child from</div>
+			<div class="slds-col heading slds-size_1-of-1">Your Relationship with Opposing Party</div>
+
+			<div class="slds-grid slds-wrap slds-gutters slds-size_1-of-1 slds-p-top_medium slds-p-bottom_medium">
+				<!-- Column A -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS"><abbr class="slds-required" part="required" lwc-enmikoh2qu=""
+									title="required">*</abbr>Child’s Name</label>
+							<lightning-input-field field-name="Name" data-field="Name" label="Child's First Name" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+
+						<div class="slds-grid slds-wrap slds-gutters slds-p-top_medium slds-size_1-of-1">
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<label class="labelCSS"> Gender<abbr class="slds-required" part="required" title="required">*</abbr>
+								</label>
+								<lightning-input-field field-name="Gender__c" data-field="Gender__c" label="Gender" variant="label-hidden" class="custom-input" onchange={handleOnChange} required autocomplete="off"> </lightning-input-field>
+							</div>
+
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<label class="labelCSS">Race</label>
+								<lightning-input-field field-name="Race__c" data-field="Race__c" label="Race" variant="label-hidden" class="custom-input" onchange={handleOnChange}> autocomplete="off" </lightning-input-field>
+							</div>
+						</div>
+
+						<div class="slds-p-top_medium slds-size_1-of-1">
+							<lightning-input-field field-name="Social_Security_Number__c" data-field="Social_Security_Number__c" label="Social Security Number" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+
+						<div class="slds-p-top_medium slds-size_1-of-1">
+							<lightning-input-field field-name="Date_of_Birth__c" data-field="Date_of_Birth__c" label="Date Of Birth" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- Column B -->
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+					<div class="slds-col slds-wrap slds-grid slds-size_1-of-1">
+						<div class="slds-size_1-of-1">
+							<label class="labelCSS"><abbr class="slds-required" part="required" lwc-enmikoh2qu="" title="required">*</abbr>Current Street Address</label>
+							<lightning-input-field field-name="Street__c" data-field="Street__c" label="Current Street Address" variant="label-hidden" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-p-top_medium slds-size_1-of-1">
+							<label class="labelCSS">City<abbr class="slds-required" part="required" lwc-enmikoh2qu="" title="required">*</abbr></label>
+							<lightning-input-field field-name="City__c" data-field="City__c" label="City" variant="label-hidden" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-p-top_medium slds-size_1-of-1">
+							<lightning-input-field field-name="State__c" data-field="State__c" label="State" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-p-top_medium slds-size_1-of-1">
+							<lightning-input-field field-name="Time_in_Jurisdiction__c" data-field="Time_in_Jurisdiction__c" label="Length of Residence in Current State" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</template>
+
+		<template lwc:if={addChildSubTab1}>
+			<div class="slds-col heading headingPadding slds-size_1-of-1">{addLabel} a Child from</div>
+			<div class="slds-col heading slds-size_1-of-1">Your Relationship with Opposing Party</div>
+
+			<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Parent/Guardian Full Name (Client)</label>
+						<lightning-input-field field-name="Parent_1_Text__c" data-field="Parent_1_Text__c" label="Parent/Guardian (Client)" variant="label-hidden" class="custom-input" onchange={handleOnChange} required="" autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="If_Other__c" data-field="If_Other__c" label="Parent/Guardian (Client)" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Child_Resides_With__c" data-field="Child_Resides_With__c" label="Child Resides with" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Dependent Child’s Monthly Income</label>
+						<lightning-input-field field-name="Dependent_Child_monthly_income_source__c" data-field="Dependent_Child_monthly_income_source__c" label="Dependent Child Monthly Income" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Dependent Child’s Monthly Gross</label>
+						<lightning-input-field field-name="Dependent_Children_s_monthly_gross__c" data-field="Dependent_Children_s_monthly_gross__c" label="Dependent Child Monthly Gross" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template lwc:if={addChildSubTab2}>
+			<div class="slds-col heading headingPadding slds-size_1-of-1">{addLabel} a Child from</div>
+			<div class="slds-col heading slds-size_1-of-1">Your Relationship with Opposing Party</div>
+			<div class="slds-p-around_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+					<label class="labelCSS">Parent/Guardian Full Name (Client)</label>
+					<lightning-input-field field-name="Parent_2_Text__c" data-field="Parent_2_Text__c" label="Parent/Guardian opposing party or other" variant="label-hidden" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="If_Other__c" data-field="If_Other__c" label="Parent/Guardian (Client)"  variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Child_Resides_With__c" data-field="Child_Resides_With__c" label="Child Resides with" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+					<div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Dependent Child’s Monthly Income</label>
+						<lightning-input-field field-name="Dependent_Child_monthly_income_source__c" data-field="Dependent_Child_monthly_income_source__c"  label="Dependent Child Monthly Income" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Dependent Child’s Monthly Gross</label>
+						<lightning-input-field field-name="Dependent_Children_s_monthly_gross__c" data-field="Dependent_Children_s_monthly_gross__c" label="Dependent Child Monthly Gross" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template lwc:elseif={birthParenting}>
+			<div class="slds-col heading slds-size_1-of-1">Birth & Parenting</div>
+			<div
+				class="slds-p-bottom_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 subheading">
+				{childName}</div>
+			<template lwc:if={childName}>
+				<div class="slds-p-horizontal_xx-large slds-col slds-grid slds-wrap slds-size_1-of-1 subheading">{childName}'s Birth Location</div>
+			</template>
+			<div class="slds-p-bottom_large slds-p-horizontal_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+					<lightning-input-field field-name="Birth_City__c" data-field="Birth_City__c" label="Birth City" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+					<lightning-input-field field-name="Birth_State__c" data-field="Birth_State__c"  label="Birth State" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-p-horizontal_small slds-p-top_medium">
+					<lightning-input-field field-name="Birth_Country__c" data-field="Birth_Country__c"  label="Birth Country" variant="label-stacked" class="custom-input" onchange={handleOnChange} required autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium subheading">Parenting
+					Time</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+					<lightning-input-field field-name="Percent_of_time_with_Client__c" data-field="Percent_of_time_with_Client__c" label="Percent of time with client" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+					<lightning-input-field field-name="If_Other__c" data-field="If_Other__c" label="If Other" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+					<label class="labelCSS">Travel expenses of visitation</label>
+					<lightning-input-field field-name="Travel_expenses_for_visitation_monthly__c" data-field="Travel_expenses_for_visitation_monthly__c"  label="Travel expenses of visitation" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+					<label class="labelCSS">Percent of time opposing party first name or other</label>
+					<lightning-input-field field-name="Percent_of_time_with_Other__c" data-field="Percent_of_time_with_Other__c" label="Percent of time opposing party first name or other" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_small subheading">ICWA
+					<lightning-helptext content="(Indian Child Welfare Act)  Only applies if the child is a member of a tribe" class="icon-color helpTextMargin"></lightning-helptext>
+				</div>
+				<div class="slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 slds-m-left_medium"
+					style="background-color:#00000015;border-radius:15px;padding-bottom: 15px;">
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Tribe__c" data-field="Tribe__c"  label="Tribe" variant="label-stacked" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Member_Number__c" data-field="Member_Number__c"  label="Member Number" variant="label-stacked" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template lwc:elseif={schoolEducation}>
+			<div class="slds-col heading slds-size_1-of-1">School & Educational Needs</div>
+			<div class="slds-p-bottom_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 subheading">{childName}</div>
+			<template lwc:if={childName}>
+				<div class="slds-p-horizontal_x-large slds-col slds-grid slds-wrap slds-size_1-of-1 subheading">{childName}'s School</div>
+			</template>
+
+			<div class="slds-p-bottom_large slds-p-horizontal_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid_align-center">
+
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Name of School in Which Child is Enrolled</label>
+						<lightning-input-field field-name="School_Enrolled__c" data-field="School_Enrolled__c" label="Name of School in which Tim is Enrolled" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">School Address</label>
+						<lightning-input-field field-name="School_Address__c" data-field="School_Address__c"  label="School Address" variant="label-hidden" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="City__c" data-field="City__c"  label="City" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="State__c" data-field="State__c"  label="State" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Educational_or_other_special_needs_month__c" data-field="Educational_or_other_special_needs_month__c" label="Education Expenses/Special Needs Expenses" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="School_Grade__c" data-field="School_Grade__c" label="Grade in School" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Teacher__c" data-field="Teacher__c" label="Primary Teacher’s Name" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Notes_on_Education_Schooling__c" data-field="Notes_on_Education_Schooling__c" label="Notes on Education" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template lwc:elseif={childCare}>
+			<div class="slds-col heading slds-size_1-of-1">Childcare</div>
+			<div
+				class="slds-p-bottom_large slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1 subheading">
+				{childName}</div>
+			<template lwc:if={childName}>
+				<div class="slds-p-horizontal_xx-large slds-col slds-grid slds-wrap slds-size_1-of-1 subheading">
+					Work-Related Childcare for {childName}</div>
+			</template>
+			<div class="slds-p-horizontal_large slds-p-vertical_medium slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid_align-center">
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Childcare_Provider__c" data-field="Childcare_Provider__c" label="Childcare Provider" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Childcare_Address__c" data-field="Childcare_Address__c" label="Childcare provider’s address" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-grid slds-size_1-of-1">
+						<div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="City__c" data-field="City__c" label="City" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_6-of-12 slds-p-horizontal_small slds-p-top_medium">
+							<lightning-input-field field-name="State__c" data-field="State__c" label="State" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-medium-size_1-of-2 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Childcare_Schedule__c" data-field="Childcare_Schedule__c"  label=" Childcare Schedule" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Gross_Monthly_Childcare_Cost__c" data-field="Gross_Monthly_Childcare_Cost__c"  label="Monthly Childcare Cost" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<lightning-input-field field-name="Who_Pays__c" data-field="Who_Pays__c" label="Who Pays" variant="label-stacked" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</template>
+		<lightning-input-field field-name="Matter_ID__c" disabled="true" variant="label-hidden" class="slds-hidden" value={childMatterActivity} ></lightning-input-field>	
+		<lightning-input-field field-name="Parent_1__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parent_1} ></lightning-input-field>	
+		<lightning-input-field field-name="Parent_2__c" disabled="true" variant="label-hidden" class="slds-hidden" value={parent_2} ></lightning-input-field>	
+		<template if:true={isInsert}>		<!--Set default value for new records-->
+			<lightning-input-field field-name="Child_Resides_With__c" disabled="true" variant="label-hidden" class="slds-hidden" value="Both" ></lightning-input-field>	
+		</template>		
+	</lightning-record-edit-form>
+	<div class="slds-col slds-size_1-of-1 controls slds-grid slds-grid_align-center class11">
+		<template if:true={managePreviousButtons}>
+			<button class="next-button previousBtnPadding" onclick={handlePrevious}>
+				<span class="arrow previousBtnArrow">←</span>
+				PREVIOUS
+			</button>
+		</template>
+		<template if:false={managePreviousButtons}>
+			<button class="cancel-button" onclick={handleResetProgressChild}>
+				CANCEL
+			</button>
+		</template>
+		<template if:true={manageNextButtons1}>
+			<button class="next-button nextBtnPadding" onclick={handleNext}>SAVE & CONTINUE
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+		<template if:true={manageSaveButtons}>
+			<button class="next-button nextBtnPadding" onclick={saveChildRecord}>SUBMIT SECTION
+				<span class="arrow nextBtnArrow">→</span>
+			</button>
+		</template>
+	</div>
+</template>

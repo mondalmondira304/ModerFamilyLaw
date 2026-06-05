@@ -1,0 +1,70 @@
+<template>
+  <div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+    <div class="slds-col heading slds-size_1-of-1">Contact Information</div>
+
+
+    <lightning-record-edit-form object-api-name="Account" record-id={selectedRecordId} density="comfy"
+      onsuccess={handleSuccess} class="custom-form slds-size_1-of-1" data-id="contactForm">
+      <div class="slds-grid slds-wrap slds-gutters">
+        
+        <!-- Column A (full-width on mobile, half on desktop) -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <div class="form-container">
+            <!-- Read-only name group -->
+            <lightning-input-field field-name="FirstName" disabled
+              class="custom-input readonly"></lightning-input-field>
+            <lightning-input-field field-name="MiddleName" disabled class="custom-input"></lightning-input-field>
+            <lightning-input-field field-name="LastName" disabled class="custom-input"></lightning-input-field>
+          </div>
+
+          <!-- Length of Residence -->
+            <lightning-input-field field-name="Length_of_Residence__c" data-field="Length_of_Residence__c"
+              pattern="^(?:[1-9]\d{0,2}|0)$" name="lengthOfResidence" label="Length of Residence"
+               variant="label-stacked" class="custom-input icon-color"
+              onchange={handleOnChange} required></lightning-input-field>
+
+          <lightning-input-field field-name="PersonMailingStreet" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange} required="true" autocomplete="off"></lightning-input-field>
+          <lightning-input-field field-name="PersonMailingCity" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  required="true" autocomplete="off"></lightning-input-field>
+          <lightning-input-field field-name="PersonMailingState" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  required="true" autocomplete="off"></lightning-input-field>
+          <lightning-input-field field-name="PersonMailingCountry" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  required="true" autocomplete="off"></lightning-input-field>
+          <lightning-input-field field-name="PersonMailingPostalCode" variant="label-stacked" class="custom-input icon-color" onchange={handleOnChange}  required="true" autocomplete="off"></lightning-input-field>
+
+          </div>
+        <!-- Column B -->
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+          <lightning-input-field field-name="PersonEmail"  class="custom-input" required onchange={handleOnChange} autocomplete="off" read-only></lightning-input-field>
+          <lightning-input-field field-name="PersonMobilePhone"  class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+          <lightning-input-field field-name="Phone" class="custom-input" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+
+          <!-- Upload section -->
+          <div class="upload-container slds-p-top_medium slds-m-top_medium">
+            <div class="upload-header">
+              <span>UPLOAD DOCUMENTS</span>
+              <lightning-helptext content="Please upload the required documents."
+                class="icon-color"></lightning-helptext>
+            </div>
+            <p class="upload-instructions">Please upload the following files:</p>
+            <ul class="file-list">
+              <li><strong>Profile Picture</strong></li>
+            </ul>
+								<div class="upload-box">
+									<p class="file-types">JPG, PNG</p>
+									<lightning-file-upload
+											name="fileUploader"
+											accept={acceptedFormats}
+											record-id={selectedRecordId}
+											onuploadfinished={handleUploadFinished}
+									>
+									</lightning-file-upload>
+								</div>
+            <template if:true={uploadedContactFile}>
+              <p class="uploaded-file">Uploaded: {uploadedContactFile.name}</p>
+            </template>
+          </div>
+        </div>
+      </div>
+
+    </lightning-record-edit-form>
+  </div>
+
+</template>

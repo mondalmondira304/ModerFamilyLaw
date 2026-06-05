@@ -1,0 +1,23 @@
+<template>
+	<div class="slds-p-around_small slds-col slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+		<div class="slds-col heading slds-size_1-of-1">Education for Client</div>
+		<lightning-record-edit-form record-id={selectedRecordId} object-api-name="Matters__c">
+			<div class="slds-col slds-p-top_medium slds-grid slds-grid_align-center slds-wrap slds-size_1-of-1">
+				<div class="slds-col slds-wrap slds-grid slds-size_1-of-1 slds-grid_align-center">
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Full-Time/Part-Time Student</label>
+						<lightning-input-field field-name="Full_Time_Part_Time_Student_Client__c" data-field="Full_Time_Part_Time_Student_Client__c"  label = "Full-Time/Part-Time Student" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-top_medium">
+						<label class="labelCSS">Books (Monthly Amount)</label>
+						<lightning-input-field field-name="Tuition_Books_Supplies_Fees_Client__c" data-field="Tuition_Books_Supplies_Fees_Client__c" label = "Books (Monthly Amount)" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+					<div class="slds-col slds-size_12-of-12 slds-p-horizontal_small slds-p-vertical_medium">
+						<label class="labelCSS">Tuition (Monthly Amount)</label>
+						<lightning-input-field field-name="Children_s_Tuition_Client__c" data-field="Children_s_Tuition_Client__c" label = "Tuition (Monthly Amount)" variant="label-hidden" class="custom-input icon-color" onchange={handleOnChange} autocomplete="off"></lightning-input-field>
+					</div>
+				</div>
+			</div>
+		</lightning-record-edit-form>
+    </div>
+</template>

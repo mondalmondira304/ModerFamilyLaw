@@ -1,0 +1,294 @@
+.heading-large {
+  font-size: 2.5rem;
+  color: #5D69B2;
+}
+
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+  overflow: hidden;
+}
+
+/* === Hero === */
+.hero {
+  position: relative;
+}
+
+.hero-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.hero-accent {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg,
+      #a3de83 0%,
+      #4fd1b5 25%,
+      #33b5e5 60%,
+      #8b6bd6 100%);
+}
+
+/* === Content === */
+.content {
+  padding: 2.25rem 2.5rem 2.5rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: var(--mfl-brand-blue);
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin: 0 0 2rem;
+  font-size: 1.15rem;
+  color: var(--mfl-weak);
+}
+
+/* === Tiers === */
+.tiers {
+  margin: 0 auto 2.25rem;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: start;
+  gap: 2rem;
+}
+
+.tiers--single {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.divider {
+  width: 1px;
+  background: var(--mfl-border);
+  height: 100%;
+  align-self: stretch;
+}
+
+.tier {
+  text-align: left;
+}
+
+.tier.center {
+  text-align: center;
+}
+
+.tier.right {
+  text-align: right;
+}
+
+.label {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: #495056;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Left: avatar + name + amount */
+.avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.name-amount .name {
+  font-size: 1.1rem;
+  color: var(--mfl-text);
+  margin-bottom: 0.15rem;
+  font-weight: 600;
+}
+
+.amount {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--mfl-text);
+}
+
+.amount.reduced {
+  color: var(--mfl-text);
+  font-size: 1.8rem;
+}
+
+/* CTA */
+.cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.cta .slds-button {
+  border-radius: 9999px;
+  padding: 0 1.5rem;
+  min-width: 210px;
+  height: 52px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(25, 159, 208, 0.25);
+  background: linear-gradient(90deg, var(--mfl-cta-grad-a), var(--mfl-cta-grad-b));
+  border: 0;
+}
+
+.cta .slds-button:hover,
+.cta .slds-button:focus {
+  transform: translateY(-1px);
+}
+
+/* Make the icon look like the mock's arrow-in-circle */
+.cta .slds-button .slds-button__icon_right {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 6px;
+  margin-left: 10px;
+}
+
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  /* font-weight: bold; */
+  color: white;
+  background-color: #3dbedb;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.next-button:hover {
+  cursor: pointer;
+}
+
+.next-button .arrow {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 7px 13px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nextBtnPadding {
+  /* padding: 5px 5px 5px 35px; */
+  padding: 5px 5px 5px 55px;
+}
+
+.nextBtnArrow {
+  margin-left: 40px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .hero-img {
+    height: 180px;
+  }
+
+  .title {
+    font-size: 2.1rem;
+  }
+
+  .tiers {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .tier,
+  .tier.right {
+    text-align: center;
+  }
+
+  .avatar-row {
+    justify-content: center;
+  }
+}
+
+
+
+/* new */
+/* Layout */
+.price-grid {
+  align-items: stretch;
+}
+
+/* Card shell */
+.price-card {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Left (original) */
+.price-card--base {
+  border: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+
+/* Right (discounted) */
+.price-card--accent {
+  border: 2px solid #3dbedb;
+}
+
+/* Top-right pill badge */
+.price-badge {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  background: #3dbedb;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+}
+
+/* Typography */
+.price-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.price-label {
+  color: var(--slds-g-color-neutral-base-50, #5f6a7d);
+  font-weight: 600;
+  margin-bottom: .25rem;
+}
+
+.price-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Waiting Spinner */
+.spinner-img {
+  display: block;
+  width: 100px;
+  pointer-events: none;
+  animation: spin 2s linear infinite; /* remove if you have an animated PNG/GIF */
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
